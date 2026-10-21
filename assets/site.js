@@ -30,7 +30,7 @@
   var vids = window.LAB_VIDEOS || {};
   document.querySelectorAll('.video[data-video]').forEach(function (box) {
     var id = youtubeId(vids[box.getAttribute('data-video')] || '');
-    if (!id) return;
+    if (!id) { box.remove(); return; }
     var title = box.querySelector('.vt') ? box.querySelector('.vt').textContent : 'Video';
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + id;
@@ -38,6 +38,10 @@
     f.loading = 'lazy';
     f.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     f.allowFullscreen = true;
-    box.innerHTML = ''; box.appendChild(f);
+    var cap = document.createElement('p');
+    cap.className = 'video-cap';
+    cap.innerHTML = title + ' · <a href="https://www.youtube.com/watch?v=' + id + '" target="_blank" rel="noopener">Open on YouTube</a><br>' +
+      'External video: versions and commands may differ slightly. Always use the commands shown on this page.';
+    box.innerHTML = ''; box.appendChild(f); box.appendChild(cap);
   });
 })();

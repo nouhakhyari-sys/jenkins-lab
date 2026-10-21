@@ -25,7 +25,7 @@ Upload each video to YouTube as **Unlisted**, then open [`assets/videos.js`](ass
 "install-jenkins-with-the-docker-command-line": "https://youtu.be/AbCdEf12345",
 ```
 
-Commit the change. Empty values show "Video coming soon".
+Commit the change. Empty values hide the video from the page.
 
 ### Edit the text
 Each page is one HTML file (`index.html`, `1-before-you-start.html`, …). Open it on GitHub, click the pencil icon, edit, and commit. The site updates by itself within a minute or two.
