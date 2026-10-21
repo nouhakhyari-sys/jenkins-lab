@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Setup Wizard · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class="active"><a href="3-setup-wizard.html" aria-current="page">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1</div>
+    <h1>3. Setup Wizard</h1>
+    <div class="prose"><p>The first time you open a new Jenkins, a setup wizard starts. It takes you through five screens: unlock Jenkins, install plugins, create the first administrator, check the URL, and start using Jenkins.</p></div>
+<figure><a href="images/03-0-setup-wizard-flow.png" target="_blank" rel="noopener"><img src="images/03-0-setup-wizard-flow.png" alt="The five screens of the setup wizard" loading="lazy"></a><figcaption>The five screens of the setup wizard</figcaption></figure>
+<aside class="note">The screenshots below come from an older Jenkins version (2.303.1). Your screens may look slightly different, but the steps are the same.</aside>
+<div class="prose"><h3>Step 1: Unlock Jenkins</h3><p>Jenkins asks for the automatically generated <b>initial admin password</b>. Paste it into the <b>Administrator password</b> field and click <b>Continue</b>.</p><p>Where to find it, depending on how you installed Jenkins:</p><ul><li><b>Docker:</b> <code>docker exec jenkins-local cat /var/jenkins_home/secrets/initialAdminPassword</code></li><li><b>Linux package:</b> <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code></li><li><b>WAR file:</b> printed in the terminal, and in <code>~/.jenkins/secrets/initialAdminPassword</code></li></ul></div>
+<figure><a href="images/03-1-unlock-jenkins.png" target="_blank" rel="noopener"><img src="images/03-1-unlock-jenkins.png" alt="Unlock Jenkins with the initial admin password" loading="lazy"></a><figcaption>Unlock Jenkins with the initial admin password</figcaption></figure>
+<div class="prose"><h3>Step 2: Customize Jenkins</h3><p>Choose how to install plugins:</p><ul><li><b>Install suggested plugins</b> (recommended): installs the set of plugins the community uses most. Choose this option.</li><li><b>Select plugins to install:</b> you choose the plugins yourself.</li></ul><p>The installation takes a few minutes. If some plugins fail, click <b>Retry</b>.</p></div>
+<figure><a href="images/03-2-customize-jenkins.png" target="_blank" rel="noopener"><img src="images/03-2-customize-jenkins.png" alt="Choose &quot;Install suggested plugins&quot;" loading="lazy"></a><figcaption>Choose &quot;Install suggested plugins&quot;</figcaption></figure>
+<div class="prose"><h3>Step 3: Create the first admin user</h3><p>Fill in the username, password, full name and email address of your administrator account, then click <b>Save and Continue</b>. Choose a password you will remember: this is the account you will use for the rest of the module.</p></div>
+<figure><a href="images/03-3-create-admin-user.png" target="_blank" rel="noopener"><img src="images/03-3-create-admin-user.png" alt="Create your administrator account" loading="lazy"></a><figcaption>Create your administrator account</figcaption></figure>
+<div class="prose"><h3>Step 4: Instance configuration</h3><p>Check that the <b>Jenkins URL</b> is correct. In this lab, keep <code>http://localhost:8080/</code>. Click <b>Save and Finish</b>.</p></div>
+<figure><a href="images/03-4-instance-configuration.png" target="_blank" rel="noopener"><img src="images/03-4-instance-configuration.png" alt="Check the Jenkins URL" loading="lazy"></a><figcaption>Check the Jenkins URL</figcaption></figure>
+<div class="prose"><h3>Step 5: Jenkins is ready!</h3><p>Click <b>Start using Jenkins</b>. Your Jenkins home page is available at <code>http://&lt;your IP address or localhost&gt;:&lt;port&gt;</code>, for example <code>http://localhost:8080</code>.</p></div>
+<figure><a href="images/03-5-jenkins-is-ready.png" target="_blank" rel="noopener"><img src="images/03-5-jenkins-is-ready.png" alt="The setup is complete" loading="lazy"></a><figcaption>The setup is complete</figcaption></figure>
+<div class="video" data-video="the-setup-wizard-step-by-step"><div class="video-soon"><span class="play" aria-hidden="true">▶</span><div><div class="vt">Video: The setup wizard, step by step</div><div class="vd">Coming soon. A 3-minute screen recording of the five screens, from pasting the password to &quot;Start using Jenkins&quot;.</div></div></div></div>
+    <div class="pager"><a class="prev" href="2-5-kubernetes.html">← 2.5 Kubernetes (Helm)</a><a class="next" href="4-dashboard.html">4. Tour of the dashboard →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

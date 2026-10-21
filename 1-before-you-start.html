@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Before You Start · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class="active"><a href="1-before-you-start.html" aria-current="page">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1</div>
+    <h1>1. Before You Start</h1>
+    <div class="prose"><h3>Jenkins and Java</h3><p>Jenkins is written in <b>Java</b>, a platform-independent language. Like any other Java application, it can be installed on many operating systems: Linux, Windows, macOS, and more.</p><h3>Jenkins releases</h3><p>The Jenkins project publishes two release lines:</p><ul><li><b>Weekly:</b> a new version every week, delivering the newest features and bug fixes to users and plugin developers.</li><li><b>LTS (Long-Term Support):</b> every 12 weeks, one weekly release is selected as the stable release for that period. It then receives only important fixes.</li></ul></div>
+<figure><a href="images/01-releases-lts-weekly.png" target="_blank" rel="noopener"><img src="images/01-releases-lts-weekly.png" alt="Weekly releases and the LTS line chosen from them" loading="lazy"></a><figcaption>Weekly releases and the LTS line chosen from them</figcaption></figure>
+<aside class="note"><b>In this lab, always use the LTS release.</b> It is the stable choice for learning and for production servers.</aside>
+<div class="prose"><h3>Prerequisites</h3><p><b>Minimum hardware</b> (enough for learning and testing):</p><ul><li>256 MB of RAM</li><li>1 GB of disk space (at least 10 GB if you run Jenkins as a Docker container)</li></ul><p><b>Recommended hardware for a small team:</b> 4 GB of RAM or more, and 50 GB of disk space or more. Production servers need more; see the <a href="https://www.jenkins.io/doc/book/scaling/hardware-recommendations/">hardware recommendations</a>.</p><p><b>Software:</b></p><ul><li><b>Java 21 or Java 25.</b> Older versions (Java 8, 11 and 17) are no longer supported by current Jenkins releases. See the <a href="https://www.jenkins.io/doc/book/platform-information/support-policy-java/">Java support policy</a>.</li><li><b>A modern web browser:</b> Google Chrome, Mozilla Firefox, Microsoft Edge or Apple Safari. Internet Explorer is not supported. See the <a href="https://www.jenkins.io/doc/book/platform-information/support-policy-web-browsers/">browser support policy</a>.</li></ul></div>
+<aside class="note"><b>Using Docker?</b> Then you do not need to install Java yourself: the Jenkins Docker image already contains it.</aside>
+    <div class="pager"><a class="prev" href="index.html">← Home</a><a class="next" href="2-installation-channels.html">2. Installation channels →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

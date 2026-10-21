@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Installation Channels · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class="active"><a href="2-installation-channels.html" aria-current="page">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1</div>
+    <h1>2. Installation Channels</h1>
+    <div class="prose"><p>Jenkins is distributed through many channels. They all run the same application, <b>jenkins.war</b>; only the packaging and the way you manage it change.</p></div>
+<figure><a href="images/02-installation-channels.png" target="_blank" rel="noopener"><img src="images/02-installation-channels.png" alt="The main ways to install Jenkins" loading="lazy"></a><figcaption>The main ways to install Jenkins</figcaption></figure>
+<div class="prose"><h3>Which channel for which situation?</h3><ul><li><b>Standalone WAR:</b> a quick test on any machine that has Java.</li><li><b>Linux packages:</b> a Linux server, with a service that starts automatically.</li><li><b>Windows installer (.msi):</b> a Windows server; Jenkins runs as a Windows service. See <a href="https://www.jenkins.io/doc/book/installing/windows/">Installing Jenkins on Windows</a>.</li><li><b>Servlet container:</b> an organisation that already runs Tomcat or another Java application server.</li><li><b>Docker:</b> an isolated, reproducible installation in one command. <b>This is the path we use in the lab.</b></li><li><b>Kubernetes:</b> Jenkins in a cluster, for teams that need to scale.</li></ul><p>The <a href="https://www.jenkins.io/doc/book/installing/">Jenkins installation documentation</a> has complete instructions for every channel. The next pages explain each one.</p></div>
+    <div class="pager"><a class="prev" href="1-before-you-start.html">← 1. Before you start</a><a class="next" href="2-1-standalone-war.html">2.1 Standalone WAR →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

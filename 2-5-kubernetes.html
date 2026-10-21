@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.5 Kubernetes (Helm) · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub active"><a href="2-5-kubernetes.html" aria-current="page">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1 › 2. Installation Channels</div>
+    <h1>2.5 Kubernetes (Helm)</h1>
+    <div class="prose"><p>To run Jenkins in Kubernetes, use the official <b>Helm chart</b>. Helm is the package manager for Kubernetes: it finds, shares and installs software built for Kubernetes. <a href="https://helm.sh/docs/">Install Helm</a> first. Full guide: <a href="https://www.jenkins.io/doc/book/installing/kubernetes/">Installing Jenkins on Kubernetes</a>.</p><p>In the commands below, replace <code>yourname</code> with your own Kubernetes namespace.</p><p><b>1. Add the Jenkins chart repository</b> and look at the available charts:</p></div>
+<div class="code"><div class="code-cap">Add the Jenkins Helm repository</div><div class="code-box"><pre><code>helm repo add jenkinsci https://charts.jenkins.io
+helm repo update
+helm search repo jenkinsci</code></pre><button type="button" class="copy" aria-label="Copy the command: Add the Jenkins Helm repository">Copy</button></div></div>
+<div class="prose"><p><b>2. Install Jenkins</b> in your namespace (the chart name is lowercase):</p></div>
+<div class="code"><div class="code-cap">Install the Jenkins chart (skip the first line if the namespace already exists)</div><div class="code-box"><pre><code>kubectl create namespace yourname
+helm install jenkins jenkinsci/jenkins -n yourname</code></pre><button type="button" class="copy" aria-label="Copy the command: Install the Jenkins chart (skip the first line if the namespace already exists)">Copy</button></div></div>
+<div class="prose"><p><b>3. Check the pods and services.</b> Wait until the pod <code>jenkins-0</code> has the status <b>Running</b>; it can take a few minutes.</p></div>
+<div class="code"><div class="code-cap">Check that Jenkins is running</div><div class="code-box"><pre><code>kubectl get pods -n yourname
+kubectl get services -n yourname</code></pre><button type="button" class="copy" aria-label="Copy the command: Check that Jenkins is running">Copy</button></div></div>
+<div class="prose"><p><b>4. Get the admin password:</b></p></div>
+<div class="code"><div class="code-cap">Display the admin password</div><div class="code-box"><pre><code>kubectl get secret jenkins -n yourname \
+  -o jsonpath=&quot;{.data.jenkins-admin-password}&quot; | base64 --decode; echo</code></pre><button type="button" class="copy" aria-label="Copy the command: Display the admin password">Copy</button></div></div>
+<div class="prose"><p><b>5. Forward a local port</b> to the Jenkins pod, so you can open it from your browser:</p></div>
+<div class="code"><div class="code-cap">Make Jenkins reachable on localhost:8080</div><div class="code-box"><pre><code>kubectl port-forward jenkins-0 8080:8080 -n yourname</code></pre><button type="button" class="copy" aria-label="Copy the command: Make Jenkins reachable on localhost:8080">Copy</button></div></div>
+<div class="prose"><p><b>6. Open</b> <code>http://localhost:8080</code> and log in with the user <b>admin</b> and the password from step 4. The Helm chart prepares Jenkins for you, so you may not see the setup wizard.</p></div>
+    <div class="pager"><a class="prev" href="2-4-docker.html">← 2.4 Docker (lab path)</a><a class="next" href="3-setup-wizard.html">3. Setup wizard →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

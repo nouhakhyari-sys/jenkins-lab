@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.3 Servlet Container · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub active"><a href="2-3-servlet-container.html" aria-current="page">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1 › 2. Installation Channels</div>
+    <h1>2.3 Servlet Container</h1>
+    <div class="prose"><p>Because Jenkins is distributed as a standard WAR file, you can deploy it on a Java application server (servlet container) such as <b>Tomcat</b>.</p><h3>Steps</h3><ol><li>Copy <code>jenkins.war</code> into the <code>webapps</code> folder of the application server.</li><li>Restart the application server.</li></ol><p>With Tomcat, Jenkins is then available at <code>http://&lt;server&gt;:8080/jenkins</code>.</p><h3>Pros and cons</h3><ul><li><b>Pro:</b> system administrators manage one application server instead of several.</li><li><b>Con:</b> more complex to set up and maintain, and you lose some convenient features, such as upgrading or restarting Jenkins from its own interface.</li></ul><p>Not every server version works: check the <a href="https://www.jenkins.io/doc/book/platform-information/support-policy-servlet-containers/">servlet container support policy</a>.</p></div>
+    <div class="pager"><a class="prev" href="2-2-linux-packages.html">← 2.2 Linux packages</a><a class="next" href="2-4-docker.html">2.4 Docker (lab path) →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

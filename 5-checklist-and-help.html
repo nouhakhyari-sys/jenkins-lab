@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Demo, Checklist and Help · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class="active"><a href="5-checklist-and-help.html" aria-current="page">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1</div>
+    <h1>5. Demo, Checklist and Help</h1>
+    <div class="video" data-video="demo-jenkins-installation"><div class="video-soon"><span class="play" aria-hidden="true">▶</span><div><div class="vt">Video: Demo: Jenkins installation</div><div class="vd">Coming soon. The full demonstration, 5 to 8 minutes: installation with Docker, the setup wizard, and a quick tour of the dashboard.</div></div></div></div>
+<div class="prose"><h3>Checklist</h3><p>Before leaving the lab, check that:</p><ul><li>☐ The <code>jenkins-local</code> container is running (<code>docker ps</code>).</li><li>☐ Jenkins opens at <code>http://localhost:8080</code>.</li><li>☐ The suggested plugins are installed.</li><li>☐ You created your own administrator account and can log in with it.</li><li>☐ You found your Jenkins version in the footer.</li></ul><h3>Troubleshooting</h3></div>
+<details><summary>&quot;Port 8080 is already in use&quot;</summary><div class="prose"><p>Another program uses port 8080. Start the container on another host port, then open <code>http://localhost:8081</code>:</p><p><code>docker run -d --name jenkins-local -p 8081:8080 -p 50000:50000 -v jenkinsvol:/var/jenkins_home jenkins/jenkins:lts-jdk21</code></p></div></details>
+<details><summary>&quot;This site can&#x27;t be reached&quot; at localhost:8080</summary><div class="prose"><p>Check that the container is running with <code>docker ps</code>. If you used Docker Desktop, check that the host port for <b>8080/tcp</b> is filled in. Jenkins also needs about a minute to start: wait and refresh.</p></div></details>
+<details><summary>&quot;Cannot connect to the Docker daemon&quot; or &quot;docker: command not found&quot;</summary><div class="prose"><p>Docker is not installed or not started. Start Docker Desktop (or the Docker service on Linux), wait until it is ready, then try again.</p></div></details>
+<details><summary>&quot;The container name is already in use&quot;</summary><div class="prose"><p>A container called <code>jenkins-local</code> already exists. Start it with <code>docker start jenkins-local</code>, or remove it with <code>docker rm -f jenkins-local</code> and run the command again. Your data stays in the <code>jenkinsvol</code> volume.</p></div></details>
+<details><summary>No initialAdminPassword file</summary><div class="prose"><p>Check the container name in your command. If you have already completed the setup wizard, the file is deleted: log in with the administrator account you created.</p></div></details>
+<details><summary>Some plugins failed to install</summary><div class="prose"><p>Usually a network problem. Click <b>Retry</b>. If your school network uses a proxy, ask your teacher.</p></div></details>
+<details><summary>I forgot my admin password</summary><div class="prose"><p>In this lab, the simplest way is to start again from zero (this deletes all your Jenkins data):</p><p><code>docker rm -f jenkins-local</code><br><code>docker volume rm jenkinsvol</code></p><p>Then run the <code>docker run</code> command from page 2.4 again.</p></div></details>
+    <div class="pager"><a class="prev" href="4-dashboard.html">← 4. Tour of the dashboard</a><span></span></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

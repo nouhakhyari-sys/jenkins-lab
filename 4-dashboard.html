@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Tour of the Dashboard · Jenkins Lab 1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class="active"><a href="4-dashboard.html" aria-current="page">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 1</div>
+    <h1>4. Tour of the Dashboard</h1>
+    <div class="prose"><p>The dashboard is the Jenkins home page. Here are its main areas:</p></div>
+<figure><a href="images/04-dashboard-tour.png" target="_blank" rel="noopener"><img src="images/04-dashboard-tour.png" alt="The main areas of the Jenkins dashboard" loading="lazy"></a><figcaption>The main areas of the Jenkins dashboard</figcaption></figure>
+<div class="prose"><ul><li><b>Header:</b> the search box, your user name and the log-out link.</li><li><b>Breadcrumbs:</b> show where you are, for example Dashboard › my-job › #3. Click to go back.</li><li><b>Side navigation:</b> <b>New Item</b> (create a job), <b>People</b>, <b>Build History</b>, <b>Manage Jenkins</b> (settings, plugins, security), <b>My Views</b>. Some entries, such as Lockable Resources, come from plugins.</li><li><b>Views:</b> tabs that group jobs. The <b>All</b> view shows every job; click <b>+</b> to create a new view.</li><li><b>Jobs list:</b> for each job, <b>S</b> is the status of the last build (green tick = success, red cross = failure), <b>W</b> is the "weather" of recent builds (sun = healthy, storm = failing often), then the last success, last failure and last duration.</li><li><b>Build Queue:</b> builds waiting to start.</li><li><b>Build Executor Status:</b> builds currently running, and on which executor.</li><li><b>Footer:</b> the REST API link and your Jenkins version.</li></ul></div>
+<aside class="note"><b>Your turn:</b> find your Jenkins version in the footer, open <b>Manage Jenkins</b>, and find how many executors your Jenkins has (Manage Jenkins › Nodes).</aside>
+    <div class="pager"><a class="prev" href="3-setup-wizard.html">← 3. Setup wizard</a><a class="next" href="5-checklist-and-help.html">5. Checklist and help →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
