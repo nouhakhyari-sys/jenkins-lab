@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1. Hello World Pipeline · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 </head>
 <body>
 <header class="top">
@@ -31,16 +31,16 @@
     }
 }</code></pre><button type="button" class="copy" aria-label="Copy: Your first declarative pipeline">Copy</button></div></div>
 <aside class="note"><b>Simple button to try:</b> above the Script box, the drop-down <b>try sample Pipeline…</b> offers ready-made examples. Choose <b>Hello World</b> to see a similar script written for you.</aside>
-<div class="prose"><h3>Step 3: Save and run</h3><ol><li>Click <b>Save</b>. You arrive on the job page.</li><li>Click <b>Build Now</b> in the left menu.</li><li>A new line <b>#1</b> appears in <b>Build History</b> (bottom left). A green tick means the build succeeded.</li></ol><h3>Step 4: Read the logs</h3><p>Click <b>#1</b>, then <b>Console Output</b>. You see everything Jenkins did:</p></div>
+<div class="prose"><h3>Step 3: Save and run</h3><ol><li>Click <b>Save</b>. You arrive on the job page.</li><li>Click <b>Build Now</b> in the left menu.</li><li>A new line <b>#1</b> appears in the <b>Builds</b> list (bottom left; called <b>Build History</b> in older versions). A green tick means the build succeeded.</li></ol><h3>Step 4: Read the logs</h3><p>Click <b>#1</b>, then <b>Console Output</b>. You see everything Jenkins did:</p></div>
 <figure><a href="images/l2-console-hello.png" target="_blank" rel="noopener"><img src="images/l2-console-hello.png" alt="Console Output of build #1: the pipeline printed Hello World and finished with SUCCESS" loading="lazy"></a><figcaption>Console Output of build #1: the pipeline printed Hello World and finished with SUCCESS</figcaption></figure>
-<div class="prose"><p>The pipeline ran and printed <b>Hello World</b>. The last line, <code>Finished: SUCCESS</code>, is the final result of the build.</p><h3>Step 5: See the stages</h3><p>Go back to the job page (click <b>hello-world</b> in the breadcrumbs at the top). Jenkins shows the stages of each build, with their duration: here, a single stage called <b>Hello</b>.</p></div>
-<figure><a href="images/l2-job-page-tour.png" target="_blank" rel="noopener"><img src="images/l2-job-page-tour.png" alt="The job page: the stage &quot;Hello&quot; and build #1 (numbers explained on page 4)" loading="lazy"></a><figcaption>The job page: the stage &quot;Hello&quot; and build #1 (numbers explained on page 4)</figcaption></figure>
-<aside class="note"><b>Your screen may look different.</b> Since 2024, new Jenkins installations show the stages as a <b>graph</b> (Pipeline Graph View plugin) instead of this "Stage View" table: open build <b>#1</b> to see it. To get the table shown here, install the <b>Pipeline: Stage View</b> plugin (Manage Jenkins › Plugins › Available plugins).</aside>
+<div class="prose"><p>The pipeline ran and printed <b>Hello World</b>. The last line, <code>Finished: SUCCESS</code>, is the final result of the build.</p><h3>Step 5: See the stages</h3><p>Go back to the job page: click <b>hello-world</b> at the top of the page. In the left menu, click <b>Stages</b>. Jenkins draws the stages of your pipeline as a graph, with the result and the duration of each stage: here, a single stage called <b>Hello</b>.</p></div>
+<figure><a href="images/l2-job-page-new.png" target="_blank" rel="noopener"><img src="images/l2-job-page-new.png" alt="The job page: Stages (5) shows the stages of the pipeline; the other numbers are explained on page 4" loading="lazy"></a><figcaption>The job page: Stages (5) shows the stages of the pipeline; the other numbers are explained on page 4</figcaption></figure>
+<aside class="note"><b>Older Jenkins versions</b> (before 2024) show a "Stage View" table directly on the job page instead of the <b>Stages</b> button. Same information, different look.</aside>
     <div class="pager"><a class="prev" href="lab2.html">← Lab 2 home</a><a class="next" href="lab2-2-understanding-the-code.html">2. Understanding the code →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=3"></script>
-<script src="assets/site.js?v=3"></script>
+<script src="assets/videos.js?v=4"></script>
+<script src="assets/site.js?v=4"></script>
 </body>
 </html>

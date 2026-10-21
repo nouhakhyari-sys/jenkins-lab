@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>4. Explore the Jenkins Buttons · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 </head>
 <body>
 <header class="top">
@@ -17,15 +17,15 @@
     <div class="crumb">Lab 2 · Your First Pipeline</div>
     <h1>4. Explore the Jenkins Buttons</h1>
     <div class="prose"><p>Open your <code>hello-world</code> job and try each button below. Each one takes about a minute.</p><h3>On the job page</h3></div>
-<figure><a href="images/l2-job-page-tour.png" target="_blank" rel="noopener"><img src="images/l2-job-page-tour.png" alt="The job page: the numbers match the list below" loading="lazy"></a><figcaption>The job page: the numbers match the list below</figcaption></figure>
-<div class="prose"><ol><li><b>Build Now</b>: runs the pipeline again. <i>Try it:</i> click it twice. Builds <b>#2</b> and <b>#3</b> appear in Build History.</li><li><b>Configure</b>: opens the job settings and the script. <i>Try it:</i> replace <code>Hello World</code> with your first name, click <b>Save</b>, then <b>Build Now</b>. Check the new message in the Console Output.</li><li><b>Pipeline Syntax</b>: the <b>Snippet Generator</b> writes pipeline code for you. <i>Try it:</i> in <b>Sample Step</b>, choose <b>sh: Shell Script</b>, type <code>date</code>, and click <b>Generate Pipeline Script</b>. Copy the line it gives you (<code>sh 'date'</code>), add it under <code>echo</code> in your script (Configure), save and build.</li><li><b>Build History</b>: every build is kept, with its number, date and result. Click any build to open it.</li><li><b>Stages</b>: each column is a stage, each row a build, with its duration. Green means success, red means failure.</li></ol><h3>On a build page</h3><p>Click the last build in Build History:</p></div>
+<figure><a href="images/l2-job-page-new.png" target="_blank" rel="noopener"><img src="images/l2-job-page-new.png" alt="The job page: the numbers match the list below" loading="lazy"></a><figcaption>The job page: the numbers match the list below</figcaption></figure>
+<div class="prose"><ol><li><b>Build Now</b>: runs the pipeline again. <i>Try it:</i> click it twice. Builds <b>#2</b> and <b>#3</b> appear in the Builds list.</li><li><b>Configure</b>: opens the job settings and the script. <i>Try it:</i> replace <code>Hello World</code> with your first name, click <b>Save</b>, then <b>Build Now</b>. Check the new message in the Console Output.</li><li><b>Pipeline Syntax</b>: the <b>Snippet Generator</b> writes pipeline code for you. <i>Try it:</i> in <b>Sample Step</b>, choose <b>sh: Shell Script</b>, type <code>date</code>, and click <b>Generate Pipeline Script</b>. Copy the line it gives you (<code>sh 'date'</code>), add it under <code>echo</code> in your script (Configure), save and build.</li><li><b>Builds</b>: every build is kept, with its number, time and result. Click a build number (for example <b>#3</b>) to open it.</li><li><b>Stages</b>: the graph of the stages, with the result and duration of each stage. Green means success, red means failure. Click a stage to see its steps and logs.</li></ol><h3>On a build page</h3><p>Click the last build in the Builds list:</p></div>
 <figure><a href="images/l2-build-page-tour.png" target="_blank" rel="noopener"><img src="images/l2-build-page-tour.png" alt="A build page: the numbers match the list below" loading="lazy"></a><figcaption>A build page: the numbers match the list below</figcaption></figure>
 <div class="prose"><ol><li><b>Console Output</b>: the full log of the build. It is the first place to look when something fails.</li><li><b>View as plain text</b>: the same log without formatting, easy to copy into a report or a message to your teacher.</li><li><b>Restart from Stage</b>: runs the pipeline again starting from a chosen stage. Useful when only the last stage failed, so you do not repeat everything.</li><li><b>Replay</b>: edits the script <b>for one run only</b>, without changing the job. <i>Try it:</i> click Replay, add the line <code>echo 'Replay test'</code>, click <b>Run</b>. Then open <b>Configure</b>: the saved script has not changed.</li><li><b>Pipeline Steps</b>: the list of every step that ran, with its status and duration.</li><li><b>Workspaces</b>: the files in the working folder of the build. Empty for now; later, it will contain the code Jenkins downloads from Git.</li><li><b>Finished: SUCCESS</b>: the result of the build. It can also be <code>FAILURE</code>, <code>UNSTABLE</code> or <code>ABORTED</code>.</li></ol></div>
     <div class="pager"><a class="prev" href="lab2-3-shell-commands.html">← 3. Shell commands</a><a class="next" href="lab2-5-your-turn.html">5. Your turn →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=3"></script>
-<script src="assets/site.js?v=3"></script>
+<script src="assets/videos.js?v=4"></script>
+<script src="assets/site.js?v=4"></script>
 </body>
 </html>

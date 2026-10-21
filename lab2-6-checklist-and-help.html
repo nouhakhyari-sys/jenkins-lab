@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>6. Checklist and Help · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 </head>
 <body>
 <header class="top">
@@ -21,13 +21,13 @@
 <details><summary>Error &quot;No such DSL method …&quot;</summary><div class="prose"><p>A step name is misspelled, for example <code>ech</code> instead of <code>echo</code>. Correct the name; Pipeline Syntax shows the exact name of every step.</p></div></details>
 <details><summary>The build stays grey: &quot;Waiting for next available executor&quot;</summary><div class="prose"><p>Jenkins has no free executor to run the build. Go to <b>Manage Jenkins › Nodes › Built-In Node › Configure</b> and check that <b>Number of executors</b> is at least 1 (2 by default).</p></div></details>
 <details><summary>The message shows ${env.BUILD_NUMBER} instead of a number</summary><div class="prose"><p>The text is between single quotes. Use double quotes: <code>echo "Build number: ${env.BUILD_NUMBER}"</code>.</p></div></details>
-<details><summary>I cannot see the stages table (&quot;Stage View&quot;)</summary><div class="prose"><p>New Jenkins versions show the stages as a graph: open a build (for example <b>#1</b>) to see it. For the table, install the <b>Pipeline: Stage View</b> plugin from Manage Jenkins › Plugins › Available plugins.</p></div></details>
+<details><summary>I cannot see the stages</summary><div class="prose"><p>Click <b>Stages</b> in the left menu of the job page. Older tutorials show a "Stage View" table on the job page: that is the old display, replaced since 2024 by the Stages graph.</p></div></details>
 <details><summary>Jenkins does not open any more at localhost:8080</summary><div class="prose"><p>The container stopped, for example after restarting your computer. Run <code>docker start jenkins-local</code>, wait a minute, and refresh.</p></div></details>
     <div class="pager"><a class="prev" href="lab2-5-your-turn.html">← 5. Your turn</a><a class="next" href="index.html">Module home →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=3"></script>
-<script src="assets/site.js?v=3"></script>
+<script src="assets/videos.js?v=4"></script>
+<script src="assets/site.js?v=4"></script>
 </body>
 </html>
