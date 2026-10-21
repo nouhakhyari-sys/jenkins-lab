@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>6. Checklist and Help · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
 <header class="top">
@@ -26,12 +26,13 @@ bat "ver"</code></pre><p><code>uptime</code> does not exist on Windows; <code>ve
 <details><summary>The build stays grey: &quot;Waiting for next available executor&quot;</summary><div class="prose"><p>Jenkins has no free executor to run the build. Go to <b>Manage Jenkins › Nodes › Built-In Node › Configure</b> and check that <b>Number of executors</b> is at least 1 (2 by default).</p></div></details>
 <details><summary>The message shows ${env.BUILD_NUMBER} instead of a number</summary><div class="prose"><p>The text is between single quotes. Use double quotes: <code>echo "Build number: ${env.BUILD_NUMBER}"</code>.</p></div></details>
 <details><summary>I cannot see the Stage View table</summary><div class="prose"><p>Install the <b>Pipeline: Stage View</b> plugin (page 0), run at least one build, then refresh the job page. You can also click <b>Stages</b> in the left menu to see the stages as a graph.</p></div></details>
+<details><summary>Old builds disappeared from the Stage View table</summary><div class="prose"><p>This is normal. The table only shows builds that have the <b>same stages</b> as the latest build. When you rename, add or remove a stage, older builds with different stages are hidden from the table. They are not deleted: they are still in the <b>Builds</b> list, and you can open each one and click <b>Console Output</b> or <b>Stages</b>.</p></div></details>
 <details><summary>Jenkins does not open any more at localhost:8080</summary><div class="prose"><p>The container stopped, for example after restarting your computer. Run <code>docker start jenkins-local</code>, wait a minute, and refresh.</p></div></details>
     <div class="pager"><a class="prev" href="lab2-5-your-turn.html">← 5. Your turn</a><a class="next" href="index.html">Module home →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=7"></script>
-<script src="assets/site.js?v=7"></script>
+<script src="assets/videos.js?v=8"></script>
+<script src="assets/site.js?v=8"></script>
 </body>
 </html>
