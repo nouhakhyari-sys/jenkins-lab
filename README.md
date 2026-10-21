@@ -28,6 +28,8 @@ Upload each video to YouTube as **Unlisted**, then open [`assets/videos.js`](ass
 Commit the change. Empty values hide the video from the page.
 
 ### Edit the text
+After changing a file in `assets/`, also increase the `?v=` number at the bottom of each page (for example `?v=3`) so browsers load the new version at once.
+
 Each page is one HTML file (`index.html`, `1-before-you-start.html`, …). Open it on GitHub, click the pencil icon, edit, and commit. The site updates by itself within a minute or two.
 
 ### Content checked against
