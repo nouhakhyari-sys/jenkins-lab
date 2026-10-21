@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Running Shell Commands · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class="active"><a href="lab2-3-shell-commands.html" aria-current="page">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 2 · Your First Pipeline</div>
+    <h1>3. Running Shell Commands</h1>
+    <div class="prose"><p>From a Jenkins pipeline you can run <b>any external program</b>. When the pipeline runs on Linux or macOS, use the <code>sh</code> step: it runs a command in the Unix shell. The command must exist on the machine where the pipeline runs.</p><p>In this example:</p><ol><li><code>echo</code> is Jenkins' own step, which prints a message.</li><li><code>sh "echo …"</code> calls the <code>echo</code> command of the Unix shell.</li><li><code>sh "hostname"</code> prints the name of the machine.</li><li><code>sh "uptime"</code> shows how long the machine has been running.</li></ol><h3>Try it</h3><p>Create a new Pipeline job called <code>shell-commands</code> (New Item → Pipeline → OK), paste this script, save, and click <b>Build Now</b>:</p></div>
+<div class="code"><div class="code-cap">A pipeline that runs shell commands</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    stages {
+        stage(&#x27;build&#x27;) {
+            steps {
+                echo &quot;Hello World!&quot;
+                sh &quot;echo Hello from the shell&quot;
+                sh &quot;hostname&quot;
+                sh &quot;uptime&quot;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: A pipeline that runs shell commands">Copy</button></div></div>
+<div class="prose"><p>Open <b>Console Output</b>. Your log should look like this:</p></div>
+<figure><a href="images/l2-console-shell.png" target="_blank" rel="noopener"><img src="images/l2-console-shell.png" alt="Console Output: each line starting with + is a shell command that Jenkins ran" loading="lazy"></a><figcaption>Console Output: each line starting with + is a shell command that Jenkins ran</figcaption></figure>
+<div class="prose"><ul><li>Lines starting with <code>+</code> show each shell command Jenkins ran; the line below is its result.</li><li><b><code>hostname</code> prints a strange name</b> such as <code>68412fcca2f6</code>. That is because Jenkins runs <b>inside a Docker container</b>: this is the container ID. Compare it with the <b>CONTAINER ID</b> column of <code>docker ps</code> in your terminal.</li></ul></div>
+<div class="code"><div class="code-cap">Compare the container ID with the hostname printed by Jenkins</div><div class="code-box"><pre><code>docker ps</code></pre><button type="button" class="copy" aria-label="Copy: Compare the container ID with the hostname printed by Jenkins">Copy</button></div></div>
+<aside class="note"><b>Your laptop runs Windows?</b> <code>sh</code> still works, because Jenkins runs in a Linux container. On a Jenkins installed directly on Windows, you would use <code>bat</code> instead of <code>sh</code>, with Windows commands.</aside>
+    <div class="pager"><a class="prev" href="lab2-2-understanding-the-code.html">← 2. Understanding the code</a><a class="next" href="lab2-4-explore-the-buttons.html">4. Explore the buttons →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
+</body>
+</html>

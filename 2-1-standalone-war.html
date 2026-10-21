@@ -3,32 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2.1 Standalone WAR · Jenkins Lab 1</title>
-<link rel="stylesheet" href="assets/style.css?v=2">
+<title>2.1 Standalone WAR · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
   <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
 </header>
 <div class="layout">
-  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub active"><a href="2-1-standalone-war.html" aria-current="page">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub active"><a href="2-1-standalone-war.html" aria-current="page">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
   <main>
-    <div class="crumb">Lab 1 › 2. Installation Channels</div>
+    <div class="crumb">Lab 1 · Installing Jenkins</div>
     <h1>2.1 Standalone WAR</h1>
     <div class="prose"><p>With this method, Jenkins runs as a standalone application in its own process, using its embedded web server (Jetty). You download it as a Java <b>WAR</b> (Web Application Archive) file, <code>jenkins.war</code>, which runs on any operating system that has Java.</p><h3>Steps</h3><ol><li>Download the latest <b>LTS</b> <code>jenkins.war</code> from the <a href="https://www.jenkins.io/download/">Jenkins download page</a>.</li><li>Open a terminal in the download folder and run:</li></ol></div>
-<div class="code"><div class="code-cap">Start Jenkins from the WAR file</div><div class="code-box"><pre><code>java -jar jenkins.war</code></pre><button type="button" class="copy" aria-label="Copy the command: Start Jenkins from the WAR file">Copy</button></div></div>
+<div class="code"><div class="code-cap">Start Jenkins from the WAR file</div><div class="code-box"><pre><code>java -jar jenkins.war</code></pre><button type="button" class="copy" aria-label="Copy: Start Jenkins from the WAR file">Copy</button></div></div>
 <div class="prose"><p>By default, Jenkins uses port <b>8080</b>: open <code>http://localhost:8080</code> in your browser. The initial admin password is printed in the terminal, and stored in <code>~/.jenkins/secrets/initialAdminPassword</code>.</p><h3>Change the port and other options</h3><p>Pass Jenkins options after the file name. For example, to use port 9090:</p></div>
-<div class="code"><div class="code-cap">Run Jenkins on another port</div><div class="code-box"><pre><code>java -jar jenkins.war --httpPort=9090</code></pre><button type="button" class="copy" aria-label="Copy the command: Run Jenkins on another port">Copy</button></div></div>
+<div class="code"><div class="code-cap">Run Jenkins on another port</div><div class="code-box"><pre><code>java -jar jenkins.war --httpPort=9090</code></pre><button type="button" class="copy" aria-label="Copy: Run Jenkins on another port">Copy</button></div></div>
 <div class="prose"><p>The general form is <code>java [JAVA_OPTS] -jar jenkins.war [JENKINS_OPTS]</code>: Java system properties go <b>before</b> <code>-jar</code>, Jenkins options go <b>after</b> the file name. Here is an example with several options:</p></div>
 <div class="code"><div class="code-cap">Example with several startup options</div><div class="code-box"><pre><code>java -Dhudson.footerURL=http://example.org -jar jenkins.war \
-  --httpPort=8083 --prefix=/ci --httpListenAddress=127.0.0.1</code></pre><button type="button" class="copy" aria-label="Copy the command: Example with several startup options">Copy</button></div></div>
+  --httpPort=8083 --prefix=/ci --httpListenAddress=127.0.0.1</code></pre><button type="button" class="copy" aria-label="Copy: Example with several startup options">Copy</button></div></div>
 <div class="prose"><p>In this example:</p><ul><li><code>-Dhudson.footerURL=http://example.org</code> is a Java system property: it changes the link in the Jenkins footer.</li><li><code>--httpPort=8083</code> uses port 8083 instead of the default 8080.</li><li><code>--prefix=/ci</code> adds <code>/ci</code> to the Jenkins URL.</li><li><code>--httpListenAddress=127.0.0.1</code> makes Jenkins reachable only from this machine.</li></ul><p>Result: Jenkins is reachable only at <code>http://127.0.0.1:8083/ci</code>.</p><p>Run <code>java -jar jenkins.war --help</code> to list all options, and see <a href="https://www.jenkins.io/doc/book/managing/system-properties/">Jenkins features controlled with system properties</a>.</p></div>
     <div class="pager"><a class="prev" href="2-installation-channels.html">← 2. Installation channels</a><a class="next" href="2-2-linux-packages.html">2.2 Linux packages →</a></div>
   </main>
 </div>
-<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=2"></script>
-<script src="assets/site.js?v=2"></script>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
 </body>
 </html>

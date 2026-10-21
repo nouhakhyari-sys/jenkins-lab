@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2.2 Linux Packages · Jenkins Lab 1</title>
-<link rel="stylesheet" href="assets/style.css?v=2">
+<title>2.2 Linux Packages · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
   <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
 </header>
 <div class="layout">
-  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub active"><a href="2-2-linux-packages.html" aria-current="page">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub active"><a href="2-2-linux-packages.html" aria-current="page">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
   <main>
-    <div class="crumb">Lab 1 › 2. Installation Channels</div>
+    <div class="crumb">Lab 1 · Installing Jenkins</div>
     <h1>2.2 Linux Packages</h1>
     <div class="prose"><p>Linux package managers (APT on Debian/Ubuntu, DNF/YUM on Red Hat/Fedora…) provide a stable, automated way to install and manage software. The package still uses <code>jenkins.war</code>, but adds useful extras: a dedicated <code>jenkins</code> user, a system service that starts automatically, and log management.</p><h3>Example: Jenkins LTS on Ubuntu / Debian</h3><p><b>1. Install Java 21 first</b> (Jenkins cannot start without it):</p></div>
 <div class="code"><div class="code-cap">Install Java 21</div><div class="code-box"><pre><code>sudo apt update
 sudo apt install fontconfig openjdk-21-jre
-java -version</code></pre><button type="button" class="copy" aria-label="Copy the command: Install Java 21">Copy</button></div></div>
+java -version</code></pre><button type="button" class="copy" aria-label="Copy: Install Java 21">Copy</button></div></div>
 <div class="prose"><p><b>2. Add the Jenkins repository and install Jenkins:</b></p></div>
 <div class="code"><div class="code-cap">Add the Jenkins LTS repository and install</div><div class="code-box"><pre><code>sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
   https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
@@ -27,12 +27,12 @@ echo &quot;deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]&quot; \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list &gt; /dev/null
 sudo apt update
-sudo apt install jenkins</code></pre><button type="button" class="copy" aria-label="Copy the command: Add the Jenkins LTS repository and install">Copy</button></div></div>
+sudo apt install jenkins</code></pre><button type="button" class="copy" aria-label="Copy: Add the Jenkins LTS repository and install">Copy</button></div></div>
 <aside class="note"><b>Always copy these commands from the official page.</b> The repository key changes over time (the 2023 key was replaced by a 2026 key), and old tutorials using <code>apt-key</code> no longer work. Official instructions: <a href="https://www.jenkins.io/doc/book/installing/linux/">Installing Jenkins on Linux</a>.</aside>
 <div class="prose"><h3>Manage the Jenkins service</h3></div>
 <div class="code"><div class="code-cap">Start, check and stop Jenkins</div><div class="code-box"><pre><code>sudo systemctl start jenkins
 sudo systemctl status jenkins
-sudo systemctl stop jenkins</code></pre><button type="button" class="copy" aria-label="Copy the command: Start, check and stop Jenkins">Copy</button></div></div>
+sudo systemctl stop jenkins</code></pre><button type="button" class="copy" aria-label="Copy: Start, check and stop Jenkins">Copy</button></div></div>
 <div class="prose"><h3>Change the port</h3><p>On current versions, Jenkins settings are changed with a systemd override (the old <code>/etc/default/jenkins</code> file is no longer used). Run the command below, add the two lines shown, save, then restart Jenkins:</p></div>
 <div class="code"><div class="code-cap">Use port 8083 instead of 8080</div><div class="code-box"><pre><code>sudo systemctl edit jenkins
 
@@ -40,13 +40,13 @@ sudo systemctl stop jenkins</code></pre><button type="button" class="copy" aria-
 [Service]
 Environment=&quot;JENKINS_PORT=8083&quot;
 
-sudo systemctl restart jenkins</code></pre><button type="button" class="copy" aria-label="Copy the command: Use port 8083 instead of 8080">Copy</button></div></div>
+sudo systemctl restart jenkins</code></pre><button type="button" class="copy" aria-label="Copy: Use port 8083 instead of 8080">Copy</button></div></div>
 <div class="prose"><h3>Where things are</h3><ul><li><b>Jenkins home directory:</b> <code>/var/lib/jenkins</code></li><li><b>Initial admin password:</b> <code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code></li><li><b>Logs:</b> <code>journalctl -u jenkins</code></li></ul></div>
     <div class="pager"><a class="prev" href="2-1-standalone-war.html">← 2.1 Standalone WAR</a><a class="next" href="2-3-servlet-container.html">2.3 Servlet container →</a></div>
   </main>
 </div>
-<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=2"></script>
-<script src="assets/site.js?v=2"></script>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
 </body>
 </html>

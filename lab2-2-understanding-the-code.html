@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Understanding the Code · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class="active"><a href="lab2-2-understanding-the-code.html" aria-current="page">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 2 · Your First Pipeline</div>
+    <h1>2. Understanding the Code</h1>
+    <div class="prose"><p>A declarative pipeline is made of blocks nested inside each other, like boxes in boxes. Each block opens with <code>{</code> and closes with <code>}</code>.</p></div>
+<figure><a href="images/l2-pipeline-structure.png" target="_blank" rel="noopener"><img src="images/l2-pipeline-structure.png" alt="The blocks of a declarative pipeline" loading="lazy"></a><figcaption>The blocks of a declarative pipeline</figcaption></figure>
+<div class="prose"><ol><li><b><code>pipeline</code></b>: every declarative pipeline starts with this block. It is <b>mandatory</b> and contains everything else.</li><li><b><code>agent</code></b>: says <b>where</b> the pipeline runs. <code>agent any</code> means "on any available Jenkins machine". Jenkins supports many kinds of agents (other servers, Docker containers, Kubernetes pods…); we will use them later in the module.</li><li><b><code>stages</code> / <code>stage</code></b>: <code>stages</code> contains the list of <code>stage</code> blocks, run one after the other. At least one <code>stage</code> is mandatory. Here, the stage is named <b>Hello</b>; this name appears in the stage view.</li><li><b><code>steps</code></b>: contains the actual operations Jenkins performs. Here, a single step: <code>echo 'Hello World'</code> prints a message in the logs.</li></ol><h3>Rules to remember</h3><ul><li>Every <code>{</code> needs its <code>}</code>. A missing brace is the most common error.</li><li>Texts go between quotes: <code>'Hello World'</code>.</li><li>Indentation is not required, but it makes the structure readable. Keep it.</li></ul><h3>Reading the Console Output</h3><p>Each block of the code appears in the logs:</p><ul><li><code>[Pipeline] node</code> and <code>Running on Jenkins in /var/jenkins_home/workspace/hello-world</code>: the <b>agent</b>. Jenkins runs on its built-in node, in a working folder named after the job (the <b>workspace</b>).</li><li><code>[Pipeline] { (Hello)</code>: the start of the stage <b>Hello</b>.</li><li><code>[Pipeline] echo</code> then <code>Hello World</code>: the <b>step</b> and what it printed.</li><li><code>Finished: SUCCESS</code>: the result of the whole build.</li></ul></div>
+<aside class="note"><b>Declarative or scripted?</b> Jenkins accepts two syntaxes. <b>Declarative</b> (the one we use, starting with <code>pipeline {</code>) is structured and easier to read. <b>Scripted</b> (starting with <code>node {</code>) is plain Groovy code: more flexible, but harder to maintain. Start with declarative.</aside>
+    <div class="pager"><a class="prev" href="lab2-1-hello-world.html">← 1. Hello World</a><a class="next" href="lab2-3-shell-commands.html">3. Shell commands →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
+</body>
+</html>

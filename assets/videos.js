@@ -2,6 +2,7 @@
 // Example: "install-jenkins-with-the-docker-command-line": "https://youtu.be/AbCdEf12345",
 // Leave a value empty ("") to hide that video from the page.
 window.LAB_VIDEOS = {
+  // LAB 1
   // SkillUpRight, June 2024: installing Jenkins in a Docker container
   "install-jenkins-with-the-docker-command-line": "https://www.youtube.com/watch?v=cEvgCkv_PSw",
   // ProgrammingKnowledge, May 2025: Docker Desktop on Windows 11, admin user and plugins
@@ -10,4 +11,7 @@ window.LAB_VIDEOS = {
   "the-setup-wizard-step-by-step": "",
   // Cameron McKenzie, October 2024: Jenkins from a Docker image, then a first pipeline
   "demo-jenkins-installation": "https://www.youtube.com/watch?v=QLHc4BnVlR0",
+  // LAB 2
+  // Same video: its second part creates a first pipeline
+  "demo-install-jenkins-and-create-a-first-pipeline": "https://www.youtube.com/watch?v=QLHc4BnVlR0",
 };

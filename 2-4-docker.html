@@ -3,46 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2.4 Docker (Lab Path) · Jenkins Lab 1</title>
-<link rel="stylesheet" href="assets/style.css?v=2">
+<title>2.4 Docker (Lab Path) · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Lab 1 <span class="sub">Installing Jenkins</span></a>
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
   <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
 </header>
 <div class="layout">
-  <nav id="sidenav" aria-label="Lab pages"><ol><li class=""><a href="index.html">Home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub active"><a href="2-4-docker.html" aria-current="page">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol></nav>
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub active"><a href="2-4-docker.html" aria-current="page">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
   <main>
-    <div class="crumb">Lab 1 › 2. Installation Channels</div>
+    <div class="crumb">Lab 1 · Installing Jenkins</div>
     <h1>2.4 Docker (Lab Path)</h1>
     <aside class="note"><b>This is the hands-on part of the lab.</b> Follow either option A (command line) or option B (Docker Desktop interface).</aside>
 <div class="prose"><h3>Step 1: Install Docker</h3><p>Install <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> for Windows or macOS, or Docker Engine on Linux, and follow the instructions on the Docker website. Then start Docker and check that it works:</p></div>
-<div class="code"><div class="code-cap">Check that Docker is installed</div><div class="code-box"><pre><code>docker --version</code></pre><button type="button" class="copy" aria-label="Copy the command: Check that Docker is installed">Copy</button></div></div>
+<div class="code"><div class="code-cap">Check that Docker is installed</div><div class="code-box"><pre><code>docker --version</code></pre><button type="button" class="copy" aria-label="Copy: Check that Docker is installed">Copy</button></div></div>
 <figure><a href="images/02-4-docker-ports-volume.png" target="_blank" rel="noopener"><img src="images/02-4-docker-ports-volume.png" alt="What the docker run command connects: ports and volume" loading="lazy"></a><figcaption>What the docker run command connects: ports and volume</figcaption></figure>
 <div class="prose"><h3>Option A: command line</h3><p><b>2. Download the Jenkins LTS image</b> from <a href="https://hub.docker.com/r/jenkins/jenkins">Docker Hub</a>:</p></div>
-<div class="code"><div class="code-cap">Download the Jenkins LTS image (Java 21)</div><div class="code-box"><pre><code>docker pull jenkins/jenkins:lts-jdk21</code></pre><button type="button" class="copy" aria-label="Copy the command: Download the Jenkins LTS image (Java 21)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Download the Jenkins LTS image (Java 21)</div><div class="code-box"><pre><code>docker pull jenkins/jenkins:lts-jdk21</code></pre><button type="button" class="copy" aria-label="Copy: Download the Jenkins LTS image (Java 21)">Copy</button></div></div>
 <aside class="note"><b>Why the <code>lts-jdk21</code> tag?</b> Without a tag, Docker downloads <code>latest</code>, which is the <i>weekly</i> release. <code>lts-jdk21</code> is the stable LTS release with Java 21.</aside>
 <div class="prose"><p><b>3. Start the Jenkins container:</b></p></div>
 <div class="code"><div class="code-cap">Start Jenkins in a container</div><div class="code-box"><pre><code>docker run -d --name jenkins-local -p 8080:8080 -p 50000:50000 \
-  -v jenkinsvol:/var/jenkins_home jenkins/jenkins:lts-jdk21</code></pre><button type="button" class="copy" aria-label="Copy the command: Start Jenkins in a container">Copy</button></div></div>
+  -v jenkinsvol:/var/jenkins_home jenkins/jenkins:lts-jdk21</code></pre><button type="button" class="copy" aria-label="Copy: Start Jenkins in a container">Copy</button></div></div>
 <div class="prose"><p>What each part means:</p><ul><li><code>-d</code>: run in the background (detached).</li><li><code>--name jenkins-local</code>: give the container a name, used in the next commands.</li><li><code>-p 8080:8080</code>: make the web interface reachable at <code>http://localhost:8080</code>.</li><li><code>-p 50000:50000</code>: the port used by Jenkins agents (later in the module).</li><li><code>-v jenkinsvol:/var/jenkins_home</code>: store Jenkins data (jobs, plugins, users) in a Docker volume, so it survives if the container is deleted.</li></ul><p><b>4. Check that the container is running</b> (its status should be "Up"):</p></div>
-<div class="code"><div class="code-cap">List running containers</div><div class="code-box"><pre><code>docker ps</code></pre><button type="button" class="copy" aria-label="Copy the command: List running containers">Copy</button></div></div>
+<div class="code"><div class="code-cap">List running containers</div><div class="code-box"><pre><code>docker ps</code></pre><button type="button" class="copy" aria-label="Copy: List running containers">Copy</button></div></div>
 <div class="prose"><p><b>5. Get the initial admin password</b>, which you need for the next page:</p></div>
-<div class="code"><div class="code-cap">Display the initial admin password</div><div class="code-box"><pre><code>docker exec jenkins-local cat /var/jenkins_home/secrets/initialAdminPassword</code></pre><button type="button" class="copy" aria-label="Copy the command: Display the initial admin password">Copy</button></div></div>
+<div class="code"><div class="code-cap">Display the initial admin password</div><div class="code-box"><pre><code>docker exec jenkins-local cat /var/jenkins_home/secrets/initialAdminPassword</code></pre><button type="button" class="copy" aria-label="Copy: Display the initial admin password">Copy</button></div></div>
 <div class="prose"><p>You can also find it in the container logs with <code>docker logs jenkins-local</code>, between two lines of asterisks.</p><p><b>6. Open</b> <code>http://localhost:8080</code> in your browser and continue with <b>page 3, Setup Wizard</b>.</p></div>
-<div class="video" data-video="install-jenkins-with-the-docker-command-line"><div class="video-soon"><span class="play" aria-hidden="true">▶</span><div><div class="vt">Video: Install Jenkins with the Docker command line</div><div class="vd">Coming soon. A 3-minute screen recording: docker pull, docker run, docker ps, getting the password, and opening localhost:8080.</div></div></div></div>
+<div class="video" data-video="install-jenkins-with-the-docker-command-line"><div class="video-soon"><span class="play" aria-hidden="true">▶</span><div><div class="vt">Video: Install Jenkins with the Docker command line</div><div class="vd">A 3-minute screen recording: docker pull, docker run, docker ps, getting the password, and opening localhost:8080.</div></div></div></div>
 <div class="prose"><h3>Option B: Docker Desktop interface</h3><p><b>2. Search for the image:</b> in Docker Desktop, search for <b>jenkins</b>. Choose <b>jenkins/jenkins</b> (published by the Jenkins project), select the tag <b>lts-jdk21</b>, then click <b>Run</b>.</p></div>
 <figure><a href="images/02-4-docker-desktop-search.png" target="_blank" rel="noopener"><img src="images/02-4-docker-desktop-search.png" alt="Choose jenkins/jenkins with the lts-jdk21 tag, not the deprecated &quot;jenkins&quot; image" loading="lazy"></a><figcaption>Choose jenkins/jenkins with the lts-jdk21 tag, not the deprecated &quot;jenkins&quot; image</figcaption></figure>
 <div class="prose"><p><b>3. Fill in the optional settings</b> before clicking <b>Run</b>:</p><ul><li><b>Container name:</b> jenkins-local</li><li><b>Host port for 8080/tcp:</b> 8080 (required, otherwise you cannot open Jenkins)</li><li><b>Host port for 50000/tcp:</b> 50000</li><li><b>Volume:</b> container path <code>/var/jenkins_home</code> (recommended, to keep your data)</li></ul></div>
 <figure><a href="images/02-4-docker-desktop-run.png" target="_blank" rel="noopener"><img src="images/02-4-docker-desktop-run.png" alt="The settings to fill in before clicking Run" loading="lazy"></a><figcaption>The settings to fill in before clicking Run</figcaption></figure>
 <div class="prose"><p><b>4. Get the password:</b> open the container in Docker Desktop, go to the <b>Logs</b> tab and copy the password shown between the lines of asterisks. Then open <code>http://localhost:8080</code> and continue with <b>page 3</b>.</p></div>
-<div class="video" data-video="install-jenkins-with-docker-desktop"><div class="video-soon"><span class="play" aria-hidden="true">▶</span><div><div class="vt">Video: Install Jenkins with Docker Desktop</div><div class="vd">Coming soon. A 3-minute screen recording: searching the image, choosing the tag, filling in the ports, Run, and finding the password in the Logs tab.</div></div></div></div>
+<div class="video" data-video="install-jenkins-with-docker-desktop"><div class="video-soon"><span class="play" aria-hidden="true">▶</span><div><div class="vt">Video: Install Jenkins with Docker Desktop</div><div class="vd">A 3-minute screen recording: searching the image, choosing the tag, filling in the ports, Run, and finding the password in the Logs tab.</div></div></div></div>
     <div class="pager"><a class="prev" href="2-3-servlet-container.html">← 2.3 Servlet container</a><a class="next" href="2-5-kubernetes.html">2.5 Kubernetes (Helm) →</a></div>
   </main>
 </div>
-<footer>CI/CD with Jenkins · Lab 1 · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=2"></script>
-<script src="assets/site.js?v=2"></script>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
 </body>
 </html>

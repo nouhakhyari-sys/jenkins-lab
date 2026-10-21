@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Hello World Pipeline · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class="active"><a href="lab2-1-hello-world.html" aria-current="page">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 2 · Your First Pipeline</div>
+    <h1>1. Hello World Pipeline</h1>
+    <div class="prose"><p>We write a "Hello World" pipeline using the <b>declarative</b> pipeline syntax.</p><h3>Step 1: Create the job</h3><ol><li>On the Jenkins dashboard, click <b>New Item</b>.</li><li>Enter a name for the job: <code>hello-world</code></li><li>Select <b>Pipeline</b>, then click <b>OK</b>.</li></ol></div>
+<figure><a href="images/l2-new-item.png" target="_blank" rel="noopener"><img src="images/l2-new-item.png" alt="New Item: enter a name, select Pipeline, click OK" loading="lazy"></a><figcaption>New Item: enter a name, select Pipeline, click OK</figcaption></figure>
+<aside class="note"><b>Choose names without spaces</b>, for example <code>hello-world</code>, not "Jenkins pipeline example-Hello World" as in the screenshot. Jenkins creates a folder with this name, and spaces cause problems in shell commands later.</aside>
+<div class="prose"><h3>Step 2: Write the pipeline</h3><p>The configuration page opens. Scroll down to the <b>Pipeline</b> section (or click <b>Pipeline</b> in the left menu). Check that <b>Definition</b> is set to <b>Pipeline script</b>, then paste this code into the <b>Script</b> box:</p></div>
+<div class="code"><div class="code-cap">Your first declarative pipeline</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    stages {
+        stage(&#x27;Hello&#x27;) {
+            steps {
+                echo &#x27;Hello World&#x27;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: Your first declarative pipeline">Copy</button></div></div>
+<aside class="note"><b>Simple button to try:</b> above the Script box, the drop-down <b>try sample Pipeline…</b> offers ready-made examples. Choose <b>Hello World</b> to see a similar script written for you.</aside>
+<div class="prose"><h3>Step 3: Save and run</h3><ol><li>Click <b>Save</b>. You arrive on the job page.</li><li>Click <b>Build Now</b> in the left menu.</li><li>A new line <b>#1</b> appears in <b>Build History</b> (bottom left). A green tick means the build succeeded.</li></ol><h3>Step 4: Read the logs</h3><p>Click <b>#1</b>, then <b>Console Output</b>. You see everything Jenkins did:</p></div>
+<figure><a href="images/l2-console-hello.png" target="_blank" rel="noopener"><img src="images/l2-console-hello.png" alt="Console Output of build #1: the pipeline printed Hello World and finished with SUCCESS" loading="lazy"></a><figcaption>Console Output of build #1: the pipeline printed Hello World and finished with SUCCESS</figcaption></figure>
+<div class="prose"><p>The pipeline ran and printed <b>Hello World</b>. The last line, <code>Finished: SUCCESS</code>, is the final result of the build.</p><h3>Step 5: See the stages</h3><p>Go back to the job page (click <b>hello-world</b> in the breadcrumbs at the top). Jenkins shows the stages of each build, with their duration: here, a single stage called <b>Hello</b>.</p></div>
+<figure><a href="images/l2-job-page-tour.png" target="_blank" rel="noopener"><img src="images/l2-job-page-tour.png" alt="The job page: the stage &quot;Hello&quot; and build #1 (numbers explained on page 4)" loading="lazy"></a><figcaption>The job page: the stage &quot;Hello&quot; and build #1 (numbers explained on page 4)</figcaption></figure>
+<aside class="note"><b>Your screen may look different.</b> Since 2024, new Jenkins installations show the stages as a <b>graph</b> (Pipeline Graph View plugin) instead of this "Stage View" table: open build <b>#1</b> to see it. To get the table shown here, install the <b>Pipeline: Stage View</b> plugin (Manage Jenkins › Plugins › Available plugins).</aside>
+    <div class="pager"><a class="prev" href="lab2.html">← Lab 2 home</a><a class="next" href="lab2-2-understanding-the-code.html">2. Understanding the code →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
+</body>
+</html>

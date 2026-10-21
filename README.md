@@ -1,16 +1,16 @@
-# Jenkins Lab 1 – Installing Jenkins
+# Jenkins Labs – CI/CD with Jenkins
 
-Lab guide for the **CI/CD with Jenkins** module (Master 2 and Engineering 2).
+Lab guides for the **CI/CD with Jenkins** module (Master 2 and Engineering 2).
 
-**Students: read the lab here 👉 https://nouhakhyari-sys.github.io/jenkins-lab/**
+**Students: read the labs here 👉 https://nouhakhyari-sys.github.io/jenkins-lab/**
 
-## What the lab covers
+## Labs
 
-1. Before you start: Jenkins and Java, LTS vs weekly releases, prerequisites
-2. Installation channels: standalone WAR, Linux packages, servlet container, **Docker (lab path)**, Kubernetes (Helm)
-3. Setup wizard: unlock, plugins, first admin user, instance URL
-4. Tour of the dashboard
-5. Checklist and troubleshooting
+**Lab 1 – Installing Jenkins** (`lab1.html`, pages `1-…` to `5-…`): prerequisites, installation channels (WAR, Linux packages, servlet container, **Docker**, Kubernetes), setup wizard, dashboard tour, checklist and troubleshooting.
+
+**Lab 2 – Your First Pipeline** (`lab2.html`, pages `lab2-1-…` to `lab2-6-…`): Hello World declarative pipeline, the code explained, shell commands with `sh`, a guided tour of the Jenkins buttons, exercises (three stages, break and fix with Replay, variables, `post`), checklist and troubleshooting.
+
+Lab 1 and Lab 2 fit in one 1h30 session.
 
 ## For the teacher
 

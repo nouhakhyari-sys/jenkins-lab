@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Your Turn: Exercises · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=3">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class="active"><a href="lab2-5-your-turn.html" aria-current="page">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 2 · Your First Pipeline</div>
+    <h1>5. Your Turn: Exercises</h1>
+    <div class="prose"><p>Create a new Pipeline job called <code>my-first-pipeline</code> and complete the exercises in order. Try first, then open the solution to check.</p><h3>Exercise 1: Three stages</h3><p>Write a pipeline with three stages: <b>Build</b>, <b>Test</b> and <b>Deploy</b>. Each stage prints a message with <code>echo</code>. Build it and look at the stages: you now see the pipeline from the course, Build → Test → Deploy.</p></div>
+<details><summary>Show the solution of exercise 1</summary><div class="prose"><p>Three <code>stage</code> blocks inside <code>stages</code>, one after the other:</p><pre><code>pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running the tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to staging...'
+            }
+        }
+    }
+}</code></pre></div></details>
+<div class="prose"><h3>Exercise 2: Break it, then fix it with Replay</h3><ol><li>In the <b>Test</b> stage, add a command that fails: <code>sh 'exit 1'</code> (any command that returns an error code makes the build fail).</li><li>Save and build. The build turns <b>red</b>.</li><li>Open the Console Output and find the error message. What happened to the <b>Deploy</b> stage?</li><li>Fix it <b>with Replay</b>: remove the failing line and click <b>Run</b>. The new build is green.</li></ol></div>
+<details><summary>Show the answer of exercise 2</summary><div class="prose"><p>The log shows <code>ERROR: script returned exit code 1</code> and ends with <code>Finished: FAILURE</code>. The <b>Deploy</b> stage did not run: Jenkins skips the next stages after a failure ("skipped due to earlier failure(s)"). This is the "stop the line" principle from the course: a failing stage stops the change.</p><p>Note: Replay fixed this run only. The job script still contains <code>exit 1</code>; remove it with <b>Configure</b> too.</p></div></details>
+<div class="prose"><h3>Exercise 3: Jenkins variables</h3><p>Jenkins provides variables about each build. Run this pipeline twice and compare the output of the two builds:</p></div>
+<div class="code"><div class="code-cap">Print the job name and build number</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    stages {
+        stage(&#x27;Info&#x27;) {
+            steps {
+                echo &quot;Job name: ${env.JOB_NAME}&quot;
+                echo &quot;Build number: ${env.BUILD_NUMBER}&quot;
+                echo &#x27;Single quotes: ${env.BUILD_NUMBER}&#x27;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: Print the job name and build number">Copy</button></div></div>
+<details><summary>Show the answer of exercise 3</summary><div class="prose"><p>The build number changes at each build (1, then 2…). The third line prints <code>${env.BUILD_NUMBER}</code> literally: with <b>single quotes</b>, variables are not replaced. Use <b>double quotes</b> when a text contains a variable.</p></div></details>
+<div class="prose"><h3>Bonus: what happens after the stages?</h3><p>The <code>post</code> block runs after all stages, depending on the result. Run this pipeline, then add <code>sh 'exit 1'</code> in the Test stage and run it again. Which messages appear each time?</p></div>
+<div class="code"><div class="code-cap">Messages after a success or a failure</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    stages {
+        stage(&#x27;Test&#x27;) {
+            steps {
+                echo &#x27;Running the tests...&#x27;
+            }
+        }
+    }
+    post {
+        success {
+            echo &#x27;The pipeline succeeded.&#x27;
+        }
+        failure {
+            echo &#x27;The pipeline failed. Read the logs above.&#x27;
+        }
+        always {
+            echo &#x27;This message is always printed.&#x27;
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: Messages after a success or a failure">Copy</button></div></div>
+<details><summary>Show the answer of the bonus</summary><div class="prose"><p>When the build succeeds: "The pipeline succeeded." and "This message is always printed." When it fails: "The pipeline failed…" and "This message is always printed." In real projects, <code>post</code> is used to send notifications (email, Slack) and clean up.</p></div></details>
+    <div class="pager"><a class="prev" href="lab2-4-explore-the-buttons.html">← 4. Explore the buttons</a><a class="next" href="lab2-6-checklist-and-help.html">6. Checklist and help →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=3"></script>
+<script src="assets/site.js?v=3"></script>
+</body>
+</html>
