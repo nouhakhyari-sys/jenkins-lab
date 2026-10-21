@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1. Hello World Pipeline · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body>
 <header class="top">
@@ -12,7 +12,7 @@
   <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
 </header>
 <div class="layout">
-  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class="active"><a href="lab2-1-hello-world.html" aria-current="page">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class="active"><a href="lab2-1-hello-world.html" aria-current="page">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
   <main>
     <div class="crumb">Lab 2 · Your First Pipeline</div>
     <h1>1. Hello World Pipeline</h1>
@@ -33,14 +33,14 @@
 <aside class="note"><b>Simple button to try:</b> above the Script box, the drop-down <b>try sample Pipeline…</b> offers ready-made examples. Choose <b>Hello World</b> to see a similar script written for you.</aside>
 <div class="prose"><h3>Step 3: Save and run</h3><ol><li>Click <b>Save</b>. You arrive on the job page.</li><li>Click <b>Build Now</b> in the left menu.</li><li>A new line <b>#1</b> appears in the <b>Builds</b> list (bottom left; called <b>Build History</b> in older versions). A green tick means the build succeeded.</li></ol><h3>Step 4: Read the logs</h3><p>Click <b>#1</b>, then <b>Console Output</b>. You see everything Jenkins did:</p></div>
 <figure><a href="images/l2-console-hello.png" target="_blank" rel="noopener"><img src="images/l2-console-hello.png" alt="Console Output of build #1: the pipeline printed Hello World and finished with SUCCESS" loading="lazy"></a><figcaption>Console Output of build #1: the pipeline printed Hello World and finished with SUCCESS</figcaption></figure>
-<div class="prose"><p>The pipeline ran and printed <b>Hello World</b>. The last line, <code>Finished: SUCCESS</code>, is the final result of the build.</p><h3>Step 5: See the stages</h3><p>Go back to the job page: click <b>hello-world</b> at the top of the page. In the left menu, click <b>Stages</b>. Jenkins draws the stages of your pipeline as a graph, with the result and the duration of each stage: here, a single stage called <b>Hello</b>.</p></div>
-<figure><a href="images/l2-job-page-new.png" target="_blank" rel="noopener"><img src="images/l2-job-page-new.png" alt="The job page: Stages (5) shows the stages of the pipeline; the other numbers are explained on page 4" loading="lazy"></a><figcaption>The job page: Stages (5) shows the stages of the pipeline; the other numbers are explained on page 4</figcaption></figure>
-<aside class="note"><b>Older Jenkins versions</b> (before 2024) show a "Stage View" table directly on the job page instead of the <b>Stages</b> button. Same information, different look.</aside>
-    <div class="pager"><a class="prev" href="lab2.html">← Lab 2 home</a><a class="next" href="lab2-2-understanding-the-code.html">2. Understanding the code →</a></div>
+<div class="prose"><p>The pipeline ran and printed <b>Hello World</b>. The last line, <code>Finished: SUCCESS</code>, is the final result of the build.</p><h3>Step 5: See the stages</h3><p>Go back to the job page: click <b>hello-world</b> at the top of the page. Thanks to the plugin installed on page 0, the <b>Stage View</b> table shows each stage of each build, with its duration: here, a single stage called <b>Hello</b>, in green because it succeeded.</p></div>
+<figure><a href="images/l2-stage-view.png" target="_blank" rel="noopener"><img src="images/l2-stage-view.png" alt="Stage View on the job page: one column per stage, one row per build" loading="lazy"></a><figcaption>Stage View on the job page: one column per stage, one row per build</figcaption></figure>
+<aside class="note"><b>No table?</b> Check that the <b>Pipeline: Stage View</b> plugin is installed (page 0), then refresh the job page. You can also click <b>Stages</b> in the left menu: it shows the same stages as a graph.</aside>
+    <div class="pager"><a class="prev" href="lab2-0-stage-view-plugin.html">← 0. Stage View plugin</a><a class="next" href="lab2-2-understanding-the-code.html">2. Understanding the code →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=4"></script>
-<script src="assets/site.js?v=4"></script>
+<script src="assets/videos.js?v=5"></script>
+<script src="assets/site.js?v=5"></script>
 </body>
 </html>

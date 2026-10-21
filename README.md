@@ -8,7 +8,7 @@ Lab guides for the **CI/CD with Jenkins** module (Master 2 and Engineering 2).
 
 **Lab 1 – Installing Jenkins** (`lab1.html`, pages `1-…` to `5-…`): prerequisites, installation channels (WAR, Linux packages, servlet container, **Docker**, Kubernetes), setup wizard, dashboard tour, checklist and troubleshooting.
 
-**Lab 2 – Your First Pipeline** (`lab2.html`, pages `lab2-1-…` to `lab2-6-…`): Hello World declarative pipeline, the code explained, shell commands with `sh`, a guided tour of the Jenkins buttons, exercises (three stages, break and fix with Replay, variables, `post`), checklist and troubleshooting.
+**Lab 2 – Your First Pipeline** (`lab2.html`, pages `lab2-0-…` to `lab2-6-…`): installing the **Pipeline: Stage View** plugin, Hello World declarative pipeline, the code explained, shell commands with `sh`, a guided tour of the Jenkins buttons, exercises (three stages, break and fix with Replay, variables, `post`), checklist and troubleshooting.
 
 Lab 1 and Lab 2 fit in one 1h30 session.
 

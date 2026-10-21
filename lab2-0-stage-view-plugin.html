@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0. Install the Stage View Plugin · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=5">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class="active"><a href="lab2-0-stage-view-plugin.html" aria-current="page">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 2 · Your First Pipeline</div>
+    <h1>0. Install the Stage View Plugin</h1>
+    <div class="prose"><p>Jenkins can show your pipeline as a table: one column per stage, one row per build, with the result and duration of each stage. This view comes from a <b>plugin</b>, <b>Pipeline: Stage View</b>, which is not installed by default in recent versions. Install it now; it takes two minutes.</p><h3>Steps</h3><ol><li>Click <b>Manage Jenkins</b>: the gear icon at the top right of the page (in older versions, in the left menu of the dashboard).</li><li>Click <b>Plugins</b>, then <b>Available plugins</b> in the left menu.</li><li>In the search box, type <code>Pipeline: Stage View</code>.</li><li>Tick the box next to <b>Pipeline: Stage View</b>, then click <b>Install</b>.</li><li>Wait until the plugin shows <b>Success</b>. Then click <b>Go back to the top page</b>, or the Jenkins logo.</li></ol></div>
+<aside class="note"><b>Check:</b> in Manage Jenkins › Plugins › <b>Installed plugins</b>, search for "Stage View": the plugin is listed and enabled. Because Jenkins runs in Docker with the <code>jenkinsvol</code> volume, the plugin stays installed even if you restart the container.</aside>
+<div class="prose"><p>The Stage View table appears on the page of a pipeline job <b>after its first build</b>. You will see it in step 5 of the next page.</p><h3>What is a plugin?</h3><p>Jenkins itself does very little: almost every feature comes from a plugin. Git integration, pipelines, Docker support and this Stage View are all plugins. There are about 2,000 of them, managed from <b>Manage Jenkins › Plugins</b>, with four tabs: <b>Updates</b>, <b>Available plugins</b>, <b>Installed plugins</b> and <b>Advanced settings</b>.</p></div>
+    <div class="pager"><a class="prev" href="lab2.html">← Lab 2 home</a><a class="next" href="lab2-1-hello-world.html">1. Hello World →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=5"></script>
+<script src="assets/site.js?v=5"></script>
+</body>
+</html>
