@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. Bonus: Run a Pipeline from Git · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=14">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class="active"><a href="lab2-7-bonus-pipeline-from-git.html" aria-current="page">7. Bonus: pipeline from Git</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 2 · Your First Pipeline</div>
+    <h1>7. Bonus: Run a Pipeline from Git</h1>
+    <div class="prose"><p>Finished early? Until now, you typed the script in the Jenkins <b>Script</b> box. In real projects, the script is a file named <code>Jenkinsfile</code>, stored in <b>Git</b> with the code. Jenkins reads it from the repository at every build. This is called <b>Pipeline as Code</b>.</p><h3>Part 1: Run a Jenkinsfile from GitHub (10 min)</h3><p>Your teacher's public repository contains this file, in the folder <code>examples/hello-from-git</code>:</p></div>
+<div class="code"><div class="code-cap">examples/hello-from-git/Jenkinsfile (already on GitHub, nothing to copy)</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    stages {
+        stage(&#x27;Hello from Git&#x27;) {
+            steps {
+                echo &#x27;Hello World! This script was read from GitHub.&#x27;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: examples/hello-from-git/Jenkinsfile (already on GitHub, nothing to copy)">Copy</button></div></div>
+<div class="prose"><p><b>Step 1: Create the job.</b> On the dashboard, click <b>New Item</b>, type <code>hello-from-git</code>, select <b>Pipeline</b>, then click <b>OK</b>.</p><p><b>Step 2: Read the script from Git.</b> Scroll to the <b>Pipeline</b> section and fill in the fields <b>in this order</b>:</p><ol><li><b>Definition:</b> choose <b>Pipeline script from SCM</b> (SCM = Source Code Management).</li><li><b>SCM:</b> choose <b>Git</b>. New fields appear below. Only <b>None</b> in the list? See "SCM shows only None" below.</li><li><b>Repository URL:</b> paste the address below.</li></ol></div>
+<div class="code"><div class="code-cap">Repository URL</div><div class="code-box"><pre><code>https://github.com/nouhakhyari-sys/jenkins-labs-template.git</code></pre><button type="button" class="copy" aria-label="Copy: Repository URL">Copy</button></div></div>
+<div class="prose"><ol start="4"><li><b>Credentials:</b> leave <b>- none -</b>. The repository is public.</li><li><b>Branch Specifier:</b> replace <code>*/master</code> with <code>*/main</code>. GitHub names the main branch <code>main</code>.</li><li><b>Script Path:</b> replace <code>Jenkinsfile</code> with the path of the file <b>inside</b> the repository:</li></ol></div>
+<div class="code"><div class="code-cap">Script Path</div><div class="code-box"><pre><code>examples/hello-from-git/Jenkinsfile</code></pre><button type="button" class="copy" aria-label="Copy: Script Path">Copy</button></div></div>
+<aside class="note"><b>Do not mix up the two fields.</b> The GitHub address goes in <b>Repository URL</b>. <b>Script Path</b> only contains the folder and the file name inside the repository.</aside>
+<div class="prose"><ol start="7"><li>Leave <b>Lightweight checkout</b> ticked. Click <b>Save</b>.</li></ol><p><b>Step 3: Run it.</b> Click <b>Build Now</b>, then <b>#1 › Console Output</b>. You see:</p></div>
+<div class="code"><div class="code-cap">Console Output (extract)</div><div class="code-box"><pre><code>Obtained examples/hello-from-git/Jenkinsfile from git
+  https://github.com/nouhakhyari-sys/...
+...
+[Pipeline] echo
+Hello World! This script was read from GitHub.
+...
+Finished: SUCCESS</code></pre><button type="button" class="copy" aria-label="Copy: Console Output (extract)">Copy</button></div></div>
+<div class="prose"><p>Jenkins downloaded the <code>Jenkinsfile</code> from GitHub, then ran it. The script is no longer stored in Jenkins: it lives in Git.</p><h3>Part 2: Run your own Jenkinsfile (15 min)</h3><p>Now Jenkins reads <b>your</b> <code>lab2/Jenkinsfile</code>, the one you handed in. Your repository is <b>private</b>, so Jenkins needs a key to read it: a GitHub <b>token</b>.</p><p><b>Step 1: Create a token on GitHub.</b></p><ol><li>On GitHub, click your photo (top right) › <b>Settings</b> › <b>Developer settings</b> (bottom of the left menu) › <b>Personal access tokens › Fine-grained tokens</b> › <b>Generate new token</b>.</li><li><b>Token name:</b> <code>jenkins-lab</code>. <b>Expiration:</b> 30 days.</li><li><b>Repository access:</b> <b>Only select repositories</b> › choose <b>jenkins-labs</b>.</li><li><b>Permissions › Repository permissions › Contents:</b> <b>Read-only</b>.</li><li>Click <b>Generate token</b> and <b>copy</b> it now: GitHub shows it only once. It starts with <code>github_pat_</code>.</li></ol></div>
+<aside class="note"><b>A token is a password.</b> Never paste it in a script, a screenshot or a file of your repository. Only in Jenkins Credentials.</aside>
+<div class="prose"><p><b>Step 2: Create the job.</b> <b>New Item</b> › <code>my-pipeline-from-git</code> › <b>Pipeline</b> › <b>OK</b>. In the Pipeline section:</p><ol><li><b>Definition:</b> <b>Pipeline script from SCM</b>. <b>SCM:</b> <b>Git</b>.</li><li><b>Repository URL:</b> the address of <b>your</b> repository, ending with <code>.git</code>, for example <code>https://github.com/your-username/jenkins-labs.git</code></li><li><b>Credentials:</b> click <b>+ Add</b> › <b>Jenkins</b>. <b>Kind:</b> <b>Username with password</b>. <b>Username:</b> your GitHub username. <b>Password:</b> paste the token. <b>ID:</b> <code>github-token</code>. Click <b>Add</b>, then select the new credential in the list.</li><li><b>Branch Specifier:</b> <code>*/main</code>. <b>Script Path:</b> <code>lab2/Jenkinsfile</code>. Click <b>Save</b>.</li></ol><p><b>Step 3: Run it,</b> with <b>Build Now</b>. Your Build, Test and Deploy stages run, read from GitHub.</p><p><b>Step 4: Change the code, not Jenkins.</b> On GitHub, open <code>lab2/Jenkinsfile</code>, click the <b>pencil icon</b>, change an <code>echo</code> message, then <b>Commit changes</b>. In Jenkins, click <b>Build Now</b> again: the new message appears. You changed the pipeline without opening Configure. This is how real teams work.</p><h3>Troubleshooting</h3></div>
+<details><summary>SCM shows only None</summary><div class="prose"><p>The <b>Git</b> plugin is missing. Install it like the Stage View plugin (page 0): <b>Manage Jenkins › Plugins › Available plugins</b>, search <code>Git</code>, tick <b>Git</b> ("This plugin integrates Git with Jenkins"), click <b>Install</b>, wait for <b>Success</b>. Then open your job, click <b>Configure</b>: Git is in the SCM list.</p></div></details>
+<details><summary>Error &quot;Couldn&#x27;t find any revision to build&quot;</summary><div class="prose"><p>The branch is wrong. In <b>Configure</b>, set <b>Branch Specifier</b> to <code>*/main</code>, not <code>*/master</code>.</p></div></details>
+<details><summary>Error &quot;Unable to find examples/… from git&quot; or &quot;…/Jenkinsfile not found&quot;</summary><div class="prose"><p>The <b>Script Path</b> is wrong. It is case-sensitive and has no address in it: <code>examples/hello-from-git/Jenkinsfile</code> (Part 1) or <code>lab2/Jenkinsfile</code> (Part 2). Check that the file exists at that place on GitHub.</p></div></details>
+<details><summary>Error &quot;Authentication failed&quot; or &quot;repository not found&quot; (Part 2)</summary><div class="prose"><p>Jenkins cannot read your private repository. Check the <b>Credentials</b>: username = your GitHub username, password = the token (not your GitHub password), and the token gives <b>Contents: Read-only</b> access to <b>jenkins-labs</b>.</p></div></details>
+<details><summary>Error &quot;Cannot run program &quot;git&quot;&quot; (Jenkins installed on Windows)</summary><div class="prose"><p>Git is not installed on the computer that runs Jenkins. The Docker Jenkins already contains Git. On a Jenkins installed on Windows, install Git for Windows from <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a>, then restart Jenkins.</p></div></details>
+    <div class="pager"><a class="prev" href="lab2-6-checklist-and-help.html">← 6. Checklist and help</a><a class="next" href="index.html">Module home →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=14"></script>
+<script src="assets/site.js?v=14"></script>
+</body>
+</html>
