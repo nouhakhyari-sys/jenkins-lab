@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>7. Bonus: Run a Pipeline from Git · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=14">
+<link rel="stylesheet" href="assets/style.css?v=15">
 </head>
 <body>
 <header class="top">
@@ -46,13 +46,13 @@ Finished: SUCCESS</code></pre><button type="button" class="copy" aria-label="Cop
 <details><summary>SCM shows only None</summary><div class="prose"><p>The <b>Git</b> plugin is missing. Install it like the Stage View plugin (page 0): <b>Manage Jenkins › Plugins › Available plugins</b>, search <code>Git</code>, tick <b>Git</b> ("This plugin integrates Git with Jenkins"), click <b>Install</b>, wait for <b>Success</b>. Then open your job, click <b>Configure</b>: Git is in the SCM list.</p></div></details>
 <details><summary>Error &quot;Couldn&#x27;t find any revision to build&quot;</summary><div class="prose"><p>The branch is wrong. In <b>Configure</b>, set <b>Branch Specifier</b> to <code>*/main</code>, not <code>*/master</code>.</p></div></details>
 <details><summary>Error &quot;Unable to find examples/… from git&quot; or &quot;…/Jenkinsfile not found&quot;</summary><div class="prose"><p>The <b>Script Path</b> is wrong. It is case-sensitive and has no address in it: <code>examples/hello-from-git/Jenkinsfile</code> (Part 1) or <code>lab2/Jenkinsfile</code> (Part 2). Check that the file exists at that place on GitHub.</p></div></details>
-<details><summary>Error &quot;Authentication failed&quot; or &quot;repository not found&quot; (Part 2)</summary><div class="prose"><p>Jenkins cannot read your private repository. Check the <b>Credentials</b>: username = your GitHub username, password = the token (not your GitHub password), and the token gives <b>Contents: Read-only</b> access to <b>jenkins-labs</b>.</p></div></details>
+<details><summary>Error &quot;Authentication failed&quot; or &quot;repository not found&quot; (Part 2)</summary><div class="prose"><p>Jenkins cannot read your private repository. Check, in this order:</p><ol><li>A credential is <b>selected</b> in the <b>Credentials</b> list of the job, not "- none -".</li><li>Its <b>Kind</b> is <b>Username with password</b>, not "Secret text" (a Secret text does not appear in the Git list).</li><li><b>Username</b> = your GitHub username, <b>Password</b> = the token (<code>github_pat_…</code> or <code>ghp_…</code>), not your GitHub password.</li><li>The fine-grained token gives <b>Contents: Read-only</b> access to <b>jenkins-labs</b>, and its <b>Resource owner</b> is your account.</li></ol><p><b>Still failing? Use a classic token</b>, simpler: GitHub › Settings › Developer settings › Personal access tokens › <b>Tokens (classic)</b> › <b>Generate new token (classic)</b> › tick <b>repo</b> › <b>Generate token</b>. Copy it (it starts with <code>ghp_</code>), then in Jenkins edit the credential (<b>Manage Jenkins › Credentials</b>) and paste it as Password.</p></div></details>
 <details><summary>Error &quot;Cannot run program &quot;git&quot;&quot; (Jenkins installed on Windows)</summary><div class="prose"><p>Git is not installed on the computer that runs Jenkins. The Docker Jenkins already contains Git. On a Jenkins installed on Windows, install Git for Windows from <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a>, then restart Jenkins.</p></div></details>
     <div class="pager"><a class="prev" href="lab2-6-checklist-and-help.html">← 6. Checklist and help</a><a class="next" href="index.html">Module home →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=14"></script>
-<script src="assets/site.js?v=14"></script>
+<script src="assets/videos.js?v=15"></script>
+<script src="assets/site.js?v=15"></script>
 </body>
 </html>
