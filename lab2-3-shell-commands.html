@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3. Running Shell Commands · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 </head>
 <body>
 <header class="top">
@@ -34,12 +34,26 @@
 <figure><a href="images/l2-console-shell.png" target="_blank" rel="noopener"><img src="images/l2-console-shell.png" alt="Console Output: each line starting with + is a shell command that Jenkins ran" loading="lazy"></a><figcaption>Console Output: each line starting with + is a shell command that Jenkins ran</figcaption></figure>
 <div class="prose"><ul><li>Lines starting with <code>+</code> show each shell command Jenkins ran; the line below is its result.</li><li><b><code>hostname</code> prints a strange name</b> such as <code>68412fcca2f6</code>. That is because Jenkins runs <b>inside a Docker container</b>: this is the container ID. Compare it with the <b>CONTAINER ID</b> column of <code>docker ps</code> in your terminal.</li></ul></div>
 <div class="code"><div class="code-cap">Compare the container ID with the hostname printed by Jenkins</div><div class="code-box"><pre><code>docker ps</code></pre><button type="button" class="copy" aria-label="Copy: Compare the container ID with the hostname printed by Jenkins">Copy</button></div></div>
-<aside class="note"><b>Your laptop runs Windows?</b> <code>sh</code> still works, because Jenkins runs in a Linux container. On a Jenkins installed directly on Windows (the <code>.war</code> or the Windows installer), <code>sh</code> fails with <i>Cannot run program "sh"</i>: use <code>bat</code> instead, with Windows commands (see the troubleshooting on page 6).</aside>
+<aside class="note"><b>Your laptop runs Windows?</b> <code>sh</code> still works, because Jenkins runs in a Linux container. On a Jenkins installed directly on Windows (the <code>.war</code> or the Windows installer), <code>sh</code> fails with <i>Cannot run program "sh"</i>. Use <code>bat</code> instead, with Windows commands: <code>uptime</code> does not exist on Windows, so use <code>systeminfo</code>. Script below.</aside>
+<div class="code"><div class="code-cap">Same pipeline for a Jenkins installed directly on Windows</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    stages {
+        stage(&#x27;build&#x27;) {
+            steps {
+                echo &quot;Hello World!&quot;
+                bat &quot;echo Hello from the Windows shell&quot;
+                bat &quot;hostname&quot;
+                bat &quot;systeminfo&quot;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: Same pipeline for a Jenkins installed directly on Windows">Copy</button></div></div>
+<div class="prose"><p><code>systeminfo</code> takes a few seconds and prints a long report. Look for the line <b>System Boot Time</b>: it tells you since when the machine is running, like <code>uptime</code> on Linux.</p></div>
     <div class="pager"><a class="prev" href="lab2-2-understanding-the-code.html">← 2. Understanding the code</a><a class="next" href="lab2-4-explore-the-buttons.html">4. Explore the buttons →</a></div>
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=15"></script>
-<script src="assets/site.js?v=15"></script>
+<script src="assets/videos.js?v=16"></script>
+<script src="assets/site.js?v=16"></script>
 </body>
 </html>
