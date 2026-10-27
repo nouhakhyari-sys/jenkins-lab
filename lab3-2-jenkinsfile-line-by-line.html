@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2. The Jenkinsfile Line by Line · Jenkins Labs</title>
-<link rel="stylesheet" href="assets/style.css?v=21">
+<link rel="stylesheet" href="assets/style.css?v=22">
 </head>
 <body>
 <header class="top">
@@ -56,10 +56,11 @@ pipeline {
             post {
                 always {
                     junit &#x27;lab2/java-app/build/test-results/*.xml&#x27;   // JUnit plugin
+                    archiveArtifacts artifacts: &#x27;lab2/java-app/build/test-results/*.xml&#x27;
                 }
             }
         }</code></pre><button type="button" class="copy" aria-label="Copy: stage(&#x27;Test&#x27;)">Copy</button></div></div>
-<div class="prose"><ul><li><b>Double quotes</b> on the <code>sh</code> line, because the text contains <code>${params.SIMULATE_BUG}</code>. Before running the command, Jenkins replaces it by <code>true</code> or <code>false</code>. With single quotes, the text <code>${params.SIMULATE_BUG}</code> would be sent as it is, and the command would fail.</li><li><code>java</code> runs a compiled Java program:<ul><li><code>-DsimulateBug=true</code> gives a setting to the program. <code>Calculator.java</code> reads it with <code>Boolean.getBoolean("simulateBug")</code>.</li><li><code>-cp build/classes</code> ("class path"): where to find the <code>.class</code> files.</li><li><code>CalculatorTest</code>: the class to run. Its <code>main</code> method runs the 4 tests and writes the report <code>build/test-results/TEST-CalculatorTest.xml</code>.</li></ul></li><li><code>post { }</code> <b>inside a stage</b>: runs after the steps of this stage.</li><li><code>always { }</code>: in every case, success or failure. We want the test report even when tests fail.</li><li><code>junit '…/*.xml'</code>: the <b>JUnit</b> plugin reads the report and creates the <b>Tests</b> page and the trend chart. If a test failed, it marks the build <b>UNSTABLE</b> (yellow). <code>*</code> means "any file name".</li><li>The <code>junit</code> line is <b>outside</b> <code>dir(…)</code>, so its path starts from the root of the repository: <code>lab2/java-app/…</code>.</li></ul></div>
+<div class="prose"><ul><li><b>Double quotes</b> on the <code>sh</code> line, because the text contains <code>${params.SIMULATE_BUG}</code>. Before running the command, Jenkins replaces it by <code>true</code> or <code>false</code>. With single quotes, the text <code>${params.SIMULATE_BUG}</code> would be sent as it is, and the command would fail.</li><li><code>java</code> runs a compiled Java program:<ul><li><code>-DsimulateBug=true</code> gives a setting to the program. <code>Calculator.java</code> reads it with <code>Boolean.getBoolean("simulateBug")</code>.</li><li><code>-cp build/classes</code> ("class path"): where to find the <code>.class</code> files.</li><li><code>CalculatorTest</code>: the class to run. Its <code>main</code> method runs the 4 tests and writes the report <code>build/test-results/TEST-CalculatorTest.xml</code>.</li></ul></li><li><code>post { }</code> <b>inside a stage</b>: runs after the steps of this stage.</li><li><code>always { }</code>: in every case, success or failure. We want the test report even when tests fail.</li><li><code>junit '…/*.xml'</code>: the <b>JUnit</b> plugin reads the report and creates the <b>Tests</b> page and the trend chart. If a test failed, it marks the build <b>UNSTABLE</b> (yellow). <code>*</code> means "any file name".</li><li><code>archiveArtifacts artifacts: '…/*.xml'</code>: also keeps the raw report file, so you can open it from the build page (see part 4).</li><li>The <code>junit</code> line is <b>outside</b> <code>dir(…)</code>, so its path starts from the root of the repository: <code>lab2/java-app/…</code>.</li></ul></div>
 <div class="prose"><h3>6. The Package stage</h3></div>
 <div class="code"><div class="code-cap">stage(&#x27;Package&#x27;) and the end of stages</div><div class="code-box"><pre><code>        stage(&#x27;Package&#x27;) {
             steps {
@@ -132,7 +133,7 @@ pipeline {
   </main>
 </div>
 <footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
-<script src="assets/videos.js?v=21"></script>
-<script src="assets/site.js?v=21"></script>
+<script src="assets/videos.js?v=22"></script>
+<script src="assets/site.js?v=22"></script>
 </body>
 </html>
