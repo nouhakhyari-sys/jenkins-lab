@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Meet the Java Project · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=20">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class="active"><a href="lab3-1-java-project.html" aria-current="page">1. The Java project</a></li><li class=""><a href="lab3-2-run-from-github.html">2. Run it from GitHub</a></li><li class=""><a href="lab3-3-plugins-at-work.html">3. Plugins at work</a></li><li class=""><a href="lab3-4-break-the-tests.html">4. Break the tests</a></li><li class=""><a href="lab3-5-your-own-pipeline.html">5. Your own pipeline</a></li><li class=""><a href="lab3-6-install-ansicolor.html">6. Install AnsiColor</a></li><li class=""><a href="lab3-7-checklist-and-help.html">7. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 3 · Build a Java Project</div>
+    <h1>1. Meet the Java Project</h1>
+    <div class="prose"><p>Open the project on GitHub: <a href="https://github.com/nouhakhyari-sys/jenkins-labs-template/tree/main/lab2/java-app" target="_blank" rel="noopener"><b>lab2/java-app</b></a>. It is a tiny calculator, with no Maven and no library: Jenkins only needs the Java compiler it already has.</p></div>
+<div class="code"><div class="code-cap">The files of the project</div><div class="code-box"><pre><code>lab2/java-app/
+├── src/Calculator.java        the application: add() and multiply()
+├── test/CalculatorTest.java   4 tests
+├── Jenkinsfile                the pipeline for Jenkins in Docker (sh)
+└── Jenkinsfile-windows        the same pipeline for Jenkins on Windows (bat)</code></pre><button type="button" class="copy" aria-label="Copy: The files of the project">Copy</button></div></div>
+<div class="prose"><h3>Read the code (5 min)</h3><ol><li>Click <code>src/Calculator.java</code>. Find the two methods <code>add</code> and <code>multiply</code>. Notice the line with <code>simulateBug</code>: it adds 1 to every addition when the bug is switched on. You will use it in part 4.</li><li>Click <code>test/CalculatorTest.java</code>. It checks 4 results, for example <code>check("add_2_and_3", 5, calc.add(2, 3))</code>, and writes a report in the <b>JUnit XML</b> format, the standard format Jenkins understands.</li><li>Click <code>Jenkinsfile</code>. Find the three stages <b>Build</b>, <b>Test</b> and <b>Package</b>.</li></ol><h3>What each stage does</h3><ul><li><b>Build:</b> <code>javac</code> compiles the two <code>.java</code> files into <code>.class</code> files.</li><li><b>Test:</b> <code>java … CalculatorTest</code> runs the tests. Then <code>junit</code> (the <b>JUnit</b> plugin) reads the report and shows it in Jenkins.</li><li><b>Package:</b> <code>jar</code> puts the compiled code in <code>calculator.jar</code>, then <code>archiveArtifacts</code> keeps this file so you can download it.</li><li><b>options</b>: <code>timestamps()</code> (<b>Timestamper</b> plugin) writes the time on each log line. <b>post › always</b>: <code>cleanWs()</code> (<b>Workspace Cleanup</b> plugin) deletes the files at the end.</li></ul></div>
+<aside class="note"><b>dir('lab2/java-app')</b> runs the commands inside that folder of the repository, like <code>cd lab2/java-app</code> in a terminal.</aside>
+    <div class="pager"><a class="prev" href="lab3.html">← Lab 3 home</a><a class="next" href="lab3-2-run-from-github.html">2. Run it from GitHub →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=20"></script>
+<script src="assets/site.js?v=20"></script>
+</body>
+</html>

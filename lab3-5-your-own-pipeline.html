@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Your Own Java Pipeline · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=20">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-run-from-github.html">2. Run it from GitHub</a></li><li class=""><a href="lab3-3-plugins-at-work.html">3. Plugins at work</a></li><li class=""><a href="lab3-4-break-the-tests.html">4. Break the tests</a></li><li class="active"><a href="lab3-5-your-own-pipeline.html" aria-current="page">5. Your own pipeline</a></li><li class=""><a href="lab3-6-install-ansicolor.html">6. Install AnsiColor</a></li><li class=""><a href="lab3-7-checklist-and-help.html">7. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 3 · Build a Java Project</div>
+    <h1>5. Your Own Java Pipeline</h1>
+    <div class="prose"><p>Now write the pipeline yourself, in Jenkins, so you can change it. The code still comes from GitHub, but this time with the <b><code>git</code> step</b> in a <b>Checkout</b> stage.</p><h3>Exercise A: the pipeline in a Script box (10 min)</h3><ol><li><b>New Item</b> › <code>my-java-pipeline</code> › <b>Pipeline</b> › <b>OK</b>.</li><li>In the Pipeline section, keep <b>Definition: Pipeline script</b>.</li><li>Paste the version that matches your Jenkins, then <b>Save</b> and <b>Build Now</b>.</li></ol></div>
+<div class="code"><div class="code-cap">my-java-pipeline: Jenkins in Docker</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Checkout&#x27;) {
+            steps {
+                git branch: &#x27;main&#x27;, url: &#x27;https://github.com/nouhakhyari-sys/jenkins-labs-template.git&#x27;
+            }
+        }
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &#x27;javac -d build/classes src/Calculator.java test/CalculatorTest.java&#x27;
+                }
+            }
+        }
+        stage(&#x27;Test&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                }
+            }
+            post {
+                always {
+                    junit &#x27;lab2/java-app/build/test-results/*.xml&#x27;
+                }
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &#x27;jar cfe build/calculator.jar Calculator -C build/classes .&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;lab2/java-app/build/calculator.jar&#x27;, fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: my-java-pipeline: Jenkins in Docker">Copy</button></div></div>
+<div class="code"><div class="code-cap">my-java-pipeline: Jenkins installed on Windows</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Checkout&#x27;) {
+            steps {
+                git branch: &#x27;main&#x27;, url: &#x27;https://github.com/nouhakhyari-sys/jenkins-labs-template.git&#x27;
+            }
+        }
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    bat &#x27;javac -d build/classes src/Calculator.java test/CalculatorTest.java&#x27;
+                }
+            }
+        }
+        stage(&#x27;Test&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    bat &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                }
+            }
+            post {
+                always {
+                    junit &#x27;lab2/java-app/build/test-results/*.xml&#x27;
+                }
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    bat &#x27;jar cfe build/calculator.jar Calculator -C build/classes .&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;lab2/java-app/build/calculator.jar&#x27;, fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: my-java-pipeline: Jenkins installed on Windows">Copy</button></div></div>
+<details><summary>Optional: write the git line with the Snippet Generator</summary><div class="prose"><p>Click <b>Pipeline Syntax</b>. In <b>Sample Step</b> choose <b>git: Git</b>. Repository URL: the address above, Branch: <code>main</code>, Credentials: <b>- none -</b>. Click <b>Generate Pipeline Script</b>: you get the same <code>git</code> line as in the script.</p></div></details>
+<div class="prose"><p>Check: the build is green and the stages are <b>Checkout, Build, Test, Package</b>.</p><h3>Exercise B: a manual approval before deploying (10 min)</h3><p>In the course, <b>continuous delivery</b> means every build is <i>ready</i> to deploy, but a person decides. The <code>input</code> step does exactly that: the pipeline stops and waits for a click.</p><ol><li>Click <b>Configure</b>. After the <b>Package</b> stage (after its closing <code>}</code>, before the <code>}</code> that closes <code>stages</code>), add this stage:</li></ol></div>
+<div class="code"><div class="code-cap">Add after the Package stage (same in Docker and Windows)</div><div class="code-box"><pre><code>        stage(&#x27;Deploy&#x27;) {
+            steps {
+                input message: &#x27;Deploy calculator.jar to production?&#x27;, ok: &#x27;Deploy&#x27;
+                echo &#x27;Deploying calculator.jar to production...&#x27;
+                echo &#x27;Done: version &#x27; + env.BUILD_NUMBER + &#x27; is live!&#x27;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Add after the Package stage (same in Docker and Windows)">Copy</button></div></div>
+<div class="prose"><ol start="2"><li><b>Save</b>, then <b>Build with Parameters</b> › <b>Build</b>.</li><li>The build stops at <b>Deploy</b> (blue, paused). Hover the Deploy cell in Stage View, or open <b>Console Output</b>: click <b>Deploy</b> to continue, or <b>Abort</b> to stop.</li><li>Run it twice: once with <b>Deploy</b> (green build), once with <b>Abort</b> (grey build, <b>ABORTED</b>).</li></ol></div>
+<aside class="note"><b>Remove the approval and you get continuous deployment:</b> every green build goes to production automatically. Which one would you choose for a bank? For a blog?</aside>
+<div class="prose"><h3>Exercise C: choose where to deploy (5 min)</h3><ol><li>In <code>parameters</code>, add a second parameter under <code>SIMULATE_BUG</code>:</li></ol></div>
+<div class="code"><div class="code-cap">Add inside parameters { }</div><div class="code-box"><pre><code>        choice(name: &#x27;TARGET&#x27;, choices: [&#x27;test&#x27;, &#x27;production&#x27;],
+               description: &#x27;Where to deploy&#x27;)</code></pre><button type="button" class="copy" aria-label="Copy: Add inside parameters { }">Copy</button></div></div>
+<div class="prose"><ol start="2"><li>Replace your Deploy stage with this one:</li></ol></div>
+<div class="code"><div class="code-cap">Deploy stage that uses the parameter</div><div class="code-box"><pre><code>        stage(&#x27;Deploy&#x27;) {
+            steps {
+                input message: &quot;Deploy calculator.jar to ${params.TARGET}?&quot;, ok: &#x27;Deploy&#x27;
+                echo &quot;Deploying calculator.jar to ${params.TARGET}...&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Deploy stage that uses the parameter">Copy</button></div></div>
+<div class="prose"><ol start="3"><li><b>Save</b>, then <b>Build with Parameters</b>: choose <b>TARGET = production</b>, click <b>Build</b>, approve. The message says "production".</li></ol><p>Take the screenshot <code>stages.png</code>: the Stage View of <code>my-java-pipeline</code>, with the <b>Deploy</b> column.</p></div>
+<details><summary>Show the full solution (Jenkins in Docker)</summary><div class="prose"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: 'SIMULATE_BUG', defaultValue: false,
+                     description: 'Tick to put a bug in the calculator')
+        choice(name: 'TARGET', choices: ['test', 'production'],
+               description: 'Where to deploy')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nouhakhyari-sys/jenkins-labs-template.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('lab2/java-app') {
+                    sh 'javac -d build/classes src/Calculator.java test/CalculatorTest.java'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir('lab2/java-app') {
+                    sh "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest"
+                }
+            }
+            post {
+                always {
+                    junit 'lab2/java-app/build/test-results/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                dir('lab2/java-app') {
+                    sh 'jar cfe build/calculator.jar Calculator -C build/classes .'
+                }
+                archiveArtifacts artifacts: 'lab2/java-app/build/calculator.jar', fingerprint: true
+            }
+        }
+        stage('Deploy') {
+            steps {
+                input message: "Deploy calculator.jar to ${params.TARGET}?", ok: 'Deploy'
+                echo "Deploying calculator.jar to ${params.TARGET}..."
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><p>On Windows, the only difference: <code>bat</code> instead of <code>sh</code> in Build, Test and Package.</p></div></details>
+    <div class="pager"><a class="prev" href="lab3-4-break-the-tests.html">← 4. Break the tests</a><a class="next" href="lab3-6-install-ansicolor.html">6. Install AnsiColor →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=20"></script>
+<script src="assets/site.js?v=20"></script>
+</body>
+</html>

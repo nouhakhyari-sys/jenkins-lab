@@ -10,6 +10,8 @@ Lab guides for the **CI/CD with Jenkins** module (Master 2 and Engineering 2).
 
 **Lab 2 – Your First Pipeline** (`lab2.html`, pages `lab2-0-…` to `lab2-6-…`): installing the **Pipeline: Stage View** plugin, Hello World declarative pipeline, the code explained, shell commands with `sh`, a guided tour of the Jenkins buttons, exercises (three stages, break and fix with Replay, variables, `post`), checklist and troubleshooting.
 
+**Lab 3 – Build a Java Project** (`lab3.html`, pages `lab3-1-…` to `lab3-7-…`, 1h30): runs the Java example `lab2/java-app` of the public template repository from GitHub (no token), with the JUnit, Artifacts, Timestamper, Workspace Cleanup, Input and AnsiColor plugins. Every script exists for Jenkins in Docker (`sh`) and Jenkins on Windows (`bat`).
+
 Lab 1 and Lab 2 fit in one 1h30 session.
 
 ## For the teacher
