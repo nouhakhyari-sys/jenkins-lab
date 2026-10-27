@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. The Jenkinsfile Line by Line · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=21">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class="active"><a href="lab3-2-jenkinsfile-line-by-line.html" aria-current="page">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-checklist-and-help.html">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 3 · Build a Java Project</div>
+    <h1>2. The Jenkinsfile Line by Line</h1>
+    <div class="prose"><p>Before running the pipeline, read it. This page explains <b>every line</b> of <code>lab2/java-app/Jenkinsfile</code>, so that you can write the same kind of file for your own projects. Keep the file open on GitHub next to this page.</p><h3>The map</h3><p>A Jenkinsfile is a set of boxes inside boxes. Each box is a keyword followed by <code>{ }</code>. Some boxes are required, others are optional.</p></div>
+<figure><a href="images/l3-jenkinsfile-structure.png" target="_blank" rel="noopener"><img src="images/l3-jenkinsfile-structure.png" alt="The structure of the Lab 3 Jenkinsfile: required and optional blocks" loading="lazy"></a><figcaption>The structure of the Lab 3 Jenkinsfile: required and optional blocks</figcaption></figure>
+<aside class="note"><b>6 rules to write a Jenkinsfile without errors</b><ol style="margin:6px 0 0;padding-left:22px"><li>Every <code>{</code> has its <code>}</code>. Indent the lines inside each block: Jenkins does not need it, but you will find a missing <code>}</code> at once.</li><li>Inside <code>pipeline</code>, keep this order: <code>agent</code>, <code>options</code>, <code>parameters</code>, <code>stages</code>, <code>post</code>.</li><li>Each <code>stage</code> has a <b>name in quotes</b> and a <code>steps</code> block.</li><li><code>'single quotes'</code> = the text exactly as written. <code>"double quotes"</code> are needed when the text contains a variable such as <code>${params.SIMULATE_BUG}</code>.</li><li>Upper and lower case matter: <code>stage</code> works, <code>Stage</code> does not.</li><li>One step per line. A line starting with <code>//</code> is a comment: Jenkins ignores it.</li></ol></aside>
+<div class="prose"><h3>1. The start: pipeline and agent</h3></div>
+<div class="code"><div class="code-cap">Lines 1 to 3</div><div class="code-box"><pre><code>// Pipeline for the Java calculator (Docker, Linux, macOS)
+pipeline {
+    agent any</code></pre><button type="button" class="copy" aria-label="Copy: Lines 1 to 3">Copy</button></div></div>
+<div class="prose"><ul><li><code>// …</code>: a <b>comment</b> for humans. Jenkins ignores it.</li><li><code>pipeline {</code>: every declarative Jenkinsfile starts with this line. Its closing <code>}</code> is the <b>last line</b> of the file.</li><li><code>agent any</code>: <b>where</b> to run the pipeline: on any available Jenkins machine. In the lab there is only one: your Jenkins (in its Docker container, or on your Windows PC). In companies, <code>agent</code> can choose a Linux machine, a Windows machine, or a Docker container.</li></ul></div>
+<div class="prose"><h3>2. options: settings for the whole pipeline</h3></div>
+<div class="code"><div class="code-cap">options</div><div class="code-box"><pre><code>    options {
+        timestamps()          // Timestamper plugin
+    }</code></pre><button type="button" class="copy" aria-label="Copy: options">Copy</button></div></div>
+<div class="prose"><ul><li><code>options { }</code>: settings that apply to the whole pipeline. Optional.</li><li><code>timestamps()</code>: writes the time at the start of every log line. This option comes from the <b>Timestamper</b> plugin. The parentheses <code>()</code> are required, even when empty.</li><li>Other useful options: <code>timeout(time: 10, unit: 'MINUTES')</code> stops a build that takes too long; <code>buildDiscarder(logRotator(numToKeepStr: '5'))</code> keeps only the last 5 builds.</li></ul></div>
+<div class="prose"><h3>3. parameters: questions asked before the build</h3></div>
+<div class="code"><div class="code-cap">parameters</div><div class="code-box"><pre><code>    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+    }</code></pre><button type="button" class="copy" aria-label="Copy: parameters">Copy</button></div></div>
+<div class="prose"><ul><li><code>parameters { }</code>: the form shown by <b>Build with Parameters</b>. Optional.</li><li><code>booleanParam(…)</code>: a <b>checkbox</b> (true or false).</li><li><code>name: 'SIMULATE_BUG'</code>: the name of the parameter. In the steps, you read its value with <code>params.SIMULATE_BUG</code>.</li><li><code>defaultValue: false</code>: unticked unless you tick it.</li><li><code>description: …</code>: the help text shown under the checkbox.</li><li>The form <code>key: value, key: value</code> is called <b>named arguments</b>. The line can break inside the parentheses, after a comma.</li><li>Two other types: <code>string(name: 'NAME', defaultValue: 'student', description: 'Your name')</code> for a text box, and <code>choice(name: 'TARGET', choices: ['test', 'production'])</code> for a drop-down list.</li></ul></div>
+<div class="prose"><h3>4. stages and the Build stage</h3></div>
+<div class="code"><div class="code-cap">stages, stage(&#x27;Build&#x27;), steps</div><div class="code-box"><pre><code>    stages {
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &#x27;javac -version&#x27;
+                    sh &#x27;javac -d build/classes src/Calculator.java test/CalculatorTest.java&#x27;
+                }
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: stages, stage(&#x27;Build&#x27;), steps">Copy</button></div></div>
+<div class="prose"><ul><li><code>stages { }</code>: the list of stages. They run <b>one after the other</b>, in the order written.</li><li><code>stage('Build') { }</code>: one stage. The name in quotes is the column title in Stage View. Choose short names: Build, Test, Package, Deploy.</li><li><code>steps { }</code>: the actions of the stage, one per line.</li><li><code>dir('lab2/java-app') { }</code>: runs the steps inside it <b>in that folder</b>, like <code>cd lab2/java-app</code>. After the closing <code>}</code>, you are back at the root of the repository.</li><li><code>sh 'javac -version'</code>: <code>sh</code> runs a shell command. This one prints the version of the Java compiler: useful in the log to know what was used.</li><li><code>sh 'javac -d build/classes src/Calculator.java test/CalculatorTest.java'</code>: compiles the two files. <code>javac</code> is the Java compiler; <code>-d build/classes</code> means "put the compiled <code>.class</code> files in the folder <code>build/classes</code>".</li></ul></div>
+<div class="prose"><h3>5. The Test stage, with its own post</h3></div>
+<div class="code"><div class="code-cap">stage(&#x27;Test&#x27;)</div><div class="code-box"><pre><code>        stage(&#x27;Test&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                }
+            }
+            post {
+                always {
+                    junit &#x27;lab2/java-app/build/test-results/*.xml&#x27;   // JUnit plugin
+                }
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: stage(&#x27;Test&#x27;)">Copy</button></div></div>
+<div class="prose"><ul><li><b>Double quotes</b> on the <code>sh</code> line, because the text contains <code>${params.SIMULATE_BUG}</code>. Before running the command, Jenkins replaces it by <code>true</code> or <code>false</code>. With single quotes, the text <code>${params.SIMULATE_BUG}</code> would be sent as it is, and the command would fail.</li><li><code>java</code> runs a compiled Java program:<ul><li><code>-DsimulateBug=true</code> gives a setting to the program. <code>Calculator.java</code> reads it with <code>Boolean.getBoolean("simulateBug")</code>.</li><li><code>-cp build/classes</code> ("class path"): where to find the <code>.class</code> files.</li><li><code>CalculatorTest</code>: the class to run. Its <code>main</code> method runs the 4 tests and writes the report <code>build/test-results/TEST-CalculatorTest.xml</code>.</li></ul></li><li><code>post { }</code> <b>inside a stage</b>: runs after the steps of this stage.</li><li><code>always { }</code>: in every case, success or failure. We want the test report even when tests fail.</li><li><code>junit '…/*.xml'</code>: the <b>JUnit</b> plugin reads the report and creates the <b>Tests</b> page and the trend chart. If a test failed, it marks the build <b>UNSTABLE</b> (yellow). <code>*</code> means "any file name".</li><li>The <code>junit</code> line is <b>outside</b> <code>dir(…)</code>, so its path starts from the root of the repository: <code>lab2/java-app/…</code>.</li></ul></div>
+<div class="prose"><h3>6. The Package stage</h3></div>
+<div class="code"><div class="code-cap">stage(&#x27;Package&#x27;) and the end of stages</div><div class="code-box"><pre><code>        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &#x27;jar cfe build/calculator.jar Calculator -C build/classes .&#x27;
+                    sh &#x27;java -jar build/calculator.jar&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;lab2/java-app/build/calculator.jar&#x27;, fingerprint: true
+            }
+        }
+    }</code></pre><button type="button" class="copy" aria-label="Copy: stage(&#x27;Package&#x27;) and the end of stages">Copy</button></div></div>
+<div class="prose"><ul><li><code>jar cfe build/calculator.jar Calculator -C build/classes .</code>: builds a <b>.jar</b> file, the package that you would deliver.<ul><li><code>c</code> = create;</li><li><code>f</code> = the file name follows: <code>build/calculator.jar</code>;</li><li><code>e</code> = the entry point follows: <code>Calculator</code>, the class with <code>main</code>;</li><li><code>-C build/classes .</code> = take all the files of <code>build/classes</code>.</li></ul></li><li><code>java -jar build/calculator.jar</code>: runs the package once, to check that it starts (a "smoke test").</li><li><code>archiveArtifacts artifacts: …, fingerprint: true</code>: keeps <code>calculator.jar</code> on the build page, so you can download it. <code>fingerprint: true</code> records a unique ID of the file, to know later which build produced it.</li><li>The last <code>}</code> of this block closes <code>stages</code>.</li></ul></div>
+<div class="prose"><h3>7. post for the whole pipeline</h3></div>
+<div class="code"><div class="code-cap">post, then the end of the pipeline</div><div class="code-box"><pre><code>    post {
+        always {
+            cleanWs()             // Workspace Cleanup plugin
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: post, then the end of the pipeline">Copy</button></div></div>
+<div class="prose"><ul><li><code>post { }</code> <b>directly inside <code>pipeline</code></b>: runs once, after all the stages.</li><li>Conditions you can use in <code>post</code>: <code>always</code>, <code>success</code> (green), <code>unstable</code> (yellow), <code>failure</code> (red), <code>aborted</code> (stopped).</li><li><code>cleanWs()</code>: the <b>Workspace Cleanup</b> plugin deletes the files of the build, so the next build starts from a clean folder.</li><li>The very last <code>}</code> closes <code>pipeline</code>.</li></ul></div>
+<div class="prose"><h3>8. Docker or Windows: one difference</h3><p><code>Jenkinsfile-windows</code> is the same file, with <code>bat</code> instead of <code>sh</code> on the 4 command lines. <code>sh</code> runs a Linux shell command; <code>bat</code> runs a Windows command (cmd). Everything else (<code>echo</code>, <code>dir</code>, <code>junit</code>, <code>archiveArtifacts</code>, <code>cleanWs</code>) is a Jenkins step and works on both.</p><h3>9. Write your own: the recipe</h3><p>Almost every CI pipeline has the same shape. Only the commands change:</p></div>
+<div class="code"><div class="code-cap">A skeleton for any project (bat instead of sh on Windows)</div><div class="code-box"><pre><code>pipeline {
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage(&#x27;Build&#x27;) {
+            steps {
+                sh &#x27;BUILD COMMAND&#x27;
+            }
+        }
+        stage(&#x27;Test&#x27;) {
+            steps {
+                sh &#x27;TEST COMMAND&#x27;
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                sh &#x27;PACKAGE COMMAND&#x27;
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: A skeleton for any project (bat instead of sh on Windows)">Copy</button></div></div>
+<div class="prose"><table class="t"><thead><tr><th>Project</th><th>Build</th><th>Test</th><th>Package</th></tr></thead><tbody><tr><td>Java (this lab)</td><td><code>javac …</code></td><td><code>java … CalculatorTest</code></td><td><code>jar cfe …</code></td></tr><tr><td>Java with Maven</td><td><code>mvn compile</code></td><td><code>mvn test</code></td><td><code>mvn package</code></td></tr><tr><td>Python</td><td><code>pip install -r requirements.txt</code></td><td><code>pytest</code></td><td><code>python -m build</code></td></tr><tr><td>JavaScript (Node)</td><td><code>npm install</code></td><td><code>npm test</code></td><td><code>npm pack</code></td></tr></tbody></table><p>The tools in the table must be installed on the Jenkins machine. In this lab only Java is available, which is why the project uses <code>javac</code>, <code>java</code> and <code>jar</code>.</p><h3>Quick exercise (5 min)</h3><p>Without copying, write a pipeline that has:</p><ul><li>a text parameter <code>NAME</code>, default value <code>student</code>;</li><li>a stage <b>Hello</b> that prints <code>Hello, &lt;NAME&gt;!</code> with <code>echo</code>;</li><li>a stage <b>Java version</b> that runs the command <code>java -version</code>.</li></ul><p>Create a Pipeline job <code>from-scratch</code>, paste your script, then run <b>Build Now</b> once and <b>Build with Parameters</b> with your own name.</p></div>
+<details><summary>Show the solution</summary><div class="prose"><pre><code>pipeline {
+    agent any
+    parameters {
+        string(name: 'NAME', defaultValue: 'student', description: 'Your name')
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                echo "Hello, ${params.NAME}!"
+            }
+        }
+        stage('Java version') {
+            steps {
+                sh 'java -version'     // on Windows: bat 'java -version'
+            }
+        }
+    }
+}</code></pre><p>Check: <b>double quotes</b> around <code>"Hello, ${params.NAME}!"</code>, because of the variable. With single quotes, Jenkins prints <code>${params.NAME}</code> literally.</p></div></details>
+    <div class="pager"><a class="prev" href="lab3-1-java-project.html">← 1. The Java project</a><a class="next" href="lab3-3-run-from-github.html">3. Run it from GitHub →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=21"></script>
+<script src="assets/site.js?v=21"></script>
+</body>
+</html>
