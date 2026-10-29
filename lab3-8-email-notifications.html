@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8. Email Notifications · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=26">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class="active"><a href="lab3-8-email-notifications.html" aria-current="page">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 3 · Build a Java Project</div>
+    <h1>8. Email Notifications</h1>
+    <div class="prose"><p>CI is only useful if the developer <b>learns at once</b> that the build broke. Nobody watches the Jenkins page all day: Jenkins sends an <b>email</b>. In this part you use the <b>Email Extension</b> plugin to send a different email for a green, a yellow and a red build.</p><p>You send the emails to <b>Mailpit</b>, a small <b>test mail server</b>. It catches every email and shows it in a web inbox at <code>http://localhost:8025</code>. No account, no password, nothing leaves your computer. Time: about <b>15 minutes</b>.</p><h3>Before you start: which Jenkins do you have?</h3><p>Two values depend on how Jenkins runs on your computer. Find your column and use <b>only</b> its values on this page.</p><table class="t"><thead><tr><th></th><th>Jenkins in Docker (Lab 1 path)</th><th>Jenkins installed on Windows</th></tr></thead><tbody><tr><td>How to recognise it</td><td><code>docker ps</code> lists <code>jenkins-local</code></td><td>you start it with <code>java -jar jenkins.war</code> or as a Windows service; the build log shows paths like <code>C:\…\workspace</code></td></tr><tr><td>Command to start Mailpit (step 2)</td><td>the <b>three</b> commands of box A</td><td>the <b>one</b> command of box B</td></tr><tr><td><b>SMTP server</b> (step 3)</td><td><code>mailpit</code></td><td><code>localhost</code></td></tr><tr><td><b>SMTP Port</b> (step 3)</td><td><code>1025</code></td><td><code>1025</code></td></tr><tr><td>Script (step 4)</td><td>version with <code>sh</code></td><td>version with <code>bat</code></td></tr></tbody></table><h3>Step 1: Check the two plugins</h3><p>In <b>Manage Jenkins › Plugins › Installed plugins</b>, search each name and check that its switch is <b>blue</b> (enabled):</p><ul><li><code>Email Extension</code>: sends the emails;</li><li><code>Workspace Cleanup</code>: <code>cleanWs()</code> in your pipeline.</li></ul><p>Both come with the suggested plugins of Lab 1. If one is missing or disabled, install or enable it, then <b>restart Jenkins</b> (<code>http://localhost:8080/restart</code>): a plugin is only active after a restart.</p><h3>Step 2: Start the test mail server (Mailpit)</h3></div>
+<div class="code"><div class="code-cap">Box A · Jenkins in Docker: Mailpit joins the same network as Jenkins, which reaches it by the name mailpit</div><div class="code-box"><pre><code>docker network create jenkins-net
+docker network connect jenkins-net jenkins-local
+docker run -d --name mailpit --network jenkins-net -p 8025:8025 axllent/mailpit</code></pre><button type="button" class="copy" aria-label="Copy: Box A · Jenkins in Docker: Mailpit joins the same network as Jenkins, which reaches it by the name mailpit">Copy</button></div></div>
+<div class="code"><div class="code-cap">Box B · Jenkins installed on Windows: Mailpit publishes its mail port 1025 on localhost</div><div class="code-box"><pre><code>docker run -d --name mailpit -p 8025:8025 -p 1025:1025 axllent/mailpit</code></pre><button type="button" class="copy" aria-label="Copy: Box B · Jenkins installed on Windows: Mailpit publishes its mail port 1025 on localhost">Copy</button></div></div>
+<div class="prose"><p>No Docker on your Windows PC? Download <code>mailpit</code> for Windows from <a href="https://github.com/axllent/mailpit/releases" target="_blank" rel="noopener">github.com/axllent/mailpit/releases</a>, unzip it and run <code>mailpit.exe</code>. Keep its window open.</p><p><b>Check:</b> open <a href="http://localhost:8025" target="_blank" rel="noopener">http://localhost:8025</a>. You see an empty inbox. Mailpit must stay running while Jenkins sends emails; the inbox page itself can be closed.</p><h3>Step 3: Configure Jenkins and send a test email</h3><p>Go to <b>Manage Jenkins › System</b>. You fill in <b>three sections</b> of this long page. In each email section, the port field is hidden: click <b>Advanced</b> to see it.</p><ol><li><b>Jenkins Location:</b> <b>Jenkins URL</b> = <code>http://localhost:8080/</code> (it builds the links in the emails), <b>System Admin e-mail address</b> = <code>jenkins@lab.local</code> (the sender).</li><li><b>Extended E-mail Notification</b> (used by your pipeline): <b>SMTP server</b> = <code>mailpit</code> or <code>localhost</code> (see your column), <b>Advanced › SMTP Port</b> = <code>1025</code>. Leave Credentials empty, Use SSL and Use TLS unticked.</li><li><b>E-mail Notification</b> (at the bottom, used by the test button): same <b>SMTP server</b>, <b>Advanced › SMTP Port</b> = <code>1025</code>.</li><li>Still in <b>E-mail Notification</b>: tick <b>Test configuration by sending test e-mail</b>, type <code>me@lab.local</code>, click <b>Test configuration</b>.</li><li>Click <b>Save</b>.</li></ol></div>
+<aside class="note"><b>Do not go further until the test works.</b> You must see "Email was successfully sent" and the test email in Mailpit. If not, look at the troubleshooting at the bottom of this page: the cause is almost always the <b>SMTP server</b> (wrong column) or the <b>port</b> (still 25).</aside>
+<div class="prose"><h3>Step 4: Send emails from your pipeline</h3><p>Open <code>my-java-pipeline</code> › <b>Configure</b>. Select everything in the <b>Script</b> box, delete it, and paste the script for your Jenkins. It is your pipeline of part 6, with the three email blocks marked <code>// NEW</code> in <code>post</code>. Then click <b>Save</b>.</p></div>
+<div class="code"><div class="code-cap">my-java-pipeline with email notifications: Jenkins in Docker</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+        choice(name: &#x27;TARGET&#x27;, choices: [&#x27;test&#x27;, &#x27;production&#x27;],
+               description: &#x27;Where to deploy&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Checkout&#x27;) {
+            steps {
+                git branch: &#x27;main&#x27;, url: &#x27;https://github.com/nouhakhyari-sys/jenkins-labs-template.git&#x27;
+            }
+        }
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &#x27;javac -d build/classes src/Calculator.java test/CalculatorTest.java&#x27;
+                }
+            }
+        }
+        stage(&#x27;Test&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                }
+            }
+            post {
+                always {
+                    junit &#x27;lab2/java-app/build/test-results/*.xml&#x27;
+                }
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    sh &#x27;jar cfe build/calculator.jar Calculator -C build/classes .&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;lab2/java-app/build/calculator.jar&#x27;, fingerprint: true
+            }
+        }
+        stage(&#x27;Deploy&#x27;) {
+            steps {
+                input message: &quot;Deploy calculator.jar to ${params.TARGET}?&quot;, ok: &#x27;Deploy&#x27;
+                echo &quot;Deploying calculator.jar to ${params.TARGET}...&quot;
+            }
+        }
+    }
+
+    post {
+        success {                         // NEW
+            emailext to: &#x27;team@lab.local&#x27;,
+                     subject: &quot;SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;,
+                     body: &quot;Build passed: ${env.BUILD_URL}&quot;
+        }
+        unstable {                        // NEW
+            emailext to: &#x27;team@lab.local&#x27;,
+                     subject: &quot;UNSTABLE: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;,
+                     body: &quot;Tests failed: ${env.BUILD_URL}testReport/&quot;,
+                     attachLog: true
+        }
+        failure {                         // NEW
+            emailext to: &#x27;team@lab.local&#x27;,
+                     subject: &quot;FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;,
+                     body: &quot;Build broken: ${env.BUILD_URL}console&quot;,
+                     attachLog: true
+        }
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: my-java-pipeline with email notifications: Jenkins in Docker">Copy</button></div></div>
+<div class="code"><div class="code-cap">my-java-pipeline with email notifications: Jenkins installed on Windows</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+        choice(name: &#x27;TARGET&#x27;, choices: [&#x27;test&#x27;, &#x27;production&#x27;],
+               description: &#x27;Where to deploy&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Checkout&#x27;) {
+            steps {
+                git branch: &#x27;main&#x27;, url: &#x27;https://github.com/nouhakhyari-sys/jenkins-labs-template.git&#x27;
+            }
+        }
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    bat &#x27;javac -d build/classes src/Calculator.java test/CalculatorTest.java&#x27;
+                }
+            }
+        }
+        stage(&#x27;Test&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    bat &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                }
+            }
+            post {
+                always {
+                    junit &#x27;lab2/java-app/build/test-results/*.xml&#x27;
+                }
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;lab2/java-app&#x27;) {
+                    bat &#x27;jar cfe build/calculator.jar Calculator -C build/classes .&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;lab2/java-app/build/calculator.jar&#x27;, fingerprint: true
+            }
+        }
+        stage(&#x27;Deploy&#x27;) {
+            steps {
+                input message: &quot;Deploy calculator.jar to ${params.TARGET}?&quot;, ok: &#x27;Deploy&#x27;
+                echo &quot;Deploying calculator.jar to ${params.TARGET}...&quot;
+            }
+        }
+    }
+
+    post {
+        success {                         // NEW
+            emailext to: &#x27;team@lab.local&#x27;,
+                     subject: &quot;SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;,
+                     body: &quot;Build passed: ${env.BUILD_URL}&quot;
+        }
+        unstable {                        // NEW
+            emailext to: &#x27;team@lab.local&#x27;,
+                     subject: &quot;UNSTABLE: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;,
+                     body: &quot;Tests failed: ${env.BUILD_URL}testReport/&quot;,
+                     attachLog: true
+        }
+        failure {                         // NEW
+            emailext to: &#x27;team@lab.local&#x27;,
+                     subject: &quot;FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;,
+                     body: &quot;Build broken: ${env.BUILD_URL}console&quot;,
+                     attachLog: true
+        }
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: my-java-pipeline with email notifications: Jenkins installed on Windows">Copy</button></div></div>
+<aside class="note"><b>Did part 7 (AnsiColor)?</b> Add <code>ansiColor('xterm')</code> back under <code>timestamps()</code> in <code>options</code>.</aside>
+<div class="prose"><ul><li><code>success</code>, <code>unstable</code>, <code>failure</code>: one email per result, each with its own subject.</li><li><code>emailext</code> is the step of the Email Extension plugin: <code>to</code> the recipients (any address works with Mailpit), <code>subject</code> and <code>body</code> the text, <code>attachLog: true</code> attaches the Console Output to the email.</li><li><code>env.JOB_NAME</code>, <code>env.BUILD_NUMBER</code> and <code>env.BUILD_URL</code> are filled in by Jenkins: double quotes are needed.</li><li><code>always { cleanWs() }</code> is unchanged. The emails do not need the workspace: <code>attachLog</code> sends the build log, which Jenkins keeps.</li></ul><h3>Step 5: Test the emails</h3><ol><li><b>Build with Parameters</b>, SIMULATE_BUG unticked, approve the Deploy: Mailpit shows <b>SUCCESS: my-java-pipeline #…</b>.</li><li><b>Build with Parameters</b>, SIMULATE_BUG <b>ticked</b>, approve: the email <b>UNSTABLE: my-java-pipeline #…</b> arrives, with <code>build.log</code> attached. Click the link in the email: it opens the test report.</li></ol><p>In <b>Console Output</b>, the line <code>Sending email to: team@lab.local</code> shows that Jenkins handed the email to the SMTP server.</p></div>
+<aside class="note"><b>In a real team</b>, the email goes to the developers whose commits are in the build: add <code>recipientProviders: [developers(), requestor()]</code> to <code>emailext</code>. Jenkins uses the company mail server instead of Mailpit, and many teams also send alerts to Slack or Teams.</aside>
+<div class="prose"><h3>Troubleshooting</h3></div>
+<details><summary>The build is green, the log says &quot;Sending email to&quot;, but Mailpit is empty</summary><div class="prose"><p>Jenkins sent the email to another server. Check <b>Extended E-mail Notification</b>:</p><ul><li><b>SMTP server</b>: <code>localhost</code> if Jenkins is installed on Windows, <code>mailpit</code> only if Jenkins runs in Docker. Using <code>mailpit</code> on a Windows Jenkins is the most common mistake.</li><li><b>Advanced › SMTP Port</b>: <code>1025</code>, not <code>25</code>.</li></ul><p>Still nothing? Tick <b>Enable Debug Mode</b> in the same section, save, build again: the Console Output shows <code>DEBUG SMTP: trying to connect to host "…", port …</code>, the server Jenkins really uses. Untick it afterwards.</p></div></details>
+<details><summary>Test button: &quot;Failed to send out e-mail … port: 25 …&quot;</summary><div class="prose"><p>The <b>SMTP Port</b> of <b>E-mail Notification</b> is still <code>25</code>. Click <b>Advanced</b> in that section, set <code>1025</code>, test again.</p></div></details>
+<details><summary>Test button: &quot;Unknown host&quot; or &quot;Connection refused&quot;</summary><div class="prose"><p>Wrong <b>SMTP server</b> for your Jenkins (see your column), or Mailpit is not running: <code>docker ps</code> must list <code>mailpit</code>. For a Windows Jenkins, its line must show <code>0.0.0.0:1025-&gt;1025/tcp</code>; if not, run <code>docker rm -f mailpit</code>, then the command of box B again.</p></div></details>
+<details><summary>Error &quot;No such DSL method &#x27;cleanWs&#x27;&quot; (build red at the end)</summary><div class="prose"><p>The <b>Workspace Cleanup</b> plugin is disabled or missing. Enable or install it in <b>Installed plugins</b> / <b>Available plugins</b>, then <b>restart Jenkins</b>. Check: <b>Pipeline Syntax › Sample Step</b> lists <code>cleanWs</code>.</p></div></details>
+<details><summary>Error &quot;No such DSL method &#x27;emailext&#x27;&quot;</summary><div class="prose"><p>The <b>Email Extension</b> plugin is disabled or missing. Enable or install it, restart Jenkins, build again.</p></div></details>
+<details><summary>Error &quot;No such DSL method &#x27;post&#x27;&quot; … WorkflowScript:1</summary><div class="prose"><p>The Script box contains only the <code>post</code> block. Replace the whole content of the Script box with the complete script of step 4.</p></div></details>
+<details><summary>The links in the email contain &quot;null&quot;</summary><div class="prose"><p>The <b>Jenkins URL</b> is not set: <b>Manage Jenkins › System › Jenkins Location</b>, type <code>http://localhost:8080/</code>, save.</p></div></details>
+<details><summary>Mailpit shows no inbox at localhost:8025</summary><div class="prose"><p>Mailpit is not running: <code>docker ps</code> must list <code>mailpit</code>. If it stopped, run <code>docker start mailpit</code> (or open <code>mailpit.exe</code> again).</p></div></details>
+    <div class="pager"><a class="prev" href="lab3-7-install-ansicolor.html">← 7. Install AnsiColor</a><a class="next" href="lab3-9-checklist-and-help.html">9. Checklist and help →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=26"></script>
+<script src="assets/site.js?v=26"></script>
+</body>
+</html>

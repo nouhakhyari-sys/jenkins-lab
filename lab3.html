@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 3 – Build a Java Project · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=26">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class="active"><a href="lab3.html" aria-current="page">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 3 · Build a Java Project</div>
+    <h1>Lab 3 – Build a Java Project</h1>
+    <div class="prose"><p>In this lab, Jenkins builds a <b>real Java project</b> stored on GitHub: it compiles the code, runs the tests, packages a <code>.jar</code> file and waits for your approval before deploying it. On the way you use six <b>plugins</b>.</p><h3>Objectives</h3><ul><li>Run a pipeline whose <code>Jenkinsfile</code> is stored in a <b>public</b> GitHub repository (no token needed).</li><li>Read the results produced by plugins: <b>JUnit</b> (tests), <b>Artifacts</b> (files to download), <b>Timestamper</b>, <b>Workspace Cleanup</b>.</li><li>Use <b>build parameters</b> and see an <b>unstable</b> (yellow) build.</li><li>Write your own pipeline with a <b>manual approval</b> before deployment.</li><li>Install a new plugin: <b>AnsiColor</b>.</li><li>Send an <b>email</b> for each build result with the <b>Email Extension</b> plugin.</li></ul></div>
+<figure><a href="images/l3-pipeline.png" target="_blank" rel="noopener"><img src="images/l3-pipeline.png" alt="The pipeline of this lab: from GitHub to deployment, with the plugin used at each stage" loading="lazy"></a><figcaption>The pipeline of this lab: from GitHub to deployment, with the plugin used at each stage</figcaption></figure>
+<div class="prose"><h3>Session plan (1h30)</h3><ol><li>Meet the Java project (5 min)</li><li>The Jenkinsfile line by line (15 min)</li><li>Run it from GitHub (10 min)</li><li>Plugins at work (10 min)</li><li>Break the tests (10 min)</li><li>Your own Java pipeline (25 min)</li><li>Install a plugin: AnsiColor (10 min)</li><li>Email notifications (15 min, if you have time)</li><li>Checklist and hand-in (5 min)</li></ol><h3>Before you start</h3><ul><li>Jenkins is running and you can log in at <code>http://localhost:8080</code>.</li><li>Lab 2 is done: you know <b>New Item</b>, <b>Configure</b>, <b>Build Now</b> and <b>Console Output</b>.</li><li>The <b>Git</b> plugin is installed: when you create a Pipeline job, the <b>SCM</b> list offers <b>Git</b>.</li></ul></div>
+<aside class="note"><b>Jenkins in Docker or on Windows?</b> Every script of this lab exists in two versions. <b>Jenkins in Docker</b> (Lab 1 path) uses <code>sh</code>. <b>Jenkins installed directly on Windows</b> uses <code>bat</code>, and needs <b>Git for Windows</b> and a <b>JDK</b> (not only a JRE) installed on the computer. Always take the version that matches your Jenkins.</aside>
+    <div class="pager"><a class="prev" href="index.html">← Module home</a><a class="next" href="lab3-1-java-project.html">1. The Java project →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=26"></script>
+<script src="assets/site.js?v=26"></script>
+</body>
+</html>
