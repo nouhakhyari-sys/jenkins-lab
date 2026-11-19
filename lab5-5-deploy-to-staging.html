@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Deploy to Staging · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=32">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="lab4.html">Lab 4 home</a></li><li class=""><a href="lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="lab5.html">Lab 5 home</a></li><li class=""><a href="lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class=""><a href="lab5-4-docker-image.html">4. Docker image</a></li><li class="active"><a href="lab5-5-deploy-to-staging.html" aria-current="page">5. Deploy to staging</a></li><li class=""><a href="lab5-6-production.html">6. Production</a></li><li class=""><a href="lab5-7-challenges.html">7. Challenges</a></li><li class=""><a href="lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 5 · Deploy with Docker</div>
+    <h1>5. Deploy to Staging</h1>
+    <aside class="note">🎯 <b>Why this step?</b> Tests passed, the image exists. Now it must <b>run</b> somewhere like production, before real users see it: <b>staging</b>. A <b>smoke test</b> then checks automatically that the deployed app answers. This is where port mapping (slides <i>Port Mapping</i>) becomes real.</aside>
+<div class="prose"><p>Staging is a container named <code>calc-staging</code>, on port <b>8081</b> of your computer. The app listens on port <b>8080</b> inside the container (the <code>EXPOSE</code> of the Dockerfile). Add this stage <b>after Docker image</b>. ✍️ <b>Your turn:</b> fill in the blanks.</p></div>
+<div class="code"><div class="code-cap">Deploy to staging, to complete (Jenkins in Docker)</div><div class="code-box"><pre><code>        stage(&#x27;Deploy to staging&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                sh &#x27;docker rm -f calc-staging || true&#x27;
+                sh &quot;docker run -d --name calc-staging -p ____:____ ${IMAGE}:${VERSION}&quot;
+                sh &#x27;sleep 3&#x27;
+                sh &#x27;curl -s http://host.docker.internal:____/add/2/3 | grep -x ____&#x27;
+                echo &quot;Application deployed successfully: http://localhost:8081 (version ${VERSION})&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Deploy to staging, to complete (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Deploy to staging, to complete (Jenkins on Windows)</div><div class="code-box"><pre><code>        stage(&#x27;Deploy to staging&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                bat &#x27;docker rm -f calc-staging 2&gt;nul &amp; exit /b 0&#x27;
+                bat &quot;docker run -d --name calc-staging -p ____:____ ${IMAGE}:${VERSION}&quot;
+                bat &#x27;ping -n 4 127.0.0.1 &gt;nul&#x27;
+                script {
+                    def answer = bat(script: &#x27;@curl -s http://localhost:____/add/2/3&#x27;, returnStdout: true).trim()
+                    echo &quot;Smoke test: /add/2/3 answered ${answer}&quot;
+                    if (answer != &#x27;____&#x27;) {
+                        error &quot;Smoke test failed: got ${answer}&quot;
+                    }
+                }
+                echo &quot;Application deployed successfully: http://localhost:8081 (version ${VERSION})&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Deploy to staging, to complete (Jenkins on Windows)">Copy</button></div></div>
+<aside class="note">✍️ <b>The blanks.</b><ol><li><code>-p ____:____</code> is <code>-p HOST:CONTAINER</code>. Which port is on your computer, which one in the container?</li><li>The smoke test calls staging <b>from Jenkins</b>, through the port of your computer.</li><li>It requires one exact answer: what does <code>/add/2/3</code> return?</li></ol></aside>
+<details><summary>Show the solution (Jenkins in Docker)</summary><div class="prose"><pre><code>        stage('Deploy to staging') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                sh 'docker rm -f calc-staging || true'
+                sh "docker run -d --name calc-staging -p 8081:8080 ${IMAGE}:${VERSION}"
+                sh 'sleep 3'
+                sh 'curl -s http://host.docker.internal:8081/add/2/3 | grep -x 5'
+                echo "Application deployed successfully: http://localhost:8081 (version ${VERSION})"
+            }
+        }</code></pre></div></details>
+<details><summary>Show the solution (Jenkins on Windows)</summary><div class="prose"><pre><code>        stage('Deploy to staging') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                bat 'docker rm -f calc-staging 2>nul &amp; exit /b 0'
+                bat "docker run -d --name calc-staging -p 8081:8080 ${IMAGE}:${VERSION}"
+                bat 'ping -n 4 127.0.0.1 >nul'
+                script {
+                    def answer = bat(script: '@curl -s http://localhost:8081/add/2/3', returnStdout: true).trim()
+                    echo "Smoke test: /add/2/3 answered ${answer}"
+                    if (answer != '5') {
+                        error "Smoke test failed: expected 5 but got ${answer}"
+                    }
+                }
+                echo "Application deployed successfully: http://localhost:8081 (version ${VERSION})"
+            }
+        }</code></pre></div></details>
+<div class="prose"><p>The other lines:</p><ul><li><code>docker rm -f calc-staging</code>: remove the previous staging container (<code>|| true</code> / <code>exit /b 0</code> ignores the error when there is none, on the first run).</li><li><code>-d</code>: the container runs in the background, so the pipeline continues.</li><li>Wait 3 seconds for Java to start, then the smoke test: it calls <code>/add/2/3</code> and requires exactly <code>5</code>. Docker version: <code>grep -x 5</code> fails if the answer is different. Windows version: <code>returnStdout: true</code> gives the answer to Jenkins, <code>.trim()</code> removes the line ending, and <code>error</code> stops the stage if it is not <code>5</code> (<code>@</code> stops Windows from adding the command itself to the answer). Either way, a wrong answer turns the stage red.</li><li>Jenkins in Docker calls <code>host.docker.internal</code>: for Jenkins, <code>localhost</code> is <b>its own container</b>, not your computer.</li></ul></div>
+<aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>You run the job twice. What happens to the first staging container?</li><li>Open <code>http://localhost:8080</code>, then <code>http://localhost:8081</code>. What will each one show, and why are they different?</li></ol></aside>
+<div class="prose"><h3>Run and check</h3><ol><li>Run the job. Open <code>http://localhost:8081</code>: <i>Calculator 1.0.N is running</i>, with the number of the build. Then <code>http://localhost:8081/add/2/3</code>.</li><li>Run the job again and refresh: the version changed.</li><li><b>Check that Jenkins started the container, not you.</b> You never typed <code>docker run</code>: the <i>Deploy to staging</i> stage did. In a terminal, run <code>docker ps</code> and find the line <code>calc-staging</code>:<ul><li><b>IMAGE</b>: <code>calc-web:1.0.N</code>, N = the number of your last green build;</li><li><b>CREATED</b>: a few minutes ago, the time of that build (compare with its time in Jenkins);</li><li><b>PORTS</b>: <code>0.0.0.0:8081-&gt;8080/tcp</code> = port 8081 of your computer to port 8080 of the container.</li></ul>Run the job once more and type <code>docker ps</code> again: same name, but a new image tag and a new CREATED time. Jenkins replaced the container.</li></ol></div>
+<div class="code"><div class="code-cap">Terminal: list the running containers</div><div class="code-box"><pre><code>docker ps</code></pre><button type="button" class="copy" aria-label="Copy: Terminal: list the running containers">Copy</button></div></div>
+<div class="code"><div class="code-cap">What you should see (your numbers differ)</div><div class="code-box"><pre><code>CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                    NAMES
+302a9674d125   calc-web:1.0.11  &quot;/__cacert_entrypoin…&quot;   7 minutes ago   Up 7 minutes   0.0.0.0:8081-&gt;8080/tcp   calc-staging</code></pre><button type="button" class="copy" aria-label="Copy: What you should see (your numbers differ)">Copy</button></div></div>
+<aside class="note">Docker Desktop also shows it in <b>Containers</b>, but its list does not always refresh: if <code>calc-staging</code> is missing there, trust <code>docker ps</code>. A line with <code>8080/tcp</code> and no arrow (<code>-&gt;</code>) is a container with <b>no port mapping</b>: it cannot be opened in a browser.</aside>
+<details><summary>Show the explanation</summary><div class="prose"><ul><li>The second run removes the old container and starts a new one from the new image: a deployment replaces the container, the old image stays in <code>docker images</code>.</li><li>8080 is Jenkins (its own port mapping, from Lab 1), 8081 is the calculator. Same port 8080 <b>inside</b> both containers, different ports on your computer: exactly the third <i>Port Mapping</i> slide.</li></ul></div></details>
+<aside class="note">💥 <b>Break it on purpose</b> (2 min). Put <code>//</code> in front of the <code>docker rm -f calc-staging</code> line and run the job. Read the error in the Console Output, then remove the <code>//</code>. (The answer goes in checkpoint 5.)</aside>
+<details><summary>Show what happens</summary><div class="prose"><p><code>Conflict. The container name "/calc-staging" is already in use</code>. Two containers cannot have the same name: the old one must be removed before the new one starts. Changing the host port would not help either: two containers on 8081 give <i>port is already allocated</i>.</p></div></details>
+<aside class="note">Screenshots: the browser on <code>http://localhost:8081</code> showing the version (<code>app.png</code>), and the output of <code>docker ps</code> added to <code>docker.png</code>.</aside>
+<aside class="note">✅ <b>Checkpoint 5</b>: answer in <code>report.txt</code>, in your own words (one or two lines each).<ol><li>In <code>-p 8081:8080</code>, which number belongs to your computer, which one to the container?</li><li>What did the error say when you removed <code>docker rm -f</code>? What does that line do?</li><li>What does the smoke test prove that the unit tests could not prove?</li></ol></aside>
+<details><summary>See the answer</summary><div class="prose"><ol><li><b>8081</b> is the port of <b>your computer</b> (the browser uses it), <b>8080</b> is the port <b>inside the container</b> (the app listens on it). <code>-p HOST:CONTAINER</code>.</li><li><code>Conflict. The container name &quot;/calc-staging&quot; is already in use</code>. Two containers cannot have the same name. <code>docker rm -f calc-staging</code> removes the old staging container (even if it is running) before the new version starts.</li><li>The unit and integration tests run the code in the Jenkins workspace. The smoke test calls the app <b>really deployed</b>: the image built correctly, the container started, the port mapping works, and the answer is right. Example seen in this lab: tests green, but the container crashed at start (Java 25 code in a Java 21 image). Only the smoke test caught it.</li></ol></div></details>
+    <div class="pager"><a class="prev" href="lab5-4-docker-image.html">← 4. Docker image</a><a class="next" href="lab5-6-production.html">6. Production →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=32"></script>
+<script src="assets/site.js?v=32"></script>
+</body>
+</html>

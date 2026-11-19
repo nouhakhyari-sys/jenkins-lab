@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Build the Docker Image · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=32">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="lab4.html">Lab 4 home</a></li><li class=""><a href="lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="lab5.html">Lab 5 home</a></li><li class=""><a href="lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class="active"><a href="lab5-4-docker-image.html" aria-current="page">4. Docker image</a></li><li class=""><a href="lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class=""><a href="lab5-6-production.html">6. Production</a></li><li class=""><a href="lab5-7-challenges.html">7. Challenges</a></li><li class=""><a href="lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 5 · Deploy with Docker</div>
+    <h1>4. Build the Docker Image</h1>
+    <aside class="note">🎯 <b>Why this step?</b> This is the <b>release</b> step of the chapter: the code becomes a <b>versioned artifact</b>. With Docker, the artifact is no longer only a jar, it is an <b>image</b> that contains the jar <b>and</b> Java: it will run the same way in staging and production (slides <i>Why do you need docker?</i>).</aside>
+<div class="prose"><p>Edit your job (<b>Configure</b>) and make two changes.</p><h3>Step 1: a version for each build</h3><p>Add this <code>environment</code> block just after the <code>parameters { }</code> block:</p></div>
+<div class="code"><div class="code-cap">Add after parameters { } (Docker and Windows)</div><div class="code-box"><pre><code>    environment {
+        IMAGE   = &#x27;calc-web&#x27;
+        VERSION = &quot;1.0.${BUILD_NUMBER}&quot;
+    }</code></pre><button type="button" class="copy" aria-label="Copy: Add after parameters { } (Docker and Windows)">Copy</button></div></div>
+<div class="prose"><p>Each build gets its own version: build 12 is <code>1.0.12</code>. <code>IMAGE</code> and <code>VERSION</code> become variables of the whole pipeline: <code>${IMAGE}</code> and <code>${VERSION}</code> in any stage.</p><h3>Step 2: the Docker image stage</h3><p>Add this stage <b>after Package</b>, inside <code>stages { }</code>. ✍️ <b>Your turn:</b> the <code>docker build</code> line has three blanks.</p></div>
+<div class="code"><div class="code-cap">Docker image stage, to complete (Jenkins in Docker)</div><div class="code-box"><pre><code>        stage(&#x27;Docker image&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                dir(&#x27;app/lab5/calc-web&#x27;) {
+                    // fill in the 3 blanks: image name, tag, build context
+                    sh &quot;docker build --build-arg APP_VERSION=${VERSION} -t ____:____ ____&quot;
+                }
+                sh &quot;echo ${IMAGE}:${VERSION} &gt; image.txt&quot;
+                archiveArtifacts artifacts: &#x27;image.txt&#x27;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Docker image stage, to complete (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Docker image stage, to complete (Jenkins on Windows)</div><div class="code-box"><pre><code>        stage(&#x27;Docker image&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                dir(&#x27;app/lab5/calc-web&#x27;) {
+                    // fill in the 3 blanks: image name, tag, build context
+                    bat &quot;docker build --build-arg APP_VERSION=${VERSION} -t ____:____ ____&quot;
+                }
+                bat &quot;echo ${IMAGE}:${VERSION}&gt; image.txt&quot;
+                archiveArtifacts artifacts: &#x27;image.txt&#x27;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Docker image stage, to complete (Jenkins on Windows)">Copy</button></div></div>
+<aside class="note">✍️ <b>The three blanks</b> of <code>docker build … -t NAME:TAG CONTEXT</code>:<ol><li><b>Name</b>: the image name, already in a variable of the <code>environment</code> block.</li><li><b>Tag</b>: the version of this build, also a variable.</li><li><b>Context</b>: the folder Docker reads the Dockerfile and the jar from. We are already inside <code>dir('app/lab5/calc-web')</code>, so it is the current folder: one character.</li></ol></aside>
+<details><summary>Show the solution</summary><div class="prose"><p>The line becomes:</p><pre><code>docker build --build-arg APP_VERSION=${VERSION} -t ${IMAGE}:${VERSION} .</code></pre><p>Full stage:</p><pre><code>        stage('Docker image') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                dir('app/lab5/calc-web') {
+                    sh "docker build --build-arg APP_VERSION=${VERSION} -t ${IMAGE}:${VERSION} ."
+                }
+                sh "echo ${IMAGE}:${VERSION} > image.txt"
+                archiveArtifacts artifacts: 'image.txt'
+            }
+        }</code></pre><p>Windows: the same with <code>bat</code>, as in the box above.</p></div></details>
+<div class="prose"><p>The other lines:</p><ul><li><code>when { expression { currentBuild.currentResult == 'SUCCESS' } }</code>: the stage runs only if the build is still <b>green</b>.</li><li><code>--build-arg APP_VERSION=…</code>: gives the version to the <code>ARG</code> of the Dockerfile.</li><li><code>image.txt</code>: a small text file with the image reference, archived with the jar. The build page now lists the jar, <code>image.txt</code> and the two test reports.</li></ul></div>
+<aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>After two runs, how many <code>calc-web</code> images will <code>docker images calc-web</code> list, and with which tags?</li><li>With SIMULATE_BUG ticked: will the Docker image stage run? Which line decides?</li></ol></aside>
+<div class="prose"><h3>Run and check</h3><ol><li>Run the job without the bug. The stage <b>Docker image</b> appears and turns green. The build page lists four artifacts: the jar, <code>image.txt</code> and the two XML test reports.</li><li><b>Find your image.</b> Jenkins does not keep it: <code>docker build</code> sent it to the Docker engine of your computer. Two ways to see it:<ul><li><b>Docker Desktop</b> › <b>Images</b>: find <code>calc-web</code> with the tag of your build (build 6 → <code>1.0.6</code>). The list does not always refresh by itself: click the <b>circular arrow</b> next to <i>Last refresh</i>. Still empty? Use the terminal.</li><li><b>Terminal</b> (PowerShell, or the <b>Terminal</b> button of Docker Desktop): <code>docker images calc-web</code>. The terminal always shows the current state.</li></ul></li><li><b>Watch the version go up.</b> Run the job again, without the bug, and list the images again: a <b>second line</b> appears, with the new build number (<code>1.0.6</code> then <code>1.0.7</code>). The old image is still there.</li><li>Run it with SIMULATE_BUG. Compare with your predictions. Then list the images: is there a new tag?</li></ol></div>
+<div class="code"><div class="code-cap">Terminal: list the calc-web images</div><div class="code-box"><pre><code>docker images calc-web</code></pre><button type="button" class="copy" aria-label="Copy: Terminal: list the calc-web images">Copy</button></div></div>
+<div class="prose"><p>Example after builds 6 and 7 (sizes depend on your computer):</p></div>
+<div class="code"><div class="code-cap">What you should see</div><div class="code-box"><pre><code>IMAGE            ID             DISK USAGE   CONTENT SIZE   EXTRA
+calc-web:1.0.7   7f3b9c2e41aa       457MB          116MB
+calc-web:1.0.6   2ac4525dd606       457MB          116MB</code></pre><button type="button" class="copy" aria-label="Copy: What you should see">Copy</button></div></div>
+<div class="prose"><p>How to read it: <b>IMAGE</b> = name:tag, the tag being <code>1.0.</code> + the build number. <b>EXTRA</b> shows <code>U</code> (in use) only when a container runs from the image: none yet, part 5 starts the first one. <b>CONTENT SIZE</b> is the compressed size, the one that is downloaded or pushed to a registry. Older Docker versions show other columns (<code>REPOSITORY  TAG  IMAGE ID  CREATED  SIZE</code>): same information, the tag is in its own column.</p></div>
+<details><summary>Show the explanation</summary><div class="prose"><ul><li>One image <b>per build</b>: <code>1.0.12</code>, <code>1.0.13</code>… Each tag says which build produced it, so you can find its tests and its commit, and redeploy an old one (challenge 3). With <code>latest</code>, every build would overwrite the previous name.</li><li>The tag follows the <b>build number</b>, not a counter of images. If build 8 is yellow (bug), there is no <code>1.0.8</code>: the next green build gives <code>1.0.9</code>. A missing number = a build that was not good enough to become an image.</li><li>With the bug, the build is yellow, so the <code>when</code> condition is false: the stage is <b>skipped</b> (grey). A build that failed its tests never becomes an image, so it can never be deployed.</li></ul></div></details>
+<aside class="note">💥 <b>Break it on purpose</b> (2 min). In the <code>docker build</code> line, replace the last <code>.</code> by <code>..</code> (the parent folder) and run. Read the error: Docker looks for the Dockerfile in the context and does not find it. Put the <code>.</code> back.</aside>
+<aside class="note">Screenshots for the hand-in: the build page with its <b>Build Artifacts</b> (<code>artifacts.png</code>), and the terminal with the output of <code>docker images calc-web</code> (<code>docker.png</code>; add the output of part 5 to it later).</aside>
+<aside class="note">✅ <b>Checkpoint 4</b>: answer in <code>report.txt</code>, in your own words (one or two lines each).<ol><li>Give the tag of your last image. Why use the build number in the tag, and not <code>latest</code>?</li><li>With SIMULATE_BUG, was the Docker image stage run? Which line of the Jenkinsfile decides that, and why is it a good rule?</li></ol></aside>
+<details><summary>See the answer</summary><div class="prose"><ol><li>The tag looks like <code>calc-web:1.0.N</code>, N = the build number (for example <code>1.0.11</code>). With the build number, each image is unique and you know which build made it: its tests, its console, its commit. You can redeploy an old one (rollback). With <code>latest</code>, every build overwrites the same name: you never know which version runs, and the old one is gone.</li><li>No: the stage was <b>skipped</b>. The line <code>when { expression { currentBuild.currentResult == &#39;SUCCESS&#39; } }</code> decides it: with failing tests, the build is UNSTABLE (yellow), not SUCCESS. Good rule: a version that failed its tests never becomes an image, so it can never be deployed.</li></ol></div></details>
+    <div class="pager"><a class="prev" href="lab5-3-build-and-parallel-tests.html">← 3. Build and parallel tests</a><a class="next" href="lab5-5-deploy-to-staging.html">5. Deploy to staging →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=32"></script>
+<script src="assets/site.js?v=32"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8. Checklist and Help · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=32">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="lab4.html">Lab 4 home</a></li><li class=""><a href="lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="lab5.html">Lab 5 home</a></li><li class=""><a href="lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class=""><a href="lab5-4-docker-image.html">4. Docker image</a></li><li class=""><a href="lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class=""><a href="lab5-6-production.html">6. Production</a></li><li class=""><a href="lab5-7-challenges.html">7. Challenges</a></li><li class="active"><a href="lab5-8-checklist-and-help.html" aria-current="page">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 5 · Deploy with Docker</div>
+    <h1>8. Checklist and Help</h1>
+    <div class="prose"><h3>Checklist</h3><p><b>Required</b> (parts 1 to 5):</p><ul><li>☐ <code>docker-check</code> shows a Client and a Server.</li><li>☐ <code>calc-web</code>: two test stages in parallel, 7 tests, green.</li><li>☐ With SIMULATE_BUG: yellow, and the Docker stages are skipped.</li><li>☐ <code>docker images calc-web</code> lists one tag per build.</li><li>☐ <code>http://localhost:8081</code> shows the version of the last build.</li><li>☐ <code>report.txt</code>: checkpoints 1 to 5 answered.</li></ul><p><b>Bonus:</b></p><ul><li>☐ Part 6: with DEPLOY_ENV = production and the approval, <code>http://localhost:8082</code> shows the same version; checkpoint 6 answered.</li><li>☐ One or more challenges of part 7 (push, scan, rollback).</li></ul><h3>Hand in your work</h3><p>In the <code>lab5</code> folder of your <b>jenkins-labs</b> repository (no lab5 folder? <b>Add file › Create new file</b>, name <code>lab5/README.md</code>, guide: <a href="handin.html">How to hand in your work</a>):</p><ul><li><code>report.txt</code>: the template below, filled in. <b>It counts most</b>: short answers in your own words, not copied from this site;</li><li><code>Jenkinsfile</code>: your final script;</li><li><code>order.png</code>: the table of part 2 after <b>Check my answers</b>, with your score;</li><li><code>stages.png</code>: the Blue Ocean graph with the two test branches in parallel;</li><li><code>artifacts.png</code>: the build page with <code>calculator-web.jar</code> and <code>image.txt</code>;</li><li><code>docker.png</code>: the terminal with <code>docker images calc-web</code> and <code>docker ps</code>;</li><li><code>app.png</code>: the browser on <code>http://localhost:8081</code> (or 8082);</li><li>bonus: <code>challenge.png</code>, a screenshot proving each challenge you did (your Docker Hub tags, the scan stage, or production back to an old version).</li></ul></div>
+<div class="code"><div class="code-cap">report.txt</div><div class="code-box"><pre><code>Lab 5 report - name, group:
+
+Part 1 - Jenkins and Docker
+1.1 Jenkins in Docker: which option of docker run lets Jenkins use the Docker engine of your computer? Jenkins on Windows: why must Jenkins be started after Docker Desktop?
+     -&gt;
+1.2 You deleted the Jenkins container. Why are your jobs still there?
+     -&gt;
+
+Part 2 - The web app
+2.1 Which file does the Dockerfile need that is not in Git? Which stage creates it?
+     -&gt;
+2.2 Which test file is a unit test, which one an integration test? What is the difference?
+     -&gt;
+
+Part 3 - Parallel tests
+3.1 Unit and integration tests run in parallel. What do you gain? Why is junit placed after both of them, not inside each?
+     -&gt;
+3.2 With SIMULATE_BUG, which stage(s) failed, and why is the build yellow and not red?
+     -&gt;
+
+Part 4 - The image
+4.1 Give the tag of your last image. Why use the build number in the tag, and not latest?
+     -&gt;
+4.2 With SIMULATE_BUG, was the Docker image stage run? Which line of the Jenkinsfile decides that, and why is it a good rule?
+     -&gt;
+
+Part 5 - Staging
+5.1 In -p 8081:8080, which number belongs to your computer, which one to the container?
+     -&gt;
+5.2 What did the error say when you removed docker rm -f? What does that line do?
+     -&gt;
+5.3 What does the smoke test prove that the unit tests could not prove?
+     -&gt;
+
+Part 6 - Production
+6.1 Is your pipeline continuous delivery or continuous deployment? Which line decides it?
+     -&gt;
+6.2 Staging and production run the same image. Why not rebuild the image for production?
+     -&gt;
+
+Challenges (only those you did): what problem does each one solve?
+     -&gt;
+
+Plugins used in your Jenkinsfile (name and what each one does):
+     -&gt;</code></pre><button type="button" class="copy" aria-label="Copy: report.txt">Copy</button></div></div>
+<div class="prose"><h3>Troubleshooting</h3></div>
+<details><summary>&quot;docker: not found&quot; (Jenkins in Docker)</summary><div class="prose"><p>Jenkins still runs the old image. Run <code>docker ps</code>: the IMAGE of your Jenkins container must be <code>jenkins-docker</code>. Redo part 1, path B, from B3.</p></div></details>
+<details><summary>&quot;permission denied while trying to connect to the Docker daemon socket&quot;</summary><div class="prose"><p>The container was started without <code>-u root</code>, or without <code>-v /var/run/docker.sock:/var/run/docker.sock</code>. Run <code>docker rm -f jenkins-local</code>, then the <code>docker run</code> line of part 1 (B5) with your volume or folder: your jobs are safe in it.</p></div></details>
+<details><summary>&quot;&#x27;docker&#x27; is not recognized&quot; (Jenkins on Windows)</summary><div class="prose"><p>Docker Desktop is not installed, or Jenkins was started before it. Start Docker Desktop, then stop Jenkins (Ctrl + C) and start it again from a <b>new</b> Command Prompt. Still failing: <b>Manage Jenkins › System › Global properties › Environment variables</b>, add <code>PATH+DOCKER</code> = <code>C:\Program Files\Docker\Docker\resources\bin</code>.</p></div></details>
+<details><summary>&quot;error during connect&quot; / &quot;Cannot connect to the Docker daemon&quot;</summary><div class="prose"><p>Docker Desktop is not running. Start it, wait for <i>Engine running</i>, and run the job again.</p></div></details>
+<details><summary>Docker image: &quot;invalid reference format&quot;</summary><div class="prose"><p>A blank is still in the <code>docker build</code> line (<code>____</code>), or a variable is misspelled. The tag must look like <code>calc-web:1.0.12</code>. Compare with the solution of part 4.</p></div></details>
+<details><summary>Docker image: &quot;COPY failed: file not found … calculator-web.jar&quot;</summary><div class="prose"><p>The Docker image stage ran before the jar was created, or the Package stage changed its name. The order must be Build → Tests → Package → Docker image, and the jar must be <code>build/calculator-web.jar</code>.</p></div></details>
+<details><summary>Staging: the container stops at once, and the smoke test fails (&quot;Connection refused&quot;)</summary><div class="prose"><p>Run <code>docker logs calc-staging</code>. If it says <code>UnsupportedClassVersionError … class file version 69.0 … up to 65.0</code>: Jenkins compiled the code with a newer Java (25) than the one in the image (21). The Build stage must use <code>javac --release 21</code>: check your script. This is the <i>it works on my machine</i> problem, caught by the pipeline before production.</p></div></details>
+<details><summary>Deploy: &quot;port is already allocated&quot;</summary><div class="prose"><p>Another program or container already uses 8081 (or 8082). Find it with <code>docker ps</code> and remove it (<code>docker rm -f &lt;name&gt;</code>), or change the host port in the script (for example <code>-p 8091:8080</code>, and the same port in the smoke test).</p></div></details>
+<details><summary>The smoke test fails, but the browser shows the app</summary><div class="prose"><p>The app needed more than 3 seconds to start: wait longer (<code>sleep 6</code>, or <code>ping -n 7 127.0.0.1 &gt;nul</code> on Windows). Jenkins in Docker: check that the container was started with <code>--add-host=host.docker.internal:host-gateway</code>, and that the smoke test uses <code>host.docker.internal</code>, not <code>localhost</code>.</p></div></details>
+<details><summary>Challenge 1: &quot;access token has insufficient scopes&quot;</summary><div class="prose"><p><code>Login Succeeded</code>, but the push fails: the Docker Hub token is <b>read-only</b>. On Docker Hub, <b>Account settings › Personal access tokens › Generate new token</b> with <b>Read &amp; Write</b>. In Jenkins, <b>Manage Jenkins › Credentials</b>, click your Docker Hub credential › <b>Update</b>, paste the new token as the password, <b>Save</b>, and run again.</p></div></details>
+<details><summary>Challenge 1: &quot;Could not find credentials entry with ID dockerhub&quot;</summary><div class="prose"><p>This Jenkins has no credential with the ID <code>dockerhub</code>: it was created with another ID, in another Jenkins, or not in <b>System › Global credentials</b>. Create it again there with ID exactly <code>dockerhub</code> (an ID cannot be changed later), or put the existing ID in <code>credentialsId:</code> of the script.</p></div></details>
+<details><summary>Challenge 1: &quot;denied: requested access to the resource is denied&quot;</summary><div class="prose"><p>The login failed or the image name does not start with your Docker Hub username. Check the credential <code>dockerhub</code> (username, and a token with <b>Read &amp; Write</b>), and the <code>docker tag</code> line.</p></div></details>
+<details><summary>Challenge 2: &quot;manifest unknown&quot; for the Trivy image</summary><div class="prose"><p>That Trivy version is not on Docker Hub. Open hub.docker.com/r/aquasec/trivy/tags, choose a recent version number (not <code>latest</code>), and use it in the stage.</p></div></details>
+<details><summary>The Docker stages are always skipped</summary><div class="prose"><p>The build is not green: a test failed (SIMULATE_BUG ticked?). Look at <b>Test Result</b>. This is on purpose: a yellow build must not be deployed.</p></div></details>
+    <div class="pager"><a class="prev" href="lab5-7-challenges.html">← 7. Challenges</a><a class="next" href="index.html">Module home →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=32"></script>
+<script src="assets/site.js?v=32"></script>
+</body>
+</html>

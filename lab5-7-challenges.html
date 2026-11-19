@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. Challenges · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=32">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="lab4.html">Lab 4 home</a></li><li class=""><a href="lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="lab5.html">Lab 5 home</a></li><li class=""><a href="lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class=""><a href="lab5-4-docker-image.html">4. Docker image</a></li><li class=""><a href="lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class=""><a href="lab5-6-production.html">6. Production</a></li><li class="active"><a href="lab5-7-challenges.html" aria-current="page">7. Challenges</a></li><li class=""><a href="lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 5 · Deploy with Docker</div>
+    <h1>7. Challenges</h1>
+    <div class="prose"><p>Finished early? Three challenges, independent of each other, each bringing one more idea of the course into your pipeline. Do them in any order. For each one you do, write in <code>report.txt</code> the <b>problem it solves</b> (the 🤔 question of the challenge).</p><h3>Challenge 1: Push the image to a registry (Docker Hub)</h3><p>Until now the image only exists on your computer. In a real team it goes to a <b>registry</b>, where staging and production servers download it. Pushing needs a login: the password must <b>never</b> be written in the Jenkinsfile, which is in Git.</p><ol><li>Create a free account on <b>hub.docker.com</b>. Then <b>Account settings › Personal access tokens › Generate new token</b>, access <b>Read &amp; Write</b>. Copy the token.</li><li>In Jenkins: <b>Manage Jenkins › Credentials › System › Global credentials › Add Credentials</b>. Kind <b>Username with password</b>, Username: your Docker Hub username, Password: the token, ID: <code>dockerhub</code>.</li><li>Add this stage <b>after Docker image</b>:</li></ol></div>
+<div class="code"><div class="code-cap">Push stage (Jenkins in Docker)</div><div class="code-box"><pre><code>        stage(&#x27;Push&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: &#x27;dockerhub&#x27;,
+                        usernameVariable: &#x27;DH_USER&#x27;, passwordVariable: &#x27;DH_TOKEN&#x27;)]) {
+                    sh &#x27;echo $DH_TOKEN | docker login -u $DH_USER --password-stdin&#x27;
+                    sh &#x27;docker tag $IMAGE:$VERSION $DH_USER/$IMAGE:$VERSION&#x27;
+                    sh &#x27;docker push $DH_USER/$IMAGE:$VERSION&#x27;
+                }
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Push stage (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Push stage (Jenkins on Windows)</div><div class="code-box"><pre><code>        stage(&#x27;Push&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: &#x27;dockerhub&#x27;,
+                        usernameVariable: &#x27;DH_USER&#x27;, passwordVariable: &#x27;DH_TOKEN&#x27;)]) {
+                    bat &#x27;echo %DH_TOKEN%| docker login -u %DH_USER% --password-stdin&#x27;
+                    bat &#x27;docker tag %IMAGE%:%VERSION% %DH_USER%/%IMAGE%:%VERSION%&#x27;
+                    bat &#x27;docker push %DH_USER%/%IMAGE%:%VERSION%&#x27;
+                }
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Push stage (Jenkins on Windows)">Copy</button></div></div>
+<div class="prose"><ul><li><code>withCredentials</code> gives the username and token to the steps inside it only, as environment variables.</li><li>The commands use <b>single quotes</b>: the shell reads the secret, Groovy never puts it in the script text. In the Console Output, the token is shown as <code>****</code>.</li><li><code>docker tag</code> gives the image a second name, <code>&lt;your-user&gt;/calc-web:1.0.N</code>: on Docker Hub an image belongs to an account.</li></ul><p><b>Check that the image reached Docker Hub:</b></p><ol><li>In the Console Output of the build, the Push stage ends with lines <code>Pushed</code> (or <code>Layer already exists</code>) and a <code>digest: sha256:…</code> line.</li><li>Open <b>hub.docker.com</b> and log in. Click <b>My Hub</b> › <b>Repositories</b>: you see <code>&lt;your-user&gt;/calc-web</code>, with <i>Last Pushed</i> a few minutes ago. This list shows <b>repositories</b>, not versions.</li><li>Click <b>&lt;your-user&gt;/calc-web</b>, then the <b>Tags</b> tab: here are the <b>versions</b>, one tag per pushed build (<code>1.0.17</code>, <code>1.0.18</code>…), with the push date and size.</li><li>Push another build and refresh the Tags tab: a new tag appears.</li></ol><p>The <i>Visibility</i> column says <b>Public</b>: anyone can now run your app on their own computer, without Jenkins and without the code: <code>docker run -d -p 8090:8080 &lt;your-user&gt;/calc-web:1.0.N</code>, then <code>http://localhost:8090/add/2/3</code>. Try it with the image of a classmate! (To make it private: the repository › <b>Settings</b> › <b>Visibility settings</b>.)</p><p>📸 For <code>challenge.png</code>: the <b>Tags</b> tab of your repository.</p><p>🤔 <b>Think:</b> why is the token stored in Jenkins Credentials and not in the Jenkinsfile? Why do staging and production servers need a registry?</p><h3>Challenge 2: Block vulnerable images (Trivy)</h3><p>Scan the image for known vulnerabilities (CVE) <b>after it is built and before it is pushed or deployed</b>. Trivy runs as a container, so there is nothing to install. Add this stage <b>after Docker image</b>, before Push and the deployments:</p></div>
+<div class="code"><div class="code-cap">Security scan stage (Jenkins in Docker)</div><div class="code-box"><pre><code>        stage(&#x27;Security scan&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                sh &quot;docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v trivy-cache:/root/.cache/ aquasec/trivy:0.73.0 image --no-progress --scanners vuln --timeout 15m --exit-code 1 --severity CRITICAL ${IMAGE}:${VERSION}&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Security scan stage (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Security scan stage (Jenkins on Windows)</div><div class="code-box"><pre><code>        stage(&#x27;Security scan&#x27;) {
+            when {
+                expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+            }
+            steps {
+                bat &quot;docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v trivy-cache:/root/.cache/ aquasec/trivy:0.73.0 image --no-progress --scanners vuln --timeout 15m --exit-code 1 --severity CRITICAL ${IMAGE}:${VERSION}&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Security scan stage (Jenkins on Windows)">Copy</button></div></div>
+<div class="prose"><ul><li>The bind mount of <code>docker.sock</code> lets Trivy see the images of your Docker engine.</li><li><code>-v trivy-cache:/root/.cache/</code>: a <b>volume</b> for Trivy's vulnerability databases (several hundred MB). Without it, <code>--rm</code> deletes them with the container and every scan downloads them again (about 5 minutes). With it, only the first scan is slow; the next ones take seconds.</li><li><code>--timeout 15m</code>: the first scan downloads about 1 GB of databases and can exceed Trivy's default limit of 5 minutes (<code>context deadline exceeded</code>). <code>--scanners vuln</code>: look only for known vulnerabilities, not for passwords in files (faster).</li><li><code>--severity CRITICAL --exit-code 1</code>: if a CRITICAL vulnerability is found, the command fails, the stage is red, and the image is <b>never</b> deployed. The first run downloads Trivy's vulnerability database: it takes a minute.</li></ul><p>🤔 <b>Think:</b> why is the scan placed after Docker image but <b>before</b> Push and the deployments? What would go wrong if it ran after deployment?</p></div>
+<aside class="note"><b>Pin your tools too.</b> The scanner uses a precise tag (<code>aquasec/trivy:0.73.0</code>), not <code>latest</code>. In March 2026, some Trivy releases were themselves compromised in a supply-chain attack (CVE-2026-33634): a team that pulled <code>latest</code> at that moment ran a malicious scanner. A security tool is a dependency like any other.</aside>
+<div class="prose"><h3>Challenge 3: Roll back production in one minute</h3><p>Version 1.0.15 is in production and customers report a bug. With versioned images, going back to 1.0.14 needs <b>no rebuild</b>: the old image still exists. Create a new pipeline job <code>calc-web-rollback</code>:</p></div>
+<div class="code"><div class="code-cap">calc-web-rollback (Jenkins in Docker)</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    parameters {
+        string(name: &#x27;ROLLBACK_TO&#x27;, defaultValue: &#x27;&#x27;,
+               description: &#x27;A version already built, for example 1.0.12&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Check the image&#x27;) {
+            steps {
+                sh &quot;docker image inspect calc-web:${params.ROLLBACK_TO} &gt; /dev/null&quot;
+            }
+        }
+        stage(&#x27;Rollback production&#x27;) {
+            steps {
+                input message: &quot;Put calc-web:${params.ROLLBACK_TO} back in production?&quot;, ok: &#x27;Rollback&#x27;
+                sh &#x27;docker rm -f calc-prod || true&#x27;
+                sh &quot;docker run -d --name calc-prod -p 8082:8080 calc-web:${params.ROLLBACK_TO}&quot;
+                echo &quot;Production is back to version ${params.ROLLBACK_TO}&quot;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: calc-web-rollback (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">calc-web-rollback (Jenkins on Windows)</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    parameters {
+        string(name: &#x27;ROLLBACK_TO&#x27;, defaultValue: &#x27;&#x27;,
+               description: &#x27;A version already built, for example 1.0.12&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Check the image&#x27;) {
+            steps {
+                bat &quot;docker image inspect calc-web:${params.ROLLBACK_TO} &gt;nul&quot;
+            }
+        }
+        stage(&#x27;Rollback production&#x27;) {
+            steps {
+                input message: &quot;Put calc-web:${params.ROLLBACK_TO} back in production?&quot;, ok: &#x27;Rollback&#x27;
+                bat &#x27;docker rm -f calc-prod 2&gt;nul &amp; exit /b 0&#x27;
+                bat &quot;docker run -d --name calc-prod -p 8082:8080 calc-web:${params.ROLLBACK_TO}&quot;
+                echo &quot;Production is back to version ${params.ROLLBACK_TO}&quot;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: calc-web-rollback (Jenkins on Windows)">Copy</button></div></div>
+<div class="prose"><ol><li>Deploy two versions to production with <code>calc-web</code> (DEPLOY_ENV = production, twice). <code>http://localhost:8082</code> shows the newest one.</li><li>Run <code>calc-web-rollback</code> with ROLLBACK_TO = the previous version (<code>docker images calc-web</code> lists them). Approve.</li><li>Refresh <code>http://localhost:8082</code>: production is back to the old version, in seconds.</li><li>Try a version that does not exist, like <code>9.9.9</code>: the first stage fails before touching production.</li></ol><p>This is why artifacts are <b>versioned and kept</b>: a rollback is just a deployment of an older artifact. Next chapter: deployment strategies (blue-green, canary) make it even safer.</p><p>🤔 <b>Think:</b> why does the rollback job not need <code>docker build</code>? What would make a rollback impossible?</p></div>
+    <div class="pager"><a class="prev" href="lab5-6-production.html">← 6. Production</a><a class="next" href="lab5-8-checklist-and-help.html">8. Checklist and help →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=32"></script>
+<script src="assets/site.js?v=32"></script>
+</body>
+</html>

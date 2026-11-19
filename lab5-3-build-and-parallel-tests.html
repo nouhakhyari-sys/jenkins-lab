@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Build, Test and Package · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=32">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="lab4.html">Lab 4 home</a></li><li class=""><a href="lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="lab5.html">Lab 5 home</a></li><li class=""><a href="lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="lab5-2-the-web-app.html">2. The web app</a></li><li class="active"><a href="lab5-3-build-and-parallel-tests.html" aria-current="page">3. Build and parallel tests</a></li><li class=""><a href="lab5-4-docker-image.html">4. Docker image</a></li><li class=""><a href="lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class=""><a href="lab5-6-production.html">6. Production</a></li><li class=""><a href="lab5-7-challenges.html">7. Challenges</a></li><li class=""><a href="lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 5 · Deploy with Docker</div>
+    <h1>3. Build, Test and Package</h1>
+    <aside class="note">🎯 <b>Why this step?</b> Tests are the gate of CI: nothing goes further if they fail. Unit tests are fast; integration tests are slower (they start a server). Running them <b>at the same time</b> gives the developer the answer sooner. A <code>parallel</code> block is the Jenkins version of two GitHub Actions jobs without <code>needs</code>.</aside>
+<div class="prose"><p>Create a <b>Pipeline</b> job named <code>calc-web</code>. In <b>Pipeline › Definition</b>, keep <b>Pipeline script</b> and paste the script for your Jenkins (Docker or Windows). It is <b>almost</b> complete: two lines marked <code>// TODO</code> in the Tests stage are for you. Fill them in with the guide below the script, <b>then</b> click <b>Save</b>.</p></div>
+<div class="code"><div class="code-cap">Part A, to complete (Jenkins in Docker)</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Checkout&#x27;) {
+            steps {
+                dir(&#x27;app&#x27;) {
+                    git url: &#x27;https://github.com/nouhakhyari-sys/jenkins-labs-template.git&#x27;, branch: &#x27;main&#x27;
+                }
+            }
+        }
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;app/lab5/calc-web&#x27;) {
+                    sh &#x27;javac --release 21 -d build/classes src/*.java test/*.java&#x27;
+                }
+            }
+        }
+        stage(&#x27;Tests&#x27;) {
+            parallel {
+                stage(&#x27;Unit tests&#x27;) {
+                    steps {
+                        dir(&#x27;app/lab5/calc-web&#x27;) {
+                            sh &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                        }
+                    }
+                }
+                // TODO 1: a second stage &#x27;Integration tests&#x27; that runs ServerTest
+            }
+            post {
+                always {
+                    // TODO 2: publish the XML reports of build/test-results (both test stages)
+                    archiveArtifacts artifacts: &#x27;app/lab5/calc-web/build/test-results/*.xml&#x27;
+                }
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;app/lab5/calc-web&#x27;) {
+                    sh &#x27;jar cfe build/calculator-web.jar CalculatorServer -C build/classes .&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;app/lab5/calc-web/build/calculator-web.jar&#x27;, fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: Part A, to complete (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Part A, to complete (Jenkins on Windows)</div><div class="code-box"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+    }
+
+    stages {
+        stage(&#x27;Checkout&#x27;) {
+            steps {
+                dir(&#x27;app&#x27;) {
+                    git url: &#x27;https://github.com/nouhakhyari-sys/jenkins-labs-template.git&#x27;, branch: &#x27;main&#x27;
+                }
+            }
+        }
+        stage(&#x27;Build&#x27;) {
+            steps {
+                dir(&#x27;app/lab5/calc-web&#x27;) {
+                    bat &#x27;javac --release 21 -d build/classes src/*.java test/*.java&#x27;
+                }
+            }
+        }
+        stage(&#x27;Tests&#x27;) {
+            parallel {
+                stage(&#x27;Unit tests&#x27;) {
+                    steps {
+                        dir(&#x27;app/lab5/calc-web&#x27;) {
+                            bat &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+                        }
+                    }
+                }
+                // TODO 1: a second stage &#x27;Integration tests&#x27; that runs ServerTest
+            }
+            post {
+                always {
+                    // TODO 2: publish the XML reports of build/test-results (both test stages)
+                    archiveArtifacts artifacts: &#x27;app/lab5/calc-web/build/test-results/*.xml&#x27;
+                }
+            }
+        }
+        stage(&#x27;Package&#x27;) {
+            steps {
+                dir(&#x27;app/lab5/calc-web&#x27;) {
+                    bat &#x27;jar cfe build/calculator-web.jar CalculatorServer -C build/classes .&#x27;
+                }
+                archiveArtifacts artifacts: &#x27;app/lab5/calc-web/build/calculator-web.jar&#x27;, fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: Part A, to complete (Jenkins on Windows)">Copy</button></div></div>
+<div class="prose"><h3>✍️ Your turn: fill in the two TODOs</h3><p>Everything you need is already on your screen: the <b>Unit tests</b> stage just above the TODOs, and what you learned in part 2 and in Lab 3.</p><h4>TODO 1: the Integration tests stage</h4><p>In part 2 you saw that the project has two test classes: <code>CalculatorTest</code> (unit) and <code>ServerTest</code> (integration). The script already runs the first one, in this stage:</p></div>
+<div class="code"><div class="code-cap">The Unit tests stage, already in your script (Windows: bat instead of sh)</div><div class="code-box"><pre><code>stage(&#x27;Unit tests&#x27;) {
+    steps {
+        dir(&#x27;app/lab5/calc-web&#x27;) {
+            sh &quot;java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest&quot;
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: The Unit tests stage, already in your script (Windows: bat instead of sh)">Copy</button></div></div>
+<div class="prose"><ol><li><b>Copy</b> this whole block, from <code>stage(</code> to its last <code>}</code>.</li><li><b>Paste</b> it in place of the line <code>// TODO 1 …</code> (still inside <code>parallel { }</code>).</li><li>In the copy, <b>change two things</b>: the stage name (<code>Unit tests</code> → <code>Integration tests</code>) and the class to run (<code>CalculatorTest</code> → <code>ServerTest</code>).</li></ol><p>Two stages inside <code>parallel { }</code> = two tests running at the same time.</p><h4>TODO 2: publish the test reports</h4><p>Each test class writes an XML report. In Lab 3, the <code>junit</code> step read these reports to show <b>Test Result</b> and to make the build <b>yellow</b> when a test fails. Its form is <code>junit 'path/to/the/reports/*.xml'</code>.</p><p>Build the path in two pieces:</p><ol><li><b>The project folder.</b> The tests ran inside <code>dir('app/lab5/calc-web')</code>. But <code>post</code> is <b>outside</b> that <code>dir()</code>, so the path must start with that folder.</li><li><b>The reports.</b> Inside the project, the tests write in <code>build/test-results/</code> (the table of part 2: "test reports (XML)"). <code>*.xml</code> takes the two files at once.</li></ol><p>So the line you write in place of <code>// TODO 2 …</code> is:</p></div>
+<div class="code"><div class="code-cap">TODO 2: fill the blank</div><div class="code-box"><pre><code>junit &#x27;____________________/build/test-results/*.xml&#x27;</code></pre><button type="button" class="copy" aria-label="Copy: TODO 2: fill the blank">Copy</button></div></div>
+<div class="prose"><p>Fill the blank with the project folder, then click <b>Save</b>. Clue: the line just <b>under</b> TODO 2 already uses this path. It archives the same XML files as artifacts, like in Lab 3, so you will find them next to the jar on the build page.</p><p><small>Why fill both before running? Jenkins checks the whole script before it starts, so an incomplete script can be refused. And without TODO 2, no test report is published: no Test Result, and no yellow build when a test fails.</small></p></div>
+<details><summary>Show the solution (Jenkins in Docker)</summary><div class="prose"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: 'SIMULATE_BUG', defaultValue: false,
+                     description: 'Tick to put a bug in the calculator')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                dir('app') {
+                    git url: 'https://github.com/nouhakhyari-sys/jenkins-labs-template.git', branch: 'main'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    sh 'javac --release 21 -d build/classes src/*.java test/*.java'
+                }
+            }
+        }
+        stage('Tests') {
+            parallel {
+                stage('Unit tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            sh "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest"
+                        }
+                    }
+                }
+                stage('Integration tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            sh "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes ServerTest"
+                        }
+                    }
+                }
+            }
+            post {
+                always {
+                    junit 'app/lab5/calc-web/build/test-results/*.xml'
+                    archiveArtifacts artifacts: 'app/lab5/calc-web/build/test-results/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    sh 'jar cfe build/calculator-web.jar CalculatorServer -C build/classes .'
+                }
+                archiveArtifacts artifacts: 'app/lab5/calc-web/build/calculator-web.jar', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre></div></details>
+<details><summary>Show the solution (Jenkins on Windows)</summary><div class="prose"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: 'SIMULATE_BUG', defaultValue: false,
+                     description: 'Tick to put a bug in the calculator')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                dir('app') {
+                    git url: 'https://github.com/nouhakhyari-sys/jenkins-labs-template.git', branch: 'main'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    bat 'javac --release 21 -d build/classes src/*.java test/*.java'
+                }
+            }
+        }
+        stage('Tests') {
+            parallel {
+                stage('Unit tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            bat "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest"
+                        }
+                    }
+                }
+                stage('Integration tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            bat "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes ServerTest"
+                        }
+                    }
+                }
+            }
+            post {
+                always {
+                    junit 'app/lab5/calc-web/build/test-results/*.xml'
+                    archiveArtifacts artifacts: 'app/lab5/calc-web/build/test-results/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    bat 'jar cfe build/calculator-web.jar CalculatorServer -C build/classes .'
+                }
+                archiveArtifacts artifacts: 'app/lab5/calc-web/build/calculator-web.jar', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre></div></details>
+<aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>Without the bug: how many tests will Jenkins report, and how many stages will you see side by side?</li><li>With SIMULATE_BUG ticked: will the build be red or yellow? Will the <b>Package</b> stage run?</li></ol></aside>
+<div class="prose"><h3>Run and observe</h3><ol><li><b>Build with Parameters</b>, SIMULATE_BUG unticked. <b>See the parallel branches in Blue Ocean:</b> open <code>http://localhost:8080/blue</code> (type <code>/blue</code> after the Jenkins address), click the <b>calc-web</b> pipeline, then <b>click the row of your run</b>. In the graph, <i>Tests</i> splits into <b>two branches, one above the other</b>: <i>Unit tests</i> and <i>Integration tests</i>. Click a branch to see its logs only. (No Blue Ocean on your Jenkins? Open the run in the classic interface › <b>Pipeline Overview</b>: same graph.)</li><li>Back in the classic interface (exit icon at the top right of Blue Ocean), open the run › <b>Test Result</b>: how many tests?</li><li>Open the <b>Console Output</b>: the lines of the two stages are mixed, each starting with <code>[Unit tests]</code> or <code>[Integration tests]</code>. They ran at the same time.</li><li>Run it with SIMULATE_BUG ticked. In Blue Ocean, open this run: which branch shows failing tests? Compare with your predictions.</li></ol></div>
+<details><summary>Show the explanation</summary><div class="prose"><ul><li>Without the bug: green, <b>7 tests</b> (4 unit, 3 integration), two stages in parallel: the Tests stage lasts as long as the slowest one, not the sum.</li><li>With the bug: both stages find it (the server uses the same calculator). The test programs report the failures in their XML instead of crashing, and <code>junit</code> marks the build <b>yellow (UNSTABLE)</b>: "it built, but tests fail". Red means the pipeline itself broke (compilation error, missing file). The next stages still run: Package does too. Part 4 adds the rule that stops a yellow build from becoming an image.</li><li><code>junit</code> is in the <code>post</code> of Tests, after both parallel stages, so one call collects the two reports, even when a test failed (<code>always</code>).</li></ul></div></details>
+<aside class="note">⚠️ The classic <b>Stage View</b> table on the job page cannot draw parallel stages: it shows <i>Tests</i>, <i>Unit tests</i> and <i>Integration tests</i> as columns one after the other, as if they ran in sequence. Use <b>Blue Ocean</b> (or Pipeline Overview) to see them in parallel.<br>Take a screenshot of the <b>Blue Ocean</b> graph (or Pipeline Overview) with the two parallel branches visible: it is part of your hand-in (<code>stages.png</code>).</aside>
+<aside class="note">✅ <b>Checkpoint 3</b>: answer in <code>report.txt</code>, in your own words (one or two lines each).<ol><li>Unit and integration tests run in parallel. What do you gain? Why is <code>junit</code> placed after both of them, not inside each?</li><li>With SIMULATE_BUG, which stage(s) failed, and why is the build yellow and not red?</li></ol></aside>
+<details><summary>See the answer</summary><div class="prose"><ol><li><b>Time.</b> The two test classes run at the same time, so the <i>Tests</i> stage lasts as long as the <b>slowest</b> one, not the sum of both: the developer gets the answer sooner. In a real project with 10 minutes of unit tests and 20 minutes of integration tests, that is 20 minutes instead of 30.<br><b>junit after both.</b> It is in the <code>post { always { } }</code> of the <i>Tests</i> stage, so it runs <b>once</b>, after both branches, and <code>*.xml</code> collects the two reports together. <code>always</code> means it runs even when tests fail: that is exactly when you need the report.</li><li><b>Both test classes found the bug</b>: Test Result shows <b>3 failing tests</b>, 2 in <code>CalculatorTest</code> (unit) and 1 in <code>ServerTest</code> (<code>http_add_2_and_3</code>), because the server uses the same wrong calculator.<br><b>Yellow, not red:</b> no stage crashed. The test programs ran to the end and wrote the failures in their XML reports; <code>junit</code> read them and marked the build <b>UNSTABLE</b> (yellow) = it built, but tests fail. <b>Red</b> (FAILURE) means the pipeline itself broke: a compilation error, a missing file, a command that fails.</li></ol></div></details>
+    <div class="pager"><a class="prev" href="lab5-2-the-web-app.html">← 2. The web app</a><a class="next" href="lab5-4-docker-image.html">4. Docker image →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=32"></script>
+<script src="assets/site.js?v=32"></script>
+</body>
+</html>

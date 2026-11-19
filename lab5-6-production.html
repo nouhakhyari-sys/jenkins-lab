@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6. Production, with Approval · Jenkins Labs</title>
+<link rel="stylesheet" href="assets/style.css?v=32">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="index.html">Module home</a><a class="navhome" href="handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="lab1.html">Lab 1 home</a></li><li class=""><a href="1-before-you-start.html">1. Before you start</a></li><li class=""><a href="2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="lab2.html">Lab 2 home</a></li><li class=""><a href="lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="lab3.html">Lab 3 home</a></li><li class=""><a href="lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="lab4.html">Lab 4 home</a></li><li class=""><a href="lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="lab5.html">Lab 5 home</a></li><li class=""><a href="lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class=""><a href="lab5-4-docker-image.html">4. Docker image</a></li><li class=""><a href="lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class="active"><a href="lab5-6-production.html" aria-current="page">6. Production</a></li><li class=""><a href="lab5-7-challenges.html">7. Challenges</a></li><li class=""><a href="lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 5 · Deploy with Docker</div>
+    <h1>6. Production, with Approval</h1>
+    <aside class="note">🎯 <b>Why this step?</b> The last step of the chapter: <b>delivery vs deployment</b>. A person approves the production release (continuous delivery), and production runs <b>the same image</b> that passed staging: <b>build once, deploy many</b> (the Docker part of the course).</aside>
+<div class="prose"><h3>Step 1: a parameter</h3><p>Replace your whole <code>parameters { }</code> block with this one. The new <code>choice</code> line goes <b>inside</b> the block, under SIMULATE_BUG, <b>before</b> the closing <code>}</code>:</p></div>
+<div class="code"><div class="code-cap">The whole parameters block (Docker and Windows)</div><div class="code-box"><pre><code>    parameters {
+        booleanParam(name: &#x27;SIMULATE_BUG&#x27;, defaultValue: false,
+                     description: &#x27;Tick to put a bug in the calculator&#x27;)
+        choice(name: &#x27;DEPLOY_ENV&#x27;, choices: [&#x27;staging&#x27;, &#x27;production&#x27;],
+               description: &#x27;staging: stop after staging. production: staging, approval, then production.&#x27;)
+    }</code></pre><button type="button" class="copy" aria-label="Copy: The whole parameters block (Docker and Windows)">Copy</button></div></div>
+<aside class="note">⚠️ Common error: the <code>choice</code> line pasted <b>after</b> the <code>}</code> of <code>parameters</code>. Jenkins then refuses the script. Both parameters must be between <code>parameters {</code> and its <code>}</code>.</aside>
+<div class="prose"><h3>Step 2: the production stage</h3><p>Production is the <b>same</b> deployment as staging, with a few differences. Compare:</p><table class="t"><thead><tr><th></th><th>Staging (part 5)</th><th>Production</th></tr></thead><tbody><tr><td>Container name</td><td><code>calc-staging</code></td><td><code>calc-prod</code></td></tr><tr><td>Port of your computer</td><td><code>8081</code></td><td><code>8082</code> (staging keeps running on 8081)</td></tr><tr><td>Image</td><td><code>${IMAGE}:${VERSION}</code></td><td>the <b>same</b> one: no new <code>docker build</code></td></tr><tr><td>Before deploying</td><td>nothing</td><td>a person clicks <b>Deploy</b> (the <code>input</code> step of Lab 3)</td></tr><tr><td>Runs when</td><td>the build is green</td><td>the build is green <b>and</b> DEPLOY_ENV = production</td></tr></tbody></table><p>✍️ <b>Your turn.</b> Paste this stage <b>after</b> the <i>Deploy to staging</i> stage (after its closing <code>}</code>), then fill the blanks with the table. The comment above each line tells you what it does.</p></div>
+<div class="code"><div class="code-cap">Deploy to production, to complete (Jenkins in Docker)</div><div class="code-box"><pre><code>        stage(&#x27;Deploy to production&#x27;) {
+            // run only if DEPLOY_ENV is production AND the build is still green
+            when {
+                allOf {
+                    expression { params.DEPLOY_ENV == &#x27;production&#x27; }
+                    expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+                }
+            }
+            steps {
+                // 1. a person must approve (the step of Lab 3 that shows a Deploy button)
+                _____ message: &quot;Deploy ${IMAGE}:${VERSION} to production?&quot;, ok: &#x27;Deploy&#x27;
+                // 2. remove the old production container
+                sh &#x27;docker rm -f ________ || true&#x27;
+                // 3. start the SAME image as staging, with the production name and port
+                sh &quot;docker run -d --name ________ -p ____:8080 ${IMAGE}:${VERSION}&quot;
+                echo &quot;Application deployed successfully: http://localhost:8082 (version ${VERSION})&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Deploy to production, to complete (Jenkins in Docker)">Copy</button></div></div>
+<div class="code"><div class="code-cap">Deploy to production, to complete (Jenkins on Windows)</div><div class="code-box"><pre><code>        stage(&#x27;Deploy to production&#x27;) {
+            // run only if DEPLOY_ENV is production AND the build is still green
+            when {
+                allOf {
+                    expression { params.DEPLOY_ENV == &#x27;production&#x27; }
+                    expression { currentBuild.currentResult == &#x27;SUCCESS&#x27; }
+                }
+            }
+            steps {
+                // 1. a person must approve (the step of Lab 3 that shows a Deploy button)
+                _____ message: &quot;Deploy ${IMAGE}:${VERSION} to production?&quot;, ok: &#x27;Deploy&#x27;
+                // 2. remove the old production container
+                bat &#x27;docker rm -f ________ 2&gt;nul &amp; exit /b 0&#x27;
+                // 3. start the SAME image as staging, with the production name and port
+                bat &quot;docker run -d --name ________ -p ____:8080 ${IMAGE}:${VERSION}&quot;
+                echo &quot;Application deployed successfully: http://localhost:8082 (version ${VERSION})&quot;
+            }
+        }</code></pre><button type="button" class="copy" aria-label="Copy: Deploy to production, to complete (Jenkins on Windows)">Copy</button></div></div>
+<div class="prose"><ul><li><code>_____</code>: the name of the Lab 3 step that pauses the pipeline and shows a button.</li><li><code>________</code> (twice): the name of the production container.</li><li><code>____</code>: the port of your computer for production.</li></ul><p>⚠️ Count your braces: each <code>stage(…) {</code> ends with its own <code>}</code> <b>before</b> the next <code>stage(</code> starts. A <code>}</code> in the wrong place is the most common error here.</p></div>
+<details><summary>Show the solution (Jenkins in Docker)</summary><div class="prose"><pre><code>        stage('Deploy to production') {
+            when {
+                allOf {
+                    expression { params.DEPLOY_ENV == 'production' }
+                    expression { currentBuild.currentResult == 'SUCCESS' }
+                }
+            }
+            steps {
+                input message: "Deploy ${IMAGE}:${VERSION} to production?", ok: 'Deploy'
+                sh 'docker rm -f calc-prod || true'
+                sh "docker run -d --name calc-prod -p 8082:8080 ${IMAGE}:${VERSION}"
+                echo "Application deployed successfully: http://localhost:8082 (version ${VERSION})"
+            }
+        }</code></pre></div></details>
+<details><summary>Show the solution (Jenkins on Windows)</summary><div class="prose"><pre><code>        stage('Deploy to production') {
+            when {
+                allOf {
+                    expression { params.DEPLOY_ENV == 'production' }
+                    expression { currentBuild.currentResult == 'SUCCESS' }
+                }
+            }
+            steps {
+                input message: "Deploy ${IMAGE}:${VERSION} to production?", ok: 'Deploy'
+                bat 'docker rm -f calc-prod 2>nul &amp; exit /b 0'
+                bat "docker run -d --name calc-prod -p 8082:8080 ${IMAGE}:${VERSION}"
+                echo "Application deployed successfully: http://localhost:8082 (version ${VERSION})"
+            }
+        }</code></pre></div></details>
+<aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>With DEPLOY_ENV = <b>staging</b>, which stage will be skipped?</li><li>With <b>production</b>, the run stops and waits. How many images will exist for this run, and how many containers?</li></ol></aside>
+<div class="prose"><h3>Run and check</h3><ol><li><b>Build with Parameters</b>, DEPLOY_ENV = <b>production</b>. The run deploys staging, then waits: click <b>Deploy</b>.</li><li>Open <code>http://localhost:8081</code> and <code>http://localhost:8082</code>: <b>the same version</b> in staging and production.</li><li><code>docker ps</code>: two containers, one image.</li></ol></div>
+<details><summary>Show the explanation</summary><div class="prose"><ul><li>With <b>staging</b>, the first <code>expression</code> of <code>allOf</code> is false: production is skipped.</li><li>With <b>production</b>: <b>one</b> image, <b>two</b> containers (slide <i>Docker Images vs Container Instances</i>). The <code>input</code> is what makes it continuous <b>delivery</b>; remove it and every green build reaches production: continuous <b>deployment</b>.</li><li>Production does not rebuild: a new build could include a different base image or library. Deploying the tested tag is the proof that production runs what staging tested.</li></ul></div></details>
+<details><summary>Show the full Jenkinsfile (Jenkins in Docker)</summary><div class="prose"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: 'SIMULATE_BUG', defaultValue: false,
+                     description: 'Tick to put a bug in the calculator')
+        choice(name: 'DEPLOY_ENV', choices: ['staging', 'production'],
+               description: 'staging: stop after staging. production: staging, approval, then production.')
+    }
+
+    environment {
+        IMAGE   = 'calc-web'
+        VERSION = "1.0.${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                dir('app') {
+                    git url: 'https://github.com/nouhakhyari-sys/jenkins-labs-template.git', branch: 'main'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    sh 'javac --release 21 -d build/classes src/*.java test/*.java'
+                }
+            }
+        }
+        stage('Tests') {
+            parallel {
+                stage('Unit tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            sh "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest"
+                        }
+                    }
+                }
+                stage('Integration tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            sh "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes ServerTest"
+                        }
+                    }
+                }
+            }
+            post {
+                always {
+                    junit 'app/lab5/calc-web/build/test-results/*.xml'
+                    archiveArtifacts artifacts: 'app/lab5/calc-web/build/test-results/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    sh 'jar cfe build/calculator-web.jar CalculatorServer -C build/classes .'
+                }
+                archiveArtifacts artifacts: 'app/lab5/calc-web/build/calculator-web.jar', fingerprint: true
+            }
+        }
+        stage('Docker image') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                dir('app/lab5/calc-web') {
+                    sh "docker build --build-arg APP_VERSION=${VERSION} -t ${IMAGE}:${VERSION} ."
+                }
+                sh "echo ${IMAGE}:${VERSION} > image.txt"
+                archiveArtifacts artifacts: 'image.txt'
+            }
+        }
+        stage('Deploy to staging') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                sh 'docker rm -f calc-staging || true'
+                sh "docker run -d --name calc-staging -p 8081:8080 ${IMAGE}:${VERSION}"
+                sh 'sleep 3'
+                sh 'curl -s http://host.docker.internal:8081/add/2/3 | grep -x 5'
+                echo "Application deployed successfully: http://localhost:8081 (version ${VERSION})"
+            }
+        }
+        stage('Deploy to production') {
+            when {
+                allOf {
+                    expression { params.DEPLOY_ENV == 'production' }
+                    expression { currentBuild.currentResult == 'SUCCESS' }
+                }
+            }
+            steps {
+                input message: "Deploy ${IMAGE}:${VERSION} to production?", ok: 'Deploy'
+                sh 'docker rm -f calc-prod || true'
+                sh "docker run -d --name calc-prod -p 8082:8080 ${IMAGE}:${VERSION}"
+                echo "Application deployed successfully: http://localhost:8082 (version ${VERSION})"
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre></div></details>
+<details><summary>Show the full Jenkinsfile (Jenkins on Windows)</summary><div class="prose"><pre><code>pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(name: 'SIMULATE_BUG', defaultValue: false,
+                     description: 'Tick to put a bug in the calculator')
+        choice(name: 'DEPLOY_ENV', choices: ['staging', 'production'],
+               description: 'staging: stop after staging. production: staging, approval, then production.')
+    }
+
+    environment {
+        IMAGE   = 'calc-web'
+        VERSION = "1.0.${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                dir('app') {
+                    git url: 'https://github.com/nouhakhyari-sys/jenkins-labs-template.git', branch: 'main'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    bat 'javac --release 21 -d build/classes src/*.java test/*.java'
+                }
+            }
+        }
+        stage('Tests') {
+            parallel {
+                stage('Unit tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            bat "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes CalculatorTest"
+                        }
+                    }
+                }
+                stage('Integration tests') {
+                    steps {
+                        dir('app/lab5/calc-web') {
+                            bat "java -DsimulateBug=${params.SIMULATE_BUG} -cp build/classes ServerTest"
+                        }
+                    }
+                }
+            }
+            post {
+                always {
+                    junit 'app/lab5/calc-web/build/test-results/*.xml'
+                    archiveArtifacts artifacts: 'app/lab5/calc-web/build/test-results/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                dir('app/lab5/calc-web') {
+                    bat 'jar cfe build/calculator-web.jar CalculatorServer -C build/classes .'
+                }
+                archiveArtifacts artifacts: 'app/lab5/calc-web/build/calculator-web.jar', fingerprint: true
+            }
+        }
+        stage('Docker image') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                dir('app/lab5/calc-web') {
+                    bat "docker build --build-arg APP_VERSION=${VERSION} -t ${IMAGE}:${VERSION} ."
+                }
+                bat "echo ${IMAGE}:${VERSION}> image.txt"
+                archiveArtifacts artifacts: 'image.txt'
+            }
+        }
+        stage('Deploy to staging') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                bat 'docker rm -f calc-staging 2>nul &amp; exit /b 0'
+                bat "docker run -d --name calc-staging -p 8081:8080 ${IMAGE}:${VERSION}"
+                bat 'ping -n 4 127.0.0.1 >nul'
+                script {
+                    def answer = bat(script: '@curl -s http://localhost:8081/add/2/3', returnStdout: true).trim()
+                    echo "Smoke test: /add/2/3 answered ${answer}"
+                    if (answer != '5') {
+                        error "Smoke test failed: expected 5 but got ${answer}"
+                    }
+                }
+                echo "Application deployed successfully: http://localhost:8081 (version ${VERSION})"
+            }
+        }
+        stage('Deploy to production') {
+            when {
+                allOf {
+                    expression { params.DEPLOY_ENV == 'production' }
+                    expression { currentBuild.currentResult == 'SUCCESS' }
+                }
+            }
+            steps {
+                input message: "Deploy ${IMAGE}:${VERSION} to production?", ok: 'Deploy'
+                bat 'docker rm -f calc-prod 2>nul &amp; exit /b 0'
+                bat "docker run -d --name calc-prod -p 8082:8080 ${IMAGE}:${VERSION}"
+                echo "Application deployed successfully: http://localhost:8082 (version ${VERSION})"
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</code></pre></div></details>
+<details><summary>Bonus: email notification (if you did Lab 3, part 8)</summary><div class="prose"><p>Add the <code>success</code> and <code>failure</code> blocks of the email part of Lab 3 to the <code>post { }</code> section, and put <code>${VERSION}</code> in the subject: <code>subject: "calc-web ${VERSION} deployed"</code>. Mailpit then shows which version reached which environment.</p></div></details>
+<aside class="note">✅ <b>Checkpoint 6</b>: answer in <code>report.txt</code>, in your own words (one or two lines each).<ol><li>Is your pipeline continuous delivery or continuous deployment? Which line decides it?</li><li>Staging and production run the same image. Why not rebuild the image for production?</li></ol></aside>
+<details><summary>See the answer</summary><div class="prose"><ol><li><b>Continuous delivery</b>: every good version is ready for production, but a person approves it. The <code>input</code> step decides it (Deploy / Abort). Without <code>input</code>, every green build would go to production by itself: continuous <b>deployment</b>.</li><li>Rebuilding could give a different image: a new base image, another library version, a new commit. Then production would run something that staging never tested. Deploying the same tag (<code>calc-web:1.0.N</code>) proves that production runs exactly what was tested: <b>build once, deploy many</b>.</li></ol></div></details>
+    <div class="pager"><a class="prev" href="lab5-5-deploy-to-staging.html">← 5. Deploy to staging</a><a class="next" href="lab5-7-challenges.html">7. Challenges →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="assets/videos.js?v=32"></script>
+<script src="assets/site.js?v=32"></script>
+</body>
+</html>
