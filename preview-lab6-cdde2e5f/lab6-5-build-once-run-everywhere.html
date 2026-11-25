@@ -66,46 +66,6 @@ public class Hello {
         }
     }
 }</code></pre><button type="button" class="copy" aria-label="Copy: build-once, to complete">Copy</button></div></div>
-<details><summary>Show the solution</summary><div class="prose"><pre><code>pipeline {
-    agent none
-    stages {
-        stage(&#x27;Build on Linux&#x27;) {
-            agent { label &#x27;linux&#x27; }
-            steps {
-                writeFile file: &#x27;src/Hello.java&#x27;, text: &#x27;&#x27;&#x27;
-public class Hello {
-    public static void main(String[] args) {
-        System.out.println(&quot;Hello from &quot; + System.getProperty(&quot;os.name&quot;)
-            + &quot;, Java &quot; + System.getProperty(&quot;java.version&quot;));
-    }
-}
-&#x27;&#x27;&#x27;
-                sh &#x27;javac --release 17 -d classes src/Hello.java&#x27;
-                sh &#x27;jar cfe hello.jar Hello -C classes .&#x27;
-                stash name: &#x27;app&#x27;, includes: &#x27;hello.jar&#x27;
-                archiveArtifacts artifacts: &#x27;hello.jar&#x27;, fingerprint: true
-            }
-        }
-        stage(&#x27;Run everywhere&#x27;) {
-            parallel {
-                stage(&#x27;Linux&#x27;) {
-                    agent { label &#x27;linux&#x27; }
-                    steps {
-                        unstash &#x27;app&#x27;
-                        sh &#x27;java -jar hello.jar&#x27;
-                    }
-                }
-                stage(&#x27;Windows&#x27;) {
-                    agent { label &#x27;windows&#x27; }
-                    steps {
-                        unstash &#x27;app&#x27;
-                        bat &#x27;java -jar hello.jar&#x27;
-                    }
-                }
-            }
-        }
-    }
-}</code></pre></div></details>
 <aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>The <i>Linux</i> and <i>Windows</i> stages start together. Which one finishes first? What will each one print?</li><li>You remove <code>unstash 'app'</code> from the Windows stage. Which error do you expect?</li></ol></aside>
 <div class="prose"><h3>Run and observe</h3><ol><li><b>Build Now</b>. Open the run in <b>Blue Ocean</b> (<code>/blue</code>) or <b>Pipeline Overview</b>: <i>Run everywhere</i> splits into two branches. Click each one: <code>Hello from Linux…</code> and <code>Hello from Windows 11…</code> (or Windows 10). Take the screenshot <code>parallel.png</code>.</li><li>On the build page, <b>Build Artifacts</b> shows <code>hello.jar</code> (from <code>archiveArtifacts</code>). The stash is not listed anywhere.</li><li>Remove <code>unstash 'app'</code> from the Windows stage, run, read the error, and put it back.</li></ol></div>
 <details><summary>Show the explanation</summary><div class="prose"><ul><li>The two stages run on two machines at the same time; their logs are separated in Blue Ocean. The Windows one prints your Windows version and the Java of your PC; the Linux one prints Linux and Java 21 from the image.</li><li>Without <code>unstash</code>: <i>Error: Unable to access jarfile hello.jar</i>. The Windows workspace is a folder on your PC; <code>hello.jar</code> was created in the workspace of linux-agent, inside the container.</li><li><code>javac --release 17</code> makes bytecode for Java 17 and newer, so it runs on the agent's Java 21 and on a PC with Java 17.</li></ul></div></details>
