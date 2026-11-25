@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. An Agent that Runs Docker · Jenkins Labs</title>
+<link rel="stylesheet" href="../assets/style.css?v=28">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="../index.html">Module home</a><a class="navhome" href="../handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="../lab1.html">Lab 1 home</a></li><li class=""><a href="../1-before-you-start.html">1. Before you start</a></li><li class=""><a href="../2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="../2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="../2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="../2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="../2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="../2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="../3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="../4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="../5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="../lab2.html">Lab 2 home</a></li><li class=""><a href="../lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="../lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="../lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="../lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="../lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="../lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="../lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="../lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="../lab3.html">Lab 3 home</a></li><li class=""><a href="../lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="../lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="../lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="../lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="../lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="../lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="../lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="../lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="../lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="../lab4.html">Lab 4 home</a></li><li class=""><a href="../lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="../lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="../lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="../lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="../lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="../lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="../lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="../lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="../lab5.html">Lab 5 home</a></li><li class=""><a href="../lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="../lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="../lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class=""><a href="../lab5-4-docker-image.html">4. Docker image</a></li><li class=""><a href="../lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class=""><a href="../lab5-6-production.html">6. Production</a></li><li class=""><a href="../lab5-7-challenges.html">7. Challenges</a></li><li class=""><a href="../lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 6 · Distributed Builds with Agents</div><ol><li class=""><a href="lab6.html">Lab 6 home</a></li><li class=""><a href="lab6-quiz.html">Quiz (warm-up)</a></li><li class=""><a href="lab6-1-controller-and-executors.html">1. Controller and executors</a></li><li class=""><a href="lab6-2-linux-agent.html">2. Linux agent (Docker)</a></li><li class=""><a href="lab6-3-windows-agent.html">3. Windows agent</a></li><li class=""><a href="lab6-4-labels.html">4. Labels</a></li><li class=""><a href="lab6-5-build-once-run-everywhere.html">5. Build once, run everywhere</a></li><li class=""><a href="lab6-6-protect-the-controller.html">6. Protect the controller</a></li><li class="active"><a href="lab6-7-docker-agent.html" aria-current="page">7. Docker agent (project)</a></li><li class=""><a href="lab6-8-challenges.html">8. Challenges</a></li><li class=""><a href="lab6-9-checklist-and-help.html">9. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 6 · Distributed Builds with Agents</div>
+    <h1>7. An Agent that Runs Docker</h1>
+    <aside class="note">🎯 <b>Why this step?</b> Your final project builds a Docker image, pushes it and starts staging and production containers. In Lab 5 the <b>controller</b> ran these <code>docker</code> commands. Now builds go to agents, but <code>jenkins/inbound-agent</code> has no <code>docker</code> command. You build your own agent image, with Docker inside: feature 13 of the project.</aside>
+<div class="prose"><h3>A. Build the agent image</h3><ol><li>Create a folder <code>docker-agent</code> (for example in your <b>jenkins-labs</b> repository, under <code>lab6</code>) and, in it, a file named <code>Dockerfile</code> (no extension) with:</li></ol></div>
+<div class="code"><div class="code-cap">docker-agent/Dockerfile</div><div class="code-box"><pre><code>FROM jenkins/inbound-agent:latest-jdk21
+USER root
+COPY --from=docker:27-cli /usr/local/bin/docker /usr/local/bin/docker
+RUN apt-get update &amp;&amp; apt-get install -y curl &amp;&amp; rm -rf /var/lib/apt/lists/*</code></pre><button type="button" class="copy" aria-label="Copy: docker-agent/Dockerfile">Copy</button></div></div>
+<div class="prose"><ul><li><code>FROM jenkins/inbound-agent:latest-jdk21</code>: start from the official agent (Java 21, agent.jar).</li><li><code>COPY --from=docker:27-cli …</code>: copy only the <b>docker command</b> (the client) from the official Docker image. No Docker engine inside: the agent will use the engine of your PC.</li><li><code>curl</code>: for the smoke tests of your project.</li></ul><ol start="2"><li>In PowerShell, in the folder <code>docker-agent</code>: <code>docker build -t docker-agent .</code> (the dot is the folder).</li></ol></div>
+<div class="prose"><h3>B. Create the node and start it</h3><ol><li><b>Manage Jenkins › Nodes › New Node</b>: <code>docker-agent</code>, Permanent Agent (or <b>Copy Existing Node</b> from linux-agent). Number of executors <code>1</code>, Remote root directory <code>/home/jenkins/agent</code>, Labels <code>linux docker</code>, Usage <b>Only build jobs with label expressions matching this node</b>, Launch <b>by connecting it to the controller</b> (Use WebSocket: optional, as for linux-agent). <b>Save</b>, and copy the secret.</li><li>Start it (one line, with the secret of <b>docker-agent</b>):</li></ol></div>
+<div class="code"><div class="code-cap">Start docker-agent (one line)</div><div class="code-box"><pre><code>docker run -d --name docker-agent --init --user root -v /var/run/docker.sock:/var/run/docker.sock --add-host=host.docker.internal:host-gateway -e JENKINS_URL=http://host.docker.internal:8080 -e JENKINS_SECRET=PASTE_THE_SECRET_OF_DOCKER_AGENT -e JENKINS_AGENT_NAME=docker-agent -e JENKINS_WEB_SOCKET=true -e JENKINS_AGENT_WORKDIR=/home/jenkins/agent docker-agent</code></pre><button type="button" class="copy" aria-label="Copy: Start docker-agent (one line)">Copy</button></div></div>
+<div class="prose"><p>The new parts, compared with linux-agent:</p><ul><li><code>-v /var/run/docker.sock:/var/run/docker.sock</code>: shares the <b>socket</b> of Docker Desktop. The docker command in the agent talks to the Docker engine of your PC.</li><li><code>--user root</code>: the socket only accepts root.</li><li><code>docker-agent</code> at the end: your image, not <code>jenkins/inbound-agent</code>.</li></ul><p>As in part 2, the command prints a long ID (the container runs in the background). Check: <code>docker logs docker-agent</code> ends with <b>INFO: Connected</b>, and the Nodes page shows docker-agent online. Wrong secret? <code>docker rm -f docker-agent</code> and run the line again.</p></div>
+<aside class="note">🔒 <b>Only on your own PC.</b> The Docker socket gives full control of Docker, and through it of the machine. A build on this agent could start any container, as root. Never do this on a shared server: companies use rootless builders such as kaniko (Session 9) or one fresh VM per build.</aside>
+<div class="prose"><h3>C. Build an image on the agent</h3><p>Create a <b>Pipeline</b> job named <code>image-on-agent</code>. The jar is built on a <code>linux</code> node, then carried to the <code>docker</code> node, which builds and runs an image: the same shape as your project.</p></div>
+<div class="code"><div class="code-cap">image-on-agent</div><div class="code-box"><pre><code>pipeline {
+    agent none
+    stages {
+        stage(&#x27;Build&#x27;) {
+            agent { label &#x27;linux&#x27; }
+            steps {
+                writeFile file: &#x27;src/Hello.java&#x27;, text: &#x27;&#x27;&#x27;
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello from &quot; + System.getProperty(&quot;os.name&quot;)
+            + &quot;, Java &quot; + System.getProperty(&quot;java.version&quot;));
+    }
+}
+&#x27;&#x27;&#x27;
+                sh &#x27;javac --release 17 -d classes src/Hello.java&#x27;
+                sh &#x27;jar cfe hello.jar Hello -C classes .&#x27;
+                stash name: &#x27;app&#x27;, includes: &#x27;hello.jar&#x27;
+            }
+        }
+        stage(&#x27;Docker image&#x27;) {
+            agent { label &#x27;docker&#x27; }
+            steps {
+                unstash &#x27;app&#x27;
+                writeFile file: &#x27;Dockerfile&#x27;, text: &#x27;&#x27;&#x27;
+FROM eclipse-temurin:21-jre
+COPY hello.jar /app/hello.jar
+CMD [&quot;java&quot;, &quot;-jar&quot;, &quot;/app/hello.jar&quot;]
+&#x27;&#x27;&#x27;
+                sh &#x27;docker build -t hello-agent:${BUILD_NUMBER} .&#x27;
+                sh &#x27;docker run --rm hello-agent:${BUILD_NUMBER}&#x27;
+            }
+            post { always { cleanWs() } }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: image-on-agent">Copy</button></div></div>
+<aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>Which node can run the <i>Build</i> stage? (Look at the labels of your three nodes: more than one may match.)</li><li>After the build, will <code>docker images</code> on your PC show <code>hello-agent</code>?</li></ol></aside>
+<div class="prose"><ol><li><b>Build Now</b>. In the Console Output, find the two <b>Running on</b> lines and the line <i>Hello from Linux, Java 21…</i> printed by the container.</li><li>In PowerShell: <code>docker images hello-agent</code>. Take the screenshot <code>docker-agent.png</code>: the console with <i>Running on docker-agent</i> and the Hello line.</li></ol></div>
+<details><summary>Show the explanation</summary><div class="prose"><ul><li><i>Build</i> asks for <code>linux</code>: linux-agent <b>and</b> docker-agent both have this label, so either can take it. That is normal: agents with the same label are interchangeable (fungible).</li><li><i>Docker image</i> asks for <code>docker</code>: only docker-agent. <code>unstash</code> brings the jar, <code>docker build</code> sends the workspace to the engine of your PC, which builds the image.</li><li>Yes: the image is on your PC, because the engine of your PC built it. In your project, the staging container started by this agent is also on your PC, so <code>http://host.docker.internal:8081</code> works as in Lab 5.</li></ul></div></details>
+<details><summary>&quot;docker: not found&quot; in the Docker image stage</summary><div class="prose"><p>The stage ran on a node without Docker: check that its label is <code>docker</code>, and that the container was started from <b>your</b> image <code>docker-agent</code>, not <code>jenkins/inbound-agent</code> (<code>docker ps</code>, IMAGE column).</p></div></details>
+<details><summary>&quot;permission denied while trying to connect to the Docker daemon socket&quot;</summary><div class="prose"><p><code>--user root</code> is missing. <code>docker rm -f docker-agent</code>, then start it again with the full command.</p></div></details>
+<details><summary>&quot;Cannot connect to the Docker daemon at unix:///var/run/docker.sock&quot;</summary><div class="prose"><p>The <code>-v /var/run/docker.sock:/var/run/docker.sock</code> part is missing, or Docker Desktop is stopped. Check <i>Engine running</i>, then recreate the container.</p></div></details>
+<div class="prose"><h3>D. One agent down, the other takes over</h3><p>You now have <b>two</b> nodes with the label <code>linux</code>: linux-agent (<code>linux java</code>) and docker-agent (<code>linux docker</code>).</p><ol><li>Stop the first one: <code>docker stop linux-agent</code>.</li><li>Create a <b>Pipeline</b> job named <code>failover</code> with the script below and run it. Read the <b>Running on</b> line.</li><li>Start it again: <code>docker start linux-agent</code>.</li></ol></div>
+<div class="code"><div class="code-cap">failover</div><div class="code-box"><pre><code>pipeline {
+    agent { label &#x27;linux&#x27; }
+    stages {
+        stage(&#x27;Who builds?&#x27;) {
+            steps {
+                echo &quot;I am ${env.NODE_NAME}&quot;
+            }
+        }
+    }
+}</code></pre><button type="button" class="copy" aria-label="Copy: failover">Copy</button></div></div>
+<aside class="note">🔮 <b>Predict first.</b> Write your answer down <b>before</b> you run, then compare.<ol><li>linux-agent is stopped. Will the build wait, as in part 6B?</li></ol></aside>
+<details><summary>Show the explanation</summary><div class="prose"><p>It does <b>not</b> wait: it runs on <b>docker-agent</b> (<i>I am docker-agent</i>). The job asks for the label <code>linux</code>, not for a machine name, and another node with that label was free. This is <b>failover</b>: with two interchangeable (fungible) agents, losing one does not stop the team. In part 6B there was only one node with the label, so the build had to wait.</p><p>That is the rule for your project: in the Jenkinsfile, ask for <b>labels</b> (<code>linux</code>, <code>docker</code>), never for <code>linux-agent</code>.</p></div></details>
+<aside class="note">✅ <b>Checkpoint 7</b>: answer in <code>report.txt</code>, in your own words (one or two lines each).<ol><li>The image <code>jenkins/inbound-agent</code> has no <code>docker</code> command. What did you add, and what does the <code>-v /var/run/docker.sock</code> part of the command give to the agent?</li><li>After a build of <code>image-on-agent</code>, you type <code>docker images</code> in PowerShell on your PC and you see <code>hello-agent</code>. Why is the image on your PC, although it was built "inside" the agent container?</li><li>Why must you never start an agent with <code>--user root</code> and <code>docker.sock</code> on a shared company server?</li><li>With linux-agent stopped, the job <code>failover</code> did not wait. Where did it run, and why? What would have happened with <code>agent { label 'linux-agent' }</code>?</li></ol></aside>
+<details><summary>See the answer</summary><div class="prose"><ol><li>The <b>docker command</b> (the client), copied from the official image <code>docker:27-cli</code>. The <code>-v</code> part shares the <b>socket</b> of Docker Desktop with the container: the docker command inside the agent talks to the Docker engine of your PC.</li><li>The agent has only the docker <b>client</b>. The image is built by the Docker <b>engine of your PC</b>, through the socket. So the image, and the containers the agent starts, live on your PC, next to Jenkins: that is why staging on port 8081 works from an agent.</li><li>Whoever controls the Docker engine controls the machine: a build could start a container that mounts the whole disk, as root. On a shared server, any developer who can push a Jenkinsfile would become administrator. Companies use rootless tools (kaniko, Session 9) or one VM per build instead.</li><li>On <b>docker-agent</b>: it also has the label <code>linux</code> and was free, so Jenkins chose it (failover). With <code>label 'linux-agent'</code> (the name of one machine), only that machine matches: the build would have <b>waited</b> until linux-agent came back.</li></ol></div></details>
+    <div class="pager"><a class="prev" href="lab6-6-protect-the-controller.html">← 6. Protect the controller</a><a class="next" href="lab6-8-challenges.html">8. Challenges →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="../assets/videos.js?v=28"></script>
+<script src="../assets/site.js?v=28"></script>
+</body>
+</html>

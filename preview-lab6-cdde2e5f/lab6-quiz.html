@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz: Agents and Labels · Jenkins Labs</title>
+<link rel="stylesheet" href="../assets/style.css?v=28">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Jenkins Labs <span class="sub">CI/CD with Jenkins</span></a>
+  <button type="button" class="menu" aria-expanded="false" aria-controls="sidenav">Pages</button>
+</header>
+<div class="layout">
+  <nav id="sidenav" aria-label="Lab pages"><a class="navhome" href="../index.html">Module home</a><a class="navhome" href="../handin.html">📥 How to hand in your work</a><div class="navlab">LAB 1 · Installing Jenkins</div><ol><li class=""><a href="../lab1.html">Lab 1 home</a></li><li class=""><a href="../1-before-you-start.html">1. Before you start</a></li><li class=""><a href="../2-installation-channels.html">2. Installation channels</a></li><li class="sub"><a href="../2-1-standalone-war.html">2.1 Standalone WAR</a></li><li class="sub"><a href="../2-2-linux-packages.html">2.2 Linux packages</a></li><li class="sub"><a href="../2-3-servlet-container.html">2.3 Servlet container</a></li><li class="sub"><a href="../2-4-docker.html">2.4 Docker (lab path)</a></li><li class="sub"><a href="../2-5-kubernetes.html">2.5 Kubernetes (Helm)</a></li><li class=""><a href="../3-setup-wizard.html">3. Setup wizard</a></li><li class=""><a href="../4-dashboard.html">4. Tour of the dashboard</a></li><li class=""><a href="../5-checklist-and-help.html">5. Checklist and help</a></li></ol><div class="navlab">LAB 2 · Your First Pipeline</div><ol><li class=""><a href="../lab2.html">Lab 2 home</a></li><li class=""><a href="../lab2-0-stage-view-plugin.html">0. Stage View plugin</a></li><li class=""><a href="../lab2-1-hello-world.html">1. Hello World</a></li><li class=""><a href="../lab2-2-understanding-the-code.html">2. Understanding the code</a></li><li class=""><a href="../lab2-3-shell-commands.html">3. Shell commands</a></li><li class=""><a href="../lab2-4-explore-the-buttons.html">4. Explore the buttons</a></li><li class=""><a href="../lab2-5-your-turn.html">5. Your turn</a></li><li class=""><a href="../lab2-6-checklist-and-help.html">6. Checklist and help</a></li><li class=""><a href="../lab2-7-bonus-pipeline-from-git.html">7. Bonus: pipeline from Git</a></li></ol><div class="navlab">LAB 3 · Build a Java Project</div><ol><li class=""><a href="../lab3.html">Lab 3 home</a></li><li class=""><a href="../lab3-1-java-project.html">1. The Java project</a></li><li class=""><a href="../lab3-2-jenkinsfile-line-by-line.html">2. Jenkinsfile line by line</a></li><li class=""><a href="../lab3-3-run-from-github.html">3. Run it from GitHub</a></li><li class=""><a href="../lab3-4-plugins-at-work.html">4. Plugins at work</a></li><li class=""><a href="../lab3-5-break-the-tests.html">5. Break the tests</a></li><li class=""><a href="../lab3-6-your-own-pipeline.html">6. Your own pipeline</a></li><li class=""><a href="../lab3-7-install-ansicolor.html">7. Install AnsiColor</a></li><li class=""><a href="../lab3-8-email-notifications.html">8. Email notifications</a></li><li class=""><a href="../lab3-9-checklist-and-help.html">9. Checklist and help</a></li></ol><div class="navlab">LAB 4 · Freestyle Projects and Blue Ocean</div><ol><li class=""><a href="../lab4.html">Lab 4 home</a></li><li class=""><a href="../lab4-1-freestyle-job.html">1. Freestyle job</a></li><li class=""><a href="../lab4-2-freestyle-vs-pipeline.html">2. Freestyle vs Pipeline</a></li><li class=""><a href="../lab4-3-install-blue-ocean.html">3. Install Blue Ocean</a></li><li class=""><a href="../lab4-4-explore-a-run-in-blue-ocean.html">4. Explore a run</a></li><li class=""><a href="../lab4-5-blue-ocean-editor.html">5. Blue Ocean editor</a></li><li class=""><a href="../lab4-6-branches-and-pull-requests.html">6. Branches and pull requests</a></li><li class=""><a href="../lab4-7-pipeline-graph-view.html">7. Pipeline Graph View</a></li><li class=""><a href="../lab4-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 5 · Deploy with Docker</div><ol><li class=""><a href="../lab5.html">Lab 5 home</a></li><li class=""><a href="../lab5-1-jenkins-and-docker.html">1. Jenkins and Docker</a></li><li class=""><a href="../lab5-2-the-web-app.html">2. The web app</a></li><li class=""><a href="../lab5-3-build-and-parallel-tests.html">3. Build and parallel tests</a></li><li class=""><a href="../lab5-4-docker-image.html">4. Docker image</a></li><li class=""><a href="../lab5-5-deploy-to-staging.html">5. Deploy to staging</a></li><li class=""><a href="../lab5-6-production.html">6. Production</a></li><li class=""><a href="../lab5-7-challenges.html">7. Challenges</a></li><li class=""><a href="../lab5-8-checklist-and-help.html">8. Checklist and help</a></li></ol><div class="navlab">LAB 6 · Distributed Builds with Agents</div><ol><li class=""><a href="lab6.html">Lab 6 home</a></li><li class="active"><a href="lab6-quiz.html" aria-current="page">Quiz (warm-up)</a></li><li class=""><a href="lab6-1-controller-and-executors.html">1. Controller and executors</a></li><li class=""><a href="lab6-2-linux-agent.html">2. Linux agent (Docker)</a></li><li class=""><a href="lab6-3-windows-agent.html">3. Windows agent</a></li><li class=""><a href="lab6-4-labels.html">4. Labels</a></li><li class=""><a href="lab6-5-build-once-run-everywhere.html">5. Build once, run everywhere</a></li><li class=""><a href="lab6-6-protect-the-controller.html">6. Protect the controller</a></li><li class=""><a href="lab6-7-docker-agent.html">7. Docker agent (project)</a></li><li class=""><a href="lab6-8-challenges.html">8. Challenges</a></li><li class=""><a href="lab6-9-checklist-and-help.html">9. Checklist and help</a></li></ol></nav>
+  <main>
+    <div class="crumb">Lab 6 · Distributed Builds with Agents</div>
+    <h1>Quiz: Agents and Labels</h1>
+    
+<div class="qz">
+<style>
+.qz { --ok:#1E7A45; --okbg:#E3F3EA; --bad:#B42318; --badbg:#FBE6E4; --chip:#E7EDF1; }
+.qz .fc { display:grid; perspective:1800px; margin:20px 0; }
+.qz .face { grid-area:1/1; background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; backface-visibility:hidden; -webkit-backface-visibility:hidden; transition:transform .55s ease; }
+.qz .back { transform:rotateY(180deg); background:#FAFCFD; }
+.qz .fc.flipped .front { transform:rotateY(-180deg); }
+.qz .fc.flipped .back { transform:rotateY(0deg); }
+.qz .fc:not(.flipped) .back, .qz .fc.flipped .front { pointer-events:none; }
+@media (prefers-reduced-motion: reduce) { .qz .face { transition:none; } }
+.qz .qh { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font:700 13px/1.4 inherit; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.qz .qh .tag { background:var(--chip); color:var(--slate); border-radius:20px; padding:2px 10px; }
+.qz .qq { font-size:17px; margin:0 0 12px; }
+.qz .back .qq { font-size:15px; color:var(--muted); border-left:3px solid var(--line); padding-left:10px; }
+.qz .verdict { font-weight:700; font-size:17px; padding:8px 12px; border-radius:8px; margin:6px 0 10px; }
+.qz .verdict.ok { background:var(--okbg); color:#14472A; }
+.qz .verdict.bad { background:var(--badbg); color:#7A1A12; }
+.qz .right { margin:0 0 8px; }
+.qz .why { margin:0; }
+.qz code { font-family:Consolas, "Courier New", monospace; }
+.qz .mcq { display:flex; flex-direction:column; gap:8px; }
+.qz .mcq label { display:flex; gap:10px; align-items:flex-start; border:1px solid #C7D3DA; border-radius:10px; padding:9px 12px; cursor:pointer; }
+.qz .mcq label .lt { font-weight:700; color:var(--muted); min-width:18px; }
+.qz .mcq label.ok { border-color:var(--ok); background:var(--okbg); }
+.qz .mcq label.bad { border-color:var(--bad); background:var(--badbg); }
+.qz .qcode { background:var(--code-bg); color:var(--code-ink); border-radius:10px; padding:14px 16px; font:14.5px/1.9 Consolas, "Courier New", monospace; overflow-x:auto; white-space:pre; }
+.qz .qcode .cm { color:#9FB0BC; }
+.qz .slot { display:inline-block; min-width:92px; padding:0 8px; margin:0 2px; border:2px dashed #8FA3B0; border-radius:7px; color:#FFE8A3; text-align:center; cursor:pointer; vertical-align:middle; line-height:1.6; }
+.qz .slot.filled { border-style:solid; border-color:#E9C27A; background:#33464F; }
+.qz .slot.ok { border-color:#4CC38A; background:#1D4A35; color:#D6F5E3; }
+.qz .slot.bad { border-color:#F2716A; background:#4A2423; color:#FFD9D6; }
+.qz .slot.over { background:#3E5560; }
+.qz .chips { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px; }
+.qz .chip { font:600 14.5px Consolas, "Courier New", monospace; background:var(--chip); border:1px solid #C7D3DA; border-radius:8px; padding:8px 12px; cursor:grab; user-select:none; }
+.qz .chip.sel { outline:3px solid var(--red); }
+.qz .chip.used { opacity:.35; cursor:default; }
+.qz .lines { background:var(--code-bg); border-radius:10px; padding:8px; display:flex; flex-direction:column; gap:2px; }
+.qz .ln { display:block; width:100%; text-align:left; background:transparent; color:var(--code-ink); border:1px solid transparent; border-radius:6px; padding:3px 10px; font:14.5px/1.6 Consolas, "Courier New", monospace; white-space:pre; cursor:pointer; overflow-x:auto; }
+.qz .ln:hover { background:#33464F; }
+.qz .ln.ok { background:#1D4A35; border-color:#4CC38A; }
+.qz .ln.bad { background:#4A2423; border-color:#F2716A; }
+.qz table.nodes { border-collapse:collapse; width:100%; margin:4px 0 12px; font-size:15px; }
+.qz table.nodes th, .qz table.nodes td { border:1px solid var(--line); padding:5px 10px; text-align:left; }
+.qz table.nodes th { background:var(--light); }
+.qz .opts { display:flex; flex-wrap:wrap; gap:8px 18px; }
+.qz .opts label { display:flex; align-items:center; gap:6px; cursor:pointer; padding:4px 8px; border-radius:6px; }
+.qz .opts label.ok { background:var(--okbg); }
+.qz .opts label.bad { background:var(--badbg); }
+.qz .opts label.miss { outline:2px dashed var(--ok); }
+.qz .order { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.qz .order li { display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #C7D3DA; border-radius:10px; padding:8px 10px; cursor:grab; }
+.qz .order li.ok { border-color:var(--ok); background:var(--okbg); }
+.qz .order li.bad { border-color:var(--bad); background:var(--badbg); }
+.qz .order li .num { font:700 14px Consolas, monospace; color:var(--muted); width:22px; }
+.qz .order li .txt { flex:1; }
+.qz .order li button { font:600 14px inherit; border:1px solid #C7D3DA; background:var(--light); border-radius:6px; width:34px; height:30px; cursor:pointer; }
+.qz .qbtns { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; align-items:center; }
+.qz .qbtn { font:600 15px inherit; background:var(--slate); color:#fff; border:0; border-radius:8px; padding:9px 16px; cursor:pointer; }
+.qz .qbtn.alt { background:#fff; color:var(--slate); border:1px solid var(--slate); }
+.qz .hint { color:var(--muted); font-size:14px; }
+.qz .total { position:sticky; bottom:10px; background:var(--slate); color:#fff; border-radius:12px; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; z-index:5; }
+.qz .total b { font-size:20px; }
+@media (max-width:640px) { .qz .qcode, .qz .ln { font-size:13px; } }
+</style>
+
+<p><b>15 questions, about 10 minutes, 1 point each.</b> The examples are <b>new</b>: apply the rules of the lecture. Answer alone. When you check, the card <b>flips</b>: the back repeats the question, gives the right answer and explains it. Your first answer counts. Write your total in <code>report.txt</code>.</p>
+
+<div id="qz-cards"></div>
+
+<div class="total"><span>Your total: <b id="q-total">0</b> / 15 <span id="q-done"></span></span><span id="q-msg">Answer the cards to see your score.</span></div>
+</div>
+
+<script>
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  var NODES = '<table class="nodes"><tr><th>Node</th><th>Labels</th></tr>' +
+    '<tr><td>ci-lin-1</td><td>linux docker x64</td></tr><tr><td>ci-lin-2</td><td>linux arm64</td></tr>' +
+    '<tr><td>ci-win-1</td><td>windows docker x64</td></tr><tr><td>ci-mac-1</td><td>macos arm64 xcode</td></tr></table>';
+
+  /* One entry = one card. Question, answer and explanation live together. */
+  var Q = [
+    { type: 'mcq', tag: 'Quick check',
+      q: 'Three agents have the label <code>linux</code>, each with <b>2 executors</b>. 8 builds asking for <code>linux</code> arrive at the same time. How many builds wait in the queue?',
+      o: ['0', '2', '6', '8'], a: 1,
+      why: '3 agents × 2 executors = 6 builds run at the same time. 8 − 6 = <b>2</b> builds wait until an executor is free.' },
+    { type: 'mcq', tag: 'Quick check', code: true,
+      q: 'In a Pipeline stage that runs on a Linux agent, which line is executed by the <b>controller</b>, not by the agent?',
+      o: ["sh 'make test'", "bat 'msbuild app.sln'", 'def total = files.size() * 2', "sh 'docker build .'"], a: 2,
+      why: 'Pipeline Groovy (variables, <code>if</code>, loops) always runs on the controller (flyweight executor). <code>sh</code> and <code>bat</code> steps run on the agent (heavyweight executor).' },
+    { type: 'mcq', tag: 'Quick check',
+      q: 'Which problem is <b>NOT</b> solved by adding agents?',
+      o: ['You need Windows to build a .exe installer', 'Builds wait in the queue at peak time', 'A build could read the controller\'s secrets/ folder', 'A pipeline with a huge Groovy loop is slow'], a: 3,
+      why: 'Agents run the <i>steps</i>. Pipeline Groovy always runs on the controller, so more agents do not make it faster: move heavy work into a <code>sh</code>/<code>bat</code> step.' },
+    { type: 'mcq', tag: 'Quick check', code: false,
+      q: 'Build <b>#30</b> ran <code>stash name: \'app\'</code>. Build <b>#31</b> starts with <code>unstash \'app\'</code> and has no stash of its own. What happens?',
+      o: ['#31 gets the jar of #30', '#31 fails: No such saved stash \'app\'', 'Jenkins rebuilds the jar automatically', '#31 waits until #30 runs again'], a: 1,
+      why: 'A stash lives only during <b>its own run</b>: it is deleted when #30 ends. To reuse a file from another build, archive it (<code>archiveArtifacts</code>) or push it to a registry.' },
+    { type: 'mcq', tag: 'Quick check', code: true,
+      q: 'Which line makes the pipeline depend on <b>one single machine</b> (agents no longer fungible)?',
+      o: ["agent { label 'linux' }", "agent { label 'lin-03' }", "agent { label 'linux && docker' }", 'agent none'], a: 1,
+      why: 'Each node\'s name is also a label. Asking for <code>lin-03</code> means only that machine: if it is down, the build waits. Ask for a <b>capability</b> (<code>linux</code>) so any matching agent can take it.' },
+    { type: 'mcq', tag: 'Quick check',
+      q: 'Which of these still exists <b>after</b> the build has finished?',
+      o: ['A stash', 'The workspace of a cloud agent', 'A file saved with archiveArtifacts', 'A variable defined in the Jenkinsfile'], a: 2,
+      why: '<code>archiveArtifacts</code> copies the file to the controller, kept with the build. A stash is deleted at the end of the run, a cloud agent is destroyed with its workspace, and Groovy variables exist only while the build runs.' },
+
+    { type: 'err', tag: 'Find the error',
+      q: 'Nodes: <code>ubuntu-01</code> (labels <code>linux docker</code>), <code>win-01</code> (label <code>windows</code>). The build stays in the queue for hours. Click the wrong line.',
+      lines: ['stage(\'Image\') {', "  agent { label 'docker && windows' }", "  steps { sh 'docker build -t shop:1.0 .' }", '}'], a: 1,
+      why: 'No node has <b>both</b> <code>docker</code> and <code>windows</code>, so the build waits forever (and <code>sh</code> needs Linux anyway). Fix: <code>label \'linux && docker\'</code>.' },
+    { type: 'err', tag: 'Find the error',
+      q: 'Error: <code>Cannot run program "cmd"</code>. Click the wrong line.',
+      lines: ["stage('Disk report') {", "  agent { label 'linux' }", "  steps { bat 'dir /s' }", '}'], a: 2,
+      why: '<code>bat</code> runs <code>cmd</code>, which only exists on Windows. On a Linux agent use <code>sh</code>, for example <code>sh \'du -sh *\'</code>.' },
+    { type: 'err', tag: 'Find the error',
+      q: 'Error in the second stage: <code>No such saved stash \'Web\'</code>. Click the wrong line.',
+      lines: ["stage('Build site') {", "  agent { label 'linux' }", "  steps { sh 'npm run build'; stash name: 'web', includes: 'dist/**' }", '}', "stage('Upload') {", "  agent { label 'linux' }  steps { unstash 'Web'; sh './upload.sh dist' }", '}'], a: 5,
+      why: 'The stash is called <code>web</code>, and names are case-sensitive. Fix: <code>unstash \'web\'</code>.' },
+    { type: 'err', tag: 'Find the error',
+      q: 'The controller has <b>0 executors</b>. The only agent, <code>lin-07</code> (label <code>linux</code>), has Usage = <i>Only build jobs with label expressions matching this node</i>. Nothing ever runs. Click the wrong line.',
+      lines: ['pipeline {', '  agent any', '  stages {', "    stage('Lint') { steps { sh 'npm run lint' } }", '  }', '}'], a: 1,
+      why: '<code>agent any</code> gives no label: the controller cannot build (0 executors) and lin-07 refuses jobs that do not ask for its label. Fix: <code>agent { label \'linux\' }</code>, or change the Usage of lin-07.' },
+
+    { type: 'where', tag: 'Where can it run?', expr: 'docker', a: ['ci-lin-1', 'ci-win-1'],
+      why: '<code>docker</code> matches every node that has this label: ci-lin-1 and ci-win-1. The OS does not matter, only the labels.' },
+    { type: 'where', tag: 'Where can it run?', expr: 'arm64 && !macos', a: ['ci-lin-2'],
+      why: 'arm64: ci-lin-2 and ci-mac-1. <code>!macos</code> removes ci-mac-1, so only <b>ci-lin-2</b>.' },
+    { type: 'where', tag: 'Where can it run?', expr: 'macos && docker', a: ['no node'],
+      why: 'No node has both labels. The build is <b>not red</b>: it waits in the queue, forever, with the message "There are no nodes with the label…".' },
+
+    { type: 'dnd', tag: 'Drag and drop',
+      q: '<b>PDF-report tool.</b> The Python package is built in a Docker container on a machine with Linux <b>and</b> Docker, then installed and tested on Windows. Drag each block into a gap (on a phone: tap a block, then tap a gap; tap a filled gap to empty it). All 5 gaps right = 1 point.',
+      why: '<ol><li><code>none</code>: each stage chooses its own machine; <code>any</code> would hold a machine for the whole run, for nothing.</li>' +
+           '<li><code>linux &amp;&amp; docker</code>: both labels needed. <code>linux || docker</code> could pick a Windows machine with Docker, where <code>sh</code> fails; <code>Linux</code> with a capital L matches no node.</li>' +
+           '<li><code>stash</code>: hands the wheel to a later stage of the same run (<code>archiveArtifacts</code> keeps it, but does not give it to the next stage).</li>' +
+           '<li><code>unstash</code>: copies the files into the Windows workspace, which is empty on that machine.</li>' +
+           '<li><code>bat</code>: Windows agents run Command Prompt commands.</li></ol>' },
+    { type: 'order', tag: 'Put in order',
+      q: 'A new Windows agent joins and runs its first build. Drag the steps (or use ↑ ↓) from first to last. All in the right place = 1 point.',
+      steps: ['An admin creates the node windows-agent on the controller', 'Jenkins shows the secret of windows-agent', 'On the Windows PC, java -jar agent.jar starts with the secret', 'The agent calls the controller and appears online', 'A build asking for label windows enters the queue', 'A free executor of windows-agent takes the build', 'The steps run on the PC and the console output appears on the controller'],
+      why: 'The node exists on the controller first (it creates the secret). The agent then starts agent.jar with that secret and <b>calls</b> the controller. Only an online node receives work: the build waits in the queue, gets a free executor with a matching label, runs, and its output is sent back to the controller.' }
+  ];
+
+  var answered = 0, score = 0, N = Q.length;
+  function total() {
+    $('q-total').textContent = score;
+    $('q-done').textContent = '(' + answered + ' answered)';
+    $('q-msg').textContent = answered < N ? 'Answer every card.' : score === N ? 'Perfect: you are ready for the lab.' : score >= 11 ? 'Good. Read the backs of the cards you missed.' : 'Read the backs of the cards, then ask your teacher.';
+  }
+
+  var box = $('qz-cards');
+  Q.forEach(function (item, k) {
+    var n = k + 1;
+    var card = el('div', 'fc'); card.id = 'qcard-' + n;
+    var front = el('div', 'face front'), back = el('div', 'face back');
+    var head = '<span>Question ' + n + ' / ' + N + '</span><span class="tag">' + item.tag + '</span>';
+    front.appendChild(el('div', 'qh', head));
+    back.appendChild(el('div', 'qh', '<span>Question ' + n + ' / ' + N + ' · Answer</span><span class="tag">' + item.tag + '</span>'));
+    var qtext = item.q || ('Which nodes can run <code>agent { label \'' + esc(item.expr) + '\' }</code>? Tick every node that matches.');
+    front.appendChild(el('p', 'qq', qtext));
+    back.appendChild(el('p', 'qq', qtext));   /* the back repeats ITS question */
+    var verdict = el('div', 'verdict'), right = el('p', 'right'), why = el('div', 'why', item.why);
+    back.appendChild(verdict); back.appendChild(right); back.appendChild(why);
+    var backBtns = el('div', 'qbtns'); var seeQ = el('button', 'qbtn alt', 'See the question again'); seeQ.type = 'button';
+    backBtns.appendChild(seeQ); back.appendChild(backBtns);
+    var body = el('div', 'body'); front.appendChild(body);
+    var btns = el('div', 'qbtns'); front.appendChild(btns);
+    var check = el('button', 'qbtn', 'Check'); check.type = 'button';
+    var hint = el('span', 'hint');
+    var done = false;
+
+    function flip(on) {
+      card.classList.toggle('flipped', on);
+      front.inert = on; back.inert = !on;
+      front.setAttribute('aria-hidden', on); back.setAttribute('aria-hidden', !on);
+    }
+    function finish(ok, rightHtml) {
+      if (done) return;
+      done = true; answered++; if (ok) score++;
+      verdict.className = 'verdict ' + (ok ? 'ok' : 'bad');
+      verdict.textContent = ok ? '✓ Correct' : '✗ Not quite';
+      right.innerHTML = '<b>Right answer:</b> ' + rightHtml;
+      if (check) { check.textContent = 'See the answer'; check.onclick = function () { flip(true); }; }
+      hint.textContent = '';
+      total(); flip(true);
+    }
+    seeQ.addEventListener('click', function () { flip(false); });
+
+    if (item.type === 'mcq') {
+      var wrap = el('div', 'mcq');
+      var idx = shuffle(item.o.map(function (_, i) { return i; }));
+      idx.forEach(function (oi, pos) {
+        var l = el('label'); var r = document.createElement('input'); r.type = 'radio'; r.name = 'mcq' + n; r.value = oi;
+        l.appendChild(r); l.appendChild(el('span', 'lt', 'ABCD'[pos]));
+        l.appendChild(el('span', '', item.code ? '<code>' + esc(item.o[oi]) + '</code>' : esc(item.o[oi])));
+        wrap.appendChild(l);
+      });
+      body.appendChild(wrap);
+      check.onclick = function () {
+        var c = wrap.querySelector('input:checked'); if (!c) { hint.textContent = 'Choose one answer first.'; return; }
+        Array.prototype.forEach.call(wrap.querySelectorAll('label'), function (l) {
+          var v = Number(l.querySelector('input').value); if (v === item.a) l.classList.add('ok'); else if (l.querySelector('input').checked) l.classList.add('bad');
+          l.querySelector('input').disabled = true;
+        });
+        finish(Number(c.value) === item.a, item.code ? '<code>' + esc(item.o[item.a]) + '</code>' : esc(item.o[item.a]));
+      };
+    }
+
+    if (item.type === 'err') {
+      var lines = el('div', 'lines');
+      item.lines.forEach(function (t, i) {
+        var b = el('button', 'ln'); b.type = 'button'; b.textContent = t;
+        b.addEventListener('click', function () {
+          if (done) { flip(true); return; }
+          lines.children[item.a].classList.add('ok'); if (i !== item.a) b.classList.add('bad');
+          finish(i === item.a, 'line ' + (item.a + 1) + ': <code>' + esc(item.lines[item.a].trim()) + '</code>');
+        });
+        lines.appendChild(b);
+      });
+      body.appendChild(lines);
+      check = null;
+      hint.textContent = 'Click a line: your first click counts.';
+    }
+
+    if (item.type === 'where') {
+      body.appendChild(el('div', '', NODES));
+      var opts = el('div', 'opts');
+      ['ci-lin-1', 'ci-lin-2', 'ci-win-1', 'ci-mac-1', 'no node'].forEach(function (nd) {
+        var l = el('label'); var i = document.createElement('input'); i.type = 'checkbox'; i.value = nd; l.appendChild(i); l.appendChild(document.createTextNode(nd)); opts.appendChild(l);
+      });
+      body.appendChild(opts);
+      check.onclick = function () {
+        var ok = true, any = false;
+        Array.prototype.forEach.call(opts.querySelectorAll('label'), function (l) {
+          var i = l.querySelector('input'), should = item.a.indexOf(i.value) >= 0; if (i.checked) any = true;
+          if (i.checked && should) l.classList.add('ok'); else if (i.checked) { l.classList.add('bad'); ok = false; } else if (should) { l.classList.add('miss'); ok = false; }
+        });
+        if (!any) { Array.prototype.forEach.call(opts.querySelectorAll('label'), function (l) { l.classList.remove('ok', 'bad', 'miss'); }); hint.textContent = 'Tick at least one box.'; return; }
+        Array.prototype.forEach.call(opts.querySelectorAll('input'), function (i) { i.disabled = true; });
+        finish(ok, item.a.join(', '));
+      };
+    }
+
+    if (item.type === 'dnd') {
+      var ans = ['none', 'linux && docker', 'stash', 'unstash', 'bat'];
+      var code = el('div', 'qcode',
+        'pipeline {\n    agent <span class="slot" data-i="0">____</span>\n    stages {\n        stage(\'Package\') {\n' +
+        '            agent { label \'<span class="slot" data-i="1">____</span>\' }   <span class="cm">// Linux AND Docker</span>\n            steps {\n' +
+        '                sh \'docker run --rm -v $PWD:/src python:3.12 pip wheel /src -w /src/dist\'\n' +
+        '                <span class="slot" data-i="2">____</span> name: \'wheel\', includes: \'dist/*.whl\'\n            }\n        }\n' +
+        '        stage(\'Test on Windows\') {\n            agent { label \'windows\' }\n            steps {\n' +
+        '                <span class="slot" data-i="3">____</span> \'wheel\'\n' +
+        '                <span class="slot" data-i="4">____</span> \'pip install dist/report_tool-1.0-py3-none-any.whl &amp;&amp; pytest\'\n' +
+        '            }\n        }\n    }\n}');
+      body.appendChild(code);
+      var chips = el('div', 'chips'); body.appendChild(chips);
+      var tokens = ['none', 'any', 'linux && docker', 'linux || docker', 'Linux', 'stash', 'archiveArtifacts', 'unstash', 'bat', 'sh'];
+      var slots = Array.prototype.slice.call(code.querySelectorAll('.slot')), selected = null;
+      function chipOf(t) { return Array.prototype.filter.call(chips.children, function (c) { return c.textContent === t; })[0]; }
+      function fill(s, c) { if (s.dataset.v) empty(s); s.dataset.v = c.textContent; s.textContent = c.textContent; s.classList.add('filled'); c.classList.add('used'); c.classList.remove('sel'); selected = null; }
+      function empty(s) { var c = chipOf(s.dataset.v); if (c) c.classList.remove('used'); delete s.dataset.v; s.textContent = '____'; s.classList.remove('filled'); }
+      shuffle(tokens.slice()).forEach(function (t) {
+        var c = el('span', 'chip'); c.textContent = t; c.draggable = true; c.setAttribute('role', 'button'); c.tabIndex = 0;
+        c.addEventListener('dragstart', function (e) { if (done || c.classList.contains('used')) { e.preventDefault(); return; } e.dataTransfer.setData('text/plain', t); });
+        c.addEventListener('click', function () { if (done || c.classList.contains('used')) return; if (selected) selected.classList.remove('sel'); selected = c; c.classList.add('sel'); });
+        c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); c.click(); } });
+        chips.appendChild(c);
+      });
+      slots.forEach(function (s) {
+        s.setAttribute('role', 'button'); s.tabIndex = 0;
+        s.addEventListener('dragover', function (e) { e.preventDefault(); s.classList.add('over'); });
+        s.addEventListener('dragleave', function () { s.classList.remove('over'); });
+        s.addEventListener('drop', function (e) { e.preventDefault(); s.classList.remove('over'); if (done) return; var c = chipOf(e.dataTransfer.getData('text/plain')); if (c && !c.classList.contains('used')) fill(s, c); });
+        s.addEventListener('click', function () { if (done) return; if (selected) fill(s, selected); else if (s.dataset.v) empty(s); });
+        s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); s.click(); } });
+      });
+      check.onclick = function () {
+        if (slots.some(function (s) { return !s.dataset.v; })) { hint.textContent = 'Fill the 5 gaps first.'; return; }
+        var n5 = 0; slots.forEach(function (s, i) { var ok = s.dataset.v === ans[i]; s.classList.add(ok ? 'ok' : 'bad'); if (ok) n5++; });
+        finish(n5 === 5, ans.map(function (a, i) { return (i + 1) + ' <code>' + esc(a) + '</code>'; }).join(' · ') + ' (you had ' + n5 + ' / 5)');
+      };
+    }
+
+    if (item.type === 'order') {
+      var ol = el('ol', 'order'), dragged = null; body.appendChild(ol);
+      function renum() { Array.prototype.forEach.call(ol.children, function (li, i) { li.querySelector('.num').textContent = (i + 1) + '.'; }); }
+      var order = shuffle(item.steps.slice()); if (order.join() === item.steps.join()) order.reverse();
+      order.forEach(function (s) {
+        var li = el('li'); li.draggable = true;
+        li.appendChild(el('span', 'num')); var t = el('span', 'txt'); t.textContent = s; li.appendChild(t);
+        var up = el('button', '', '↑'), dn = el('button', '', '↓'); up.type = dn.type = 'button'; up.setAttribute('aria-label', 'Move up'); dn.setAttribute('aria-label', 'Move down');
+        up.addEventListener('click', function () { if (!done && li.previousElementSibling) ol.insertBefore(li, li.previousElementSibling); renum(); });
+        dn.addEventListener('click', function () { if (!done && li.nextElementSibling) ol.insertBefore(li.nextElementSibling, li); renum(); });
+        li.addEventListener('dragstart', function (e) { if (done) { e.preventDefault(); return; } dragged = li; });
+        li.addEventListener('dragover', function (e) { e.preventDefault(); if (!dragged || dragged === li) return; var r = li.getBoundingClientRect(); ol.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li); });
+        li.addEventListener('drop', function (e) { e.preventDefault(); renum(); });
+        li.addEventListener('dragend', function () { dragged = null; renum(); });
+        li.appendChild(up); li.appendChild(dn); ol.appendChild(li);
+      });
+      renum();
+      check.onclick = function () {
+        var n7 = 0; Array.prototype.forEach.call(ol.children, function (li, i) { var ok = li.querySelector('.txt').textContent === item.steps[i]; li.classList.add(ok ? 'ok' : 'bad'); if (ok) n7++; });
+        finish(n7 === item.steps.length, '<ol style="margin:4px 0 0 18px;padding:0">' + item.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>(you had ' + n7 + ' / 7 in the right place)');
+      };
+    }
+
+    if (check) btns.appendChild(check);
+    btns.appendChild(hint);
+    card.appendChild(front); card.appendChild(back); box.appendChild(card);
+    flip(false);
+  });
+  total();
+})();
+</script>
+
+    <div class="pager"><a class="prev" href="lab6.html">← Lab 6 home</a><a class="next" href="lab6-1-controller-and-executors.html">1. Controller and executors →</a></div>
+  </main>
+</div>
+<footer>CI/CD with Jenkins · Lab guides · Commands and versions checked against the official Jenkins documentation (October 2026).</footer>
+<script src="../assets/videos.js?v=28"></script>
+<script src="../assets/site.js?v=28"></script>
+</body>
+</html>
