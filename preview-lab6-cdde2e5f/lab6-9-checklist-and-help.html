@@ -17,7 +17,7 @@
   <main>
     <div class="crumb">Lab 6 · Distributed Builds with Agents</div>
     <h1>9. Checklist and Help</h1>
-    <div class="prose"><h3>Checklist</h3><p><b>Required</b> (parts 1 to 5):</p><ul><li>☐ You saw builds waiting in the Build Queue with 1 executor (part 1).</li><li>☐ <code>linux-agent</code> is online, Architecture Linux (part 2).</li><li>☐ <code>windows-agent</code> is online (or a second Linux agent, if you have no Java on your PC) (part 3).</li><li>☐ <code>where-am-i</code>: each stage on the right node (part 4).</li><li>☐ <code>build-once</code>: built on Linux, run on both agents in parallel, <code>hello.jar</code> archived (part 5).</li><li>☐ <code>report.txt</code>: checkpoints 1 to 5 answered, and your quiz score.</li></ul><p><b>Bonus:</b></p><ul><li>☐ Part 6: 0 executors on the controller, the waiting stage fixed, the offline test done; checkpoint 6 answered.</li><li>☐ One or more challenges of part 8.</li></ul><p><b>For your final project</b> (finish at home if needed):</p><ul><li>☐ Part 7: <code>docker-agent</code> online, <code>image-on-agent</code> green; checkpoint 7 answered.</li></ul><h3>Hand in your work</h3><p>In the <code>lab6</code> folder of your <b>jenkins-labs</b> repository (guide: <a href="../handin.html">How to hand in your work</a>):</p><ul><li><code>report.txt</code>: the template below, filled in. <b>It counts most</b>: short answers in your own words;</li><li><code>Jenkinsfile</code>: your <code>build-once</code> script;</li><li><code>nodes.png</code>: the Nodes page with the controller and your two agents online (hide the secrets);</li><li><code>parallel.png</code>: Blue Ocean or Pipeline Overview with the Linux and Windows branches;</li><li><code>docker-agent.png</code> (part 7): the console with <i>Running on docker-agent</i> and the Hello line, and your <code>docker-agent/Dockerfile</code>;</li><li>bonus: <code>challenge.png</code>, a screenshot proving each challenge you did.</li></ul></div>
+    <div class="prose"><h3>Checklist</h3><p><b>Required</b> (parts 1 to 5):</p><ul><li>☐ You saw builds waiting in the Build Queue with 1 executor (part 1).</li><li>☐ <code>linux-agent</code> is online, Architecture Linux (part 2).</li><li>☐ <code>windows-agent</code> is online (or a second Linux agent, if you have no Java on your PC) (part 3).</li><li>☐ <code>where-am-i</code>: each stage on the right node (part 4).</li><li>☐ <code>build-once</code>: built on Linux, run on both agents in parallel, <code>hello.jar</code> archived (part 5).</li><li>☐ <code>report.txt</code>: checkpoints 1 to 5 answered, and your quiz score.</li></ul><p><b>Bonus:</b></p><ul><li>☐ Part 6: 0 executors on the controller, the waiting stage fixed, the offline test done; checkpoint 6 answered.</li><li>☐ One or more challenges of part 8.</li></ul><p><b>For your final project</b> (finish at home if needed):</p><ul><li>☐ Part 7: <code>docker-agent</code> online, <code>image-on-agent</code> green; checkpoint 7 answered.</li></ul><h3>Hand in your work</h3><p>In the <code>lab6</code> folder of your <b>jenkins-labs</b> repository (guide: <a href="../handin.html">How to hand in your work</a>):</p><ul><li><code>report.txt</code>: the template below, filled in. <b>It counts most</b>: short answers in your own words;</li><li><code>Jenkinsfile</code>: your <code>build-once</code> script;</li><li><code>nodes.png</code>: the Nodes page with the controller and your two agents online (hide the secrets);</li><li><code>parallel.png</code>: Blue Ocean or Pipeline Overview with the Linux and Windows branches;</li><li><code>5-1-build.png</code>, <code>5-4-no-unstash.png</code>, <code>5-5-artifact.png</code>: the screenshots of checkpoint 5;</li><li><code>docker-agent.png</code> (part 7): the console with <i>Running on docker-agent</i> and the Hello line, and your <code>docker-agent/Dockerfile</code>;</li><li>bonus: <code>challenge.png</code>, a screenshot proving each challenge you did.</li></ul></div>
 <div class="code"><div class="code-cap">report.txt</div><div class="code-box"><pre><code>Lab 6 report - name, group:
 My Jenkins: on Windows / in Docker (keep one)
 
@@ -46,11 +46,15 @@ Part 4 - Labels
      -&gt;
 
 Part 5 - Build once, run everywhere
-5.1 Why does the Windows stage need unstash, although the Build stage ran a few seconds earlier in the same pipeline?
+5.1 Where did the stage Build on Linux run? (linux-agent / windows-agent / the controller) - screenshot: 5-1-build.png
      -&gt;
-5.2 stash or archiveArtifacts: which one hands the jar to the next stage, and which one lets you download it next month? Why not use one for both?
+5.2 The stages Linux and Windows ran: (at the same time / one after the other) - screenshot: parallel.png
      -&gt;
-5.3 The jar was compiled on Linux and ran on Windows. What makes that possible, and why is &quot;build once&quot; important for a release?
+5.3 What did the Windows stage print? (Hello from Linux / Hello from Windows / an error) - screenshot: parallel.png
+     -&gt;
+5.4 Without unstash in the Windows stage, the result was: (it worked / Unable to access jarfile hello.jar / the build waited) - screenshot: 5-4-no-unstash.png
+     -&gt;
+5.5 Which one can you download from the build page next month? (the stash / hello.jar from archiveArtifacts / both) - screenshot: 5-5-artifact.png
      -&gt;
 
 Part 6 - Protect the controller
